@@ -9,7 +9,7 @@ import org.usfirst.frc.team5590.robot.RobotMap;
 /**
  *  
  */
-public class ballCollector extends Subsystem {
+public class BallCollector extends Subsystem {
     
     SpeedController ballCollector = RobotMap.ballCollectorMotor;
 	
