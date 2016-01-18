@@ -22,7 +22,7 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void setSpeed(double speed) {
-		robotDrive.tankDrive(speed, (speed));
+		robotDrive.tankDrive(speed, speed);
 	}
 	
 	public void rotateLeft(double speed) {
