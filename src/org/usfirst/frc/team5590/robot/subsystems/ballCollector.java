@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team5590.robot.RobotMap;
 
 /**
- *
+ *  
  */
 public class ballCollector extends Subsystem {
     
