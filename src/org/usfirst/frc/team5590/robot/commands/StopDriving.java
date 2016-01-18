@@ -4,12 +4,12 @@ import org.usfirst.frc.team5590.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/** Stops The Robot by setting both track motor speeds to 0
+/** Stops The Robot by setting both drive motor speeds to 0
  *
  */
-public class Stop extends Command {
+public class StopDriving extends Command {
 
-    public Stop() {
+    public StopDriving() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
     }

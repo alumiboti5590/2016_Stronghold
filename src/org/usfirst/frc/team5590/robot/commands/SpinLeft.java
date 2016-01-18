@@ -4,8 +4,8 @@ import org.usfirst.frc.team5590.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**This command sets the left track motor speed to -0.3
- *and the right track motor speed to 0.0
+/**This command sets the left drive motor speed to -0.3
+ *and the right drive motor speed to 0.0
  *to spin the robot left
  */
 public class SpinLeft extends Command {
