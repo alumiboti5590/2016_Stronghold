@@ -20,11 +20,16 @@ public class RobotMap {
     public static SpeedController ballCollector;
     public static SpeedController ballShooter;
     
+    public static int lTrack = 1;
+    public static int rTrack = 2;
+    public static int bCollector = 3;
+    public static int bShooter = 4;
+    
     public static void init(){
-    	drivetrainLeftTrack = new TalonSRX(1);
+    	drivetrainLeftTrack = new TalonSRX(lTrack);
     	LiveWindow.addActuator("Drivetrain", "Left Track", (LiveWindowSendable) drivetrainLeftTrack);
     	
-    	drivetrainRightTrack = new TalonSRX(2);
+    	drivetrainRightTrack = new TalonSRX(rTrack);
     	LiveWindow.addActuator("Drivetrain", "Left Track", (LiveWindowSendable) drivetrainRightTrack);
     
     	robotDrive = new RobotDrive(drivetrainLeftTrack, drivetrainRightTrack);
@@ -34,10 +39,10 @@ public class RobotMap {
     	robotDrive.setSensitivity(.5);
     	robotDrive.setMaxOutput(1.0);
     
-    	ballCollector = new TalonSRX(3);
+    	ballCollector = new TalonSRX(bCollector);
     	LiveWindow.addActuator("Ball Collector", "Collector", (LiveWindowSendable) ballCollector);
     
-    	ballShooter = new TalonSRX(4);
+    	ballShooter = new TalonSRX(bShooter);
     	LiveWindow.addActuator("Ball Shooter", "Shooter", (LiveWindowSendable) ballShooter);
     
     }
