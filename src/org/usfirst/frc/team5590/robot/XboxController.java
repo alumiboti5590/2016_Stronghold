@@ -25,4 +25,28 @@ public class XboxController extends Joystick{
 		
 	}
 
+	public double getLeftTrigger() {
+		return 0;
+	}
+	public double getRightTrigger() {
+		return 0;
+	}
+	public double getLeftStickX() {
+		return 0;
+	}
+	public double getLeftStickY() {
+		return 0;
+	}
+	public double getRightStickX() {
+		return 0;
+	}
+	public double getRightStickY() {
+		return 0;
+	}
+	public double getDPadX () {
+		return 0;
+	}
+	public double getDPadY () {
+		return 0;
+	}
 }
