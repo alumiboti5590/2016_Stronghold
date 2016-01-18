@@ -17,12 +17,16 @@ public class ballCollector extends Subsystem {
        
     }
     
-    public void collect(){
-    	ballCollector.set(.3);
+    public void setSpeed(double speed){
+    	ballCollector.set(speed);
+    }
+    
+    public double getSpeed(){
+    	return ballCollector.get();
     }
     
     public void stop(){
-    	ballCollector.set(0.0);
+    	ballCollector.set(0);
     }
 }
 
