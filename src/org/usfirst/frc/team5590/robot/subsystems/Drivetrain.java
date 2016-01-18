@@ -10,8 +10,8 @@ import org.usfirst.frc.team5590.robot.RobotMap;
 
 public class Drivetrain extends Subsystem {
     
-	SpeedController leftTrack = RobotMap.drivetrainLeftTrack;
-	SpeedController rightTrack = RobotMap.drivetrainRightTrack;
+	SpeedController leftTrack = RobotMap.drivetrainLeftTrackMotor;
+	SpeedController rightTrack = RobotMap.drivetrainRightTrackMotor;
 	RobotDrive robotDrive = RobotMap.robotDrive;
 	
 	// Put methods for controlling this subsystem
