@@ -10,16 +10,18 @@ import org.usfirst.frc.team5590.robot.subsystems.*;
  */
 public class BallCollect extends Command {
 
+	private static double speed = .4;
+	
     public BallCollect() {
     	requires(Robot.ballCollector);
-    	// !!! TIMEOUT NEEDS TO BE CHANGED ACCORDING TO TESTS !!!
+    	// TODO: Timeout change based on tests
     	setTimeout(1.0);
     }
 
     protected void initialize() {
     	Robot.ballCollector.stop();
-    	// !!! SPEED NEEDS TO BE CHANGED ACCORDING TO TESTS !!!
-    	Robot.ballCollector.setSpeed(.2);
+    	// TODO: Speed changed according to tests
+    	Robot.ballCollector.setSpeed(speed);
     }
 
     protected void execute() {
