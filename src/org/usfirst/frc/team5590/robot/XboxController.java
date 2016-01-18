@@ -26,22 +26,22 @@ public class XboxController extends Joystick{
 	}
 
 	public double getLeftTrigger() {
-		return 0;
+		return this.getRawAxis(2);
 	}
 	public double getRightTrigger() {
-		return 0;
+		return this.getRawAxis(3);
 	}
 	public double getLeftStickX() {
-		return 0;
+		return this.getRawAxis(0);
 	}
 	public double getLeftStickY() {
-		return 0;
+		return this.getRawAxis(1);
 	}
 	public double getRightStickX() {
-		return 0;
+		return this.getRawAxis(4);
 	}
 	public double getRightStickY() {
-		return 0;
+		return this.getRawAxis(5);
 	}
 	public double getDPadX () {
 		return 0;
