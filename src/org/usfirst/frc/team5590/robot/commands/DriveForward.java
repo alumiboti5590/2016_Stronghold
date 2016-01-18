@@ -4,8 +4,8 @@ import org.usfirst.frc.team5590.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
+/** This command sets the speed of both speed controllers to 0.6
+ * To make make both tracks drive the robot forward
  */
 public class DriveForward extends Command {
 
@@ -16,6 +16,7 @@ public class DriveForward extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.drivetrain.stop();
     	Robot.drivetrain.setSpeed(0.6);
     }
 

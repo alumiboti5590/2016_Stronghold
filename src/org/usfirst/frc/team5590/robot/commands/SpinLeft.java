@@ -4,20 +4,22 @@ import org.usfirst.frc.team5590.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**This command sets the speed of both speed controllers to -0.6
- * To make make both tracks drive the robot backwards
+/**
+ *
  */
-public class DriveBackwards extends Command {
+public class SpinLeft extends Command {
 
-    public DriveBackwards() {
+    public SpinLeft() {
         // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	
     	requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.drivetrain.stop();
-    	Robot.drivetrain.setSpeed(-0.6);
+    	Robot.drivetrain.rotateLeft(0.3);
     }
 
     // Called repeatedly when this Command is scheduled to run
