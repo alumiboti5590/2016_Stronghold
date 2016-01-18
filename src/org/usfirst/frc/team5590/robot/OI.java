@@ -1,6 +1,9 @@
 package org.usfirst.frc.team5590.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 import org.usfirst.frc.team5590.robot.commands.ExampleCommand;
 
 /**
@@ -8,6 +11,18 @@ import org.usfirst.frc.team5590.robot.commands.ExampleCommand;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	XboxController xbox_1 = new XboxController(0);
+	LogitechX3 logitech_1 = new LogitechX3(1);
+	
+	// Examples
+	boolean value = xbox_1.button_a.get();
+	double axis_value = xbox_1.getLeftStickX();
+	
+	
+			
+	
+	
+	
 	// Hello World
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
