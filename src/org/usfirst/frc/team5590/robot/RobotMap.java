@@ -15,56 +15,56 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
 public class RobotMap {
-	public static SpeedController drivetrainLeftTrack;
-    public static SpeedController drivetrainRightTrack;
-    public static SpeedController ballCollector;
-    public static SpeedController ballShooter;
-    public static SpeedController breachArm;
+	public static SpeedController drivetrainLeftTrackMotor;
+    public static SpeedController drivetrainRightTrackMotor;
+    public static SpeedController ballCollectorMotor;
+    public static SpeedController ballShooterMotor;
+    public static SpeedController breachArmMotor;
     
     public static RobotDrive robotDrive;
     
-    public static Encoder breachEncoder;
+    public static Encoder breachArmEncoder;
     
     //DIO slots
-    public static int lTrack = 1;
-    public static int rTrack = 2;
-    public static int bCollector = 3;
-    public static int bShooter = 4;
-    public static int bArmMotor = 5;
+    public static int leftTrackSlot = 1;
+    public static int rightTrackSlot = 2;
+    public static int ballCollectorSlot = 3;
+    public static int ballShooterSlot = 4;
+    public static int breachArmMotorSlot = 5;
     
     //PWM slots
-    public static int bEncoder0 = 1;
-    public static int bEncoder1 = 2;
+    public static int breachArmEncoderSlot0 = 1;
+    public static int breachArmEncoderSlot1 = 2;
     
     public static void init(){
-    	drivetrainLeftTrack = new TalonSRX(lTrack);
-    	LiveWindow.addActuator("Drivetrain", "Left Track", (LiveWindowSendable) drivetrainLeftTrack);
+    	drivetrainLeftTrackMotor = new TalonSRX(leftTrackSlot);
+    	LiveWindow.addActuator("Drivetrain", "Left Track", (LiveWindowSendable) drivetrainLeftTrackMotor);
     	
-    	drivetrainRightTrack = new TalonSRX(rTrack);
-    	LiveWindow.addActuator("Drivetrain", "Left Track", (LiveWindowSendable) drivetrainRightTrack);
+    	drivetrainRightTrackMotor = new TalonSRX(rightTrackSlot);
+    	LiveWindow.addActuator("Drivetrain", "Left Track", (LiveWindowSendable) drivetrainRightTrackMotor);
     
-    	robotDrive = new RobotDrive(drivetrainLeftTrack, drivetrainRightTrack);
+    	robotDrive = new RobotDrive(drivetrainLeftTrackMotor, drivetrainRightTrackMotor);
     	
     	robotDrive.setSafetyEnabled(false);
     	robotDrive.setExpiration(.1);
     	robotDrive.setSensitivity(.5);
     	robotDrive.setMaxOutput(1.0);
     
-    	ballCollector = new TalonSRX(bCollector);
-    	LiveWindow.addActuator("Ball Collector", "Collector", (LiveWindowSendable) ballCollector);
+    	ballCollectorMotor = new TalonSRX(ballCollectorSlot);
+    	LiveWindow.addActuator("Ball Collector", "Collector", (LiveWindowSendable) ballCollectorMotor);
     
-    	ballShooter = new TalonSRX(bShooter);
-    	LiveWindow.addActuator("Ball Shooter", "Shooter", (LiveWindowSendable) ballShooter);
+    	ballShooterMotor = new TalonSRX(ballShooterSlot);
+    	LiveWindow.addActuator("Ball Shooter", "Shooter", (LiveWindowSendable) ballShooterMotor);
     
-    	breachArm = new TalonSRX(bArmMotor);
-    	LiveWindow.addActuator("Breach Arm", "Arm", (LiveWindowSendable) breachArm);
+    	breachArmMotor = new TalonSRX(breachArmMotorSlot);
+    	LiveWindow.addActuator("Breach Arm", "Arm", (LiveWindowSendable) breachArmMotor);
     	
     	// !!! THESE ENCODER VALEUS NEED TO BE VALIDATED/CHANGED FOR THIS
     	// YEAR'S SPECS !!!
-    	breachEncoder = new Encoder(bEncoder0, bEncoder1, false, EncodingType.k2X);
-    	breachEncoder.setMinRate(.1);
-    	breachEncoder.setDistancePerPulse(.014);
-    	breachEncoder.setSamplesToAverage(30);
+    	breachArmEncoder = new Encoder(breachArmEncoderSlot0, breachArmEncoderSlot1, false, EncodingType.k2X);
+    	breachArmEncoder.setMinRate(.1);
+    	breachArmEncoder.setDistancePerPulse(.014);
+    	breachArmEncoder.setSamplesToAverage(30);
     	
     }
 }
