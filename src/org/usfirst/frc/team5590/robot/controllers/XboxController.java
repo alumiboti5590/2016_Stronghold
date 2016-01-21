@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5590.robot;
+package org.usfirst.frc.team5590.robot.controllers;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
