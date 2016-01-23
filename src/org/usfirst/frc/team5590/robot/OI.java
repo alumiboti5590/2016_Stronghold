@@ -1,10 +1,11 @@
 package org.usfirst.frc.team5590.robot;
 
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
-import org.usfirst.frc.team5590.robot.commands.ExampleCommand;
+import org.usfirst.frc.team5590.robot.controllers.LogitechX3;
+import org.usfirst.frc.team5590.robot.controllers.XboxController;
 
 /**
  * This class is the glue that binds the controls on the physical operator
