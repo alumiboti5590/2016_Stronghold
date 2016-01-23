@@ -1,40 +1,43 @@
 package org.usfirst.frc.team5590.robot.commands;
 
-import org.usfirst.frc.team5590.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
-/** Stops The Robot by setting both drive motor speeds to 0
+import org.usfirst.frc.team5590.robot.Robot;
+import org.usfirst.frc.team5590.robot.subsystems.*;
+
+/**
  *
  */
-public class StopDriving extends Command {
-
-    public StopDriving() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrain);
+public class Collect extends Command {
+	
+    public Collect() {
+    	requires(Robot.shooter);
+    	// TODO: Timeout change based on tests
+    	setTimeout(1.0);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivetrain.stop();
+    	// TODO: Speed changed according to tests
+    	Robot.shooter.stopCollector();
+    	Robot.shooter.setCollectorSpeed(.0);
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.shooter.stopCollector();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.drivetrain.stop();
+    	Robot.shooter.stopCollector();
     }
 }

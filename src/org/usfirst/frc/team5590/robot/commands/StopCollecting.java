@@ -10,14 +10,12 @@ import org.usfirst.frc.team5590.robot.subsystems.*;
 public class StopCollecting extends Command {
 
     public StopCollecting() {
-        requires(Robot.ballCollector);
-     // !!! TIMEOUT NEEDS TO BE CHANGED ACCORDING TO TESTS !!!
-        setTimeout(0.5);
+        requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ballCollector.stop();
+    	Robot.shooter.stopCollector();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -26,12 +24,12 @@ public class StopCollecting extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ballCollector.stop();
+    	Robot.shooter.stopCollector();
     }
 
     // Called when another command which requires one or more of the same

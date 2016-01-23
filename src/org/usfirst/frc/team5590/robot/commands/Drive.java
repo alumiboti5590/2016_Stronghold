@@ -1,27 +1,29 @@
 package org.usfirst.frc.team5590.robot.commands;
 
 import org.usfirst.frc.team5590.robot.Robot;
+import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /** This command sets the speed of both speed controllers to 0.6
  * To make make both tracks drive the robot forward
  */
-public class DriveForward extends Command {
+public class Drive extends Command {
+	
+	private Drivetrain drivetrain = Robot.drivetrain;
 
-    public DriveForward() {
-        // Use requires() here to declare subsystem dependencies
-    	requires(Robot.drivetrain);
+    public Drive() {
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivetrain.stop();
-    	Robot.drivetrain.setSpeed(0.6);
+    	System.out.println("Initializing Drive Command");
+    	drivetrain.stop();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	drivetrain.updateSpeed();
     }
 
     // Make this return true when this Command no longer needs to run execute()

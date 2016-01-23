@@ -4,20 +4,20 @@ import org.usfirst.frc.team5590.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**This command sets the speed of both speed controllers to -0.6
- * To make make both tracks drive the robot backwards
+/**
+ *
  */
-public class DriveBackwards extends Command {
+public class Shoot extends Command {
 
-    public DriveBackwards() {
-        // Use requires() here to declare subsystem dependencies
-    	requires(Robot.drivetrain);
+    public Shoot() {
+        requires(Robot.shooter);
+        setTimeout(1.0);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivetrain.stop();
-    	Robot.drivetrain.setSpeed(-0.6);
+    	Robot.shooter.stopShooter();
+    	//TODO Speed Changed according to tests
+    	Robot.shooter.setShooterSpeed(.0);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -26,16 +26,17 @@ public class DriveBackwards extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.stop();
+    	Robot.shooter.stopShooter();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.shooter.stopShooter();
     }
 }
