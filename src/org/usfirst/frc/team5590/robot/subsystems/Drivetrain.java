@@ -25,9 +25,7 @@ public class Drivetrain extends Subsystem {
 
 		robotDrive = new RobotDrive(leftTrackController, rightTrackController);
 		robotDrive.setSafetyEnabled(false);
-		robotDrive.setExpiration(.1);
-		robotDrive.setSensitivity(.5);
-		robotDrive.setMaxOutput(1.0);
+
 	}
 
 	public void initDefaultCommand() {
@@ -39,7 +37,7 @@ public class Drivetrain extends Subsystem {
 	 */
 	public void updateSpeed() {
 		double axisValue = OI.xboxController.getLeftStickY();
-		robotDrive.tankDrive(axisValue, axisValue, true);
+		robotDrive.arcadeDrive(axisValue, 0.0);
 		System.out.println("Y Axis Left Stick: " + axisValue);
 	}
 
