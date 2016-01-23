@@ -15,6 +15,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team5590.robot.subsystems.Shooter;
 
 public class RobotMap {
 	public static SpeedController drivetrainLeftTrackMotor;
@@ -39,13 +40,8 @@ public class RobotMap {
     public static void init(){
     	
     	Drivetrain.initializeControllers();
-    
-    	ballCollectorMotor = new TalonSRX(ballCollectorSlot);
-    	LiveWindow.addActuator("Ball Collector", "Collector", (LiveWindowSendable) ballCollectorMotor);
-    
-    	ballShooterMotor = new TalonSRX(ballShooterSlot);
-    	LiveWindow.addActuator("Ball Shooter", "Shooter", (LiveWindowSendable) ballShooterMotor);
-    
+    	Shooter.initializeControllers();
+   
     	breachArmMotor = new TalonSRX(breachArmMotorSlot);
     	LiveWindow.addActuator("Breach Arm", "Arm", (LiveWindowSendable) breachArmMotor);
     	
