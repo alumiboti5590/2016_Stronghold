@@ -15,6 +15,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team5590.robot.subsystems.Shooter;
 
 public class RobotMap {
 	public static SpeedController drivetrainLeftTrackMotor;
@@ -26,10 +27,6 @@ public class RobotMap {
     public static Encoder breachArmEncoder;
     
     //DIO slots
-    public static int leftTrackSlot = 1;
-    public static int rightTrackSlot = 2;
-    public static int ballCollectorSlot = 3;
-    public static int ballShooterSlot = 4;
     public static int breachArmMotorSlot = 5;
     
     //PWM slots
@@ -39,13 +36,8 @@ public class RobotMap {
     public static void init(){
     	
     	Drivetrain.initializeControllers();
-    
-    	ballCollectorMotor = new TalonSRX(ballCollectorSlot);
-    	LiveWindow.addActuator("Ball Collector", "Collector", (LiveWindowSendable) ballCollectorMotor);
-    
-    	ballShooterMotor = new TalonSRX(ballShooterSlot);
-    	LiveWindow.addActuator("Ball Shooter", "Shooter", (LiveWindowSendable) ballShooterMotor);
-    
+    	Shooter.initializeControllers();
+   
     	breachArmMotor = new TalonSRX(breachArmMotorSlot);
     	LiveWindow.addActuator("Breach Arm", "Arm", (LiveWindowSendable) breachArmMotor);
     	
