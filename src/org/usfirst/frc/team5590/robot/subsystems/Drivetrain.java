@@ -40,7 +40,7 @@ public class Drivetrain extends Subsystem {
 	public void updateSpeed() {
 		double axisValue = OI.xboxController.getLeftStickY();
 		robotDrive.tankDrive(axisValue, axisValue, true);
-		System.out.println(axisValue);
+		System.out.println("Y Axis Left Stick: " + axisValue);
 	}
 
 	public void takeJoystickInput(double left, double right) {
