@@ -64,7 +64,7 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void stop() {
-		robotDrive.drive(0, 0);
+		robotDrive.tankDrive(0, 0);
 		System.out.println("Stopped");
 	}
 
