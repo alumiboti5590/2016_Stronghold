@@ -8,8 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
  * To make make both tracks drive the robot backwards
  */
 public class DriveBackwards extends Command {
+	
+	private double speed;
 
-    public DriveBackwards() {
+    public DriveBackwards(double desiredSpeed) {
+    	speed = desiredSpeed;
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.drivetrain);
     }
@@ -17,7 +20,7 @@ public class DriveBackwards extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.drivetrain.stop();
-    	Robot.drivetrain.setSpeed(-0.6);
+    	Robot.drivetrain.setSpeed(-speed);
     }
 
     // Called repeatedly when this Command is scheduled to run

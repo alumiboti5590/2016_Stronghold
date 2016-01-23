@@ -8,16 +8,19 @@ import edu.wpi.first.wpilibj.command.Command;
  * To make make both tracks drive the robot forward
  */
 public class DriveForward extends Command {
+	
+	private double speed;
 
-    public DriveForward() {
+    public DriveForward(double desiredSpeed) {
         // Use requires() here to declare subsystem dependencies
+    	speed = desiredSpeed;
     	requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.drivetrain.stop();
-    	Robot.drivetrain.setSpeed(0.6);
+    	Robot.drivetrain.setSpeed(speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
