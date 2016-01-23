@@ -1,15 +1,20 @@
 package org.usfirst.frc.team5590.robot.subsystems;
 
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.command.Subsystem;
-
 import org.usfirst.frc.team5590.robot.OI;
 import org.usfirst.frc.team5590.robot.commands.Drive;
+
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.TalonSRX;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drivetrain extends Subsystem {
 	
 	private static int leftTrackSlot = 1;
     private static int rightTrackSlot = 2;
+    
+    private static DriverStation driverstation;
     
 	private static RobotDrive robotDrive;
     
@@ -17,6 +22,9 @@ public class Drivetrain extends Subsystem {
 	 * Initializes Talon Speed Controllers without needing an existing instance.
 	 */
 	public static void initializeControllers(){
+		
+		driverstation = DriverStation.getInstance();
+		
 		SpeedController leftTrackController = new TalonSRX(leftTrackSlot);
 		SpeedController rightTrackController = new TalonSRX(rightTrackSlot);
 		robotDrive = new RobotDrive(leftTrackController, rightTrackController);
