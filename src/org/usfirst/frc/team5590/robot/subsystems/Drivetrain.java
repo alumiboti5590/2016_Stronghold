@@ -3,7 +3,6 @@ package org.usfirst.frc.team5590.robot.subsystems;
 import org.usfirst.frc.team5590.robot.OI;
 import org.usfirst.frc.team5590.robot.commands.Drive;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
@@ -41,26 +40,32 @@ public class Drivetrain extends Subsystem {
 	public void updateSpeed() {
 		double axisValue = OI.xboxController.getLeftStickY();
 		robotDrive.tankDrive(axisValue, axisValue, true);
+		System.out.println(axisValue);
 	}
 
 	public void takeJoystickInput(double left, double right) {
 		robotDrive.tankDrive(left, right);
+		System.out.println("Left: " + left + "...Right:" + right);
 	}
 
 	public void setSpeed(double speed) {
 		robotDrive.tankDrive(speed, speed);
+		System.out.println("Speed: " + speed);
 	}
 
 	public void rotateLeft(double speed) {
 		robotDrive.tankDrive(-speed, speed);
+		System.out.println("Speed: " + speed);
 	}
 
 	public void rotateRight(double speed) {
 		robotDrive.tankDrive(speed, -speed);
+		System.out.println("Speed: " + speed);
 	}
 
 	public void stop() {
 		robotDrive.drive(0, 0);
+		System.out.println("Stopped");
 	}
 
 }
