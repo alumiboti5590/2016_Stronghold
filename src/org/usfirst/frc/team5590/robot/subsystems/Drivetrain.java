@@ -2,19 +2,40 @@ package org.usfirst.frc.team5590.robot.subsystems;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc.team5590.robot.RobotMap;
+
+import org.usfirst.frc.team5590.robot.OI;
 import org.usfirst.frc.team5590.robot.commands.Drive;
 
 public class Drivetrain extends Subsystem {
-    
-	SpeedController leftTrack = RobotMap.drivetrainLeftTrackMotor;
-	SpeedController rightTrack = RobotMap.drivetrainRightTrackMotor;
-	RobotDrive robotDrive = RobotMap.robotDrive;
 	
-	// Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	private static int leftTrackSlot = 1;
+    private static int rightTrackSlot = 2;
+    
+	private static RobotDrive robotDrive;
+    
+    /**
+	 * Initializes Talon Speed Controllers without needing an existing instance.
+	 */
+	public static void initializeControllers(){
+		SpeedController leftTrackController = new TalonSRX(leftTrackSlot);
+		SpeedController rightTrackController = new TalonSRX(rightTrackSlot);
+		robotDrive = new RobotDrive(leftTrackController, rightTrackController);
+    	robotDrive.setSafetyEnabled(false);
+    	robotDrive.setExpiration(.1);
+    	robotDrive.setSensitivity(.5);
+    	robotDrive.setMaxOutput(1.0);
+	}
+    
+    public void initDefaultCommand() {
+    	setDefaultCommand(new Drive());
+    }
+	
+	/**
+	 * 
+	 */
 	public void updateSpeed() {
-		
+		double axisValue = OI.xboxController.getLeftStickY();
+		robotDrive.tankDrive(axisValue, axisValue, true);
 	}
 	
 	public void takeJoystickInput(double left, double right) {
@@ -36,8 +57,6 @@ public class Drivetrain extends Subsystem {
 	public void stop() {
 		robotDrive.drive(0, 0);
 	}
-    public void initDefaultCommand() {
-    	setDefaultCommand(new Drive());
-    }
+   
 }
 

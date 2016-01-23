@@ -14,14 +14,14 @@ import java.util.Vector;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
+import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
+
 public class RobotMap {
 	public static SpeedController drivetrainLeftTrackMotor;
     public static SpeedController drivetrainRightTrackMotor;
     public static SpeedController ballCollectorMotor;
     public static SpeedController ballShooterMotor;
     public static SpeedController breachArmMotor;
-    
-    public static RobotDrive robotDrive;
     
     public static Encoder breachArmEncoder;
     
@@ -37,18 +37,8 @@ public class RobotMap {
     public static int breachArmEncoderSlot1 = 2;
     
     public static void init(){
-    	drivetrainLeftTrackMotor = new TalonSRX(leftTrackSlot);
-    	LiveWindow.addActuator("Drivetrain", "Left Track", (LiveWindowSendable) drivetrainLeftTrackMotor);
     	
-    	drivetrainRightTrackMotor = new TalonSRX(rightTrackSlot);
-    	LiveWindow.addActuator("Drivetrain", "Left Track", (LiveWindowSendable) drivetrainRightTrackMotor);
-    
-    	robotDrive = new RobotDrive(drivetrainLeftTrackMotor, drivetrainRightTrackMotor);
-    	
-    	robotDrive.setSafetyEnabled(false);
-    	robotDrive.setExpiration(.1);
-    	robotDrive.setSensitivity(.5);
-    	robotDrive.setMaxOutput(1.0);
+    	Drivetrain.initializeControllers();
     
     	ballCollectorMotor = new TalonSRX(ballCollectorSlot);
     	LiveWindow.addActuator("Ball Collector", "Collector", (LiveWindowSendable) ballCollectorMotor);

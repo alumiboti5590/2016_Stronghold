@@ -9,8 +9,8 @@ import org.usfirst.frc.team5590.robot.controllers.XboxController;
  */
 public class OI {
 	
-	XboxController xboxController = new XboxController(0);
-	LogitechX3 logitechController = new LogitechX3(1);
+	public static XboxController xboxController = new XboxController(0);
+	public static LogitechX3 logitechController = new LogitechX3(1);
 	
 	public OI() {
 
