@@ -13,6 +13,7 @@ public class Drive extends Command {
 	private Drivetrain drivetrain = Robot.drivetrain;
 
     public Drive() {
+    	requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
