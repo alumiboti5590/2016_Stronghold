@@ -1,9 +1,5 @@
 package org.usfirst.frc.team5590.robot;
 
-
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team5590.robot.controllers.LogitechX3;
 import org.usfirst.frc.team5590.robot.controllers.XboxController;
 
@@ -12,29 +8,13 @@ import org.usfirst.frc.team5590.robot.controllers.XboxController;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	XboxController xbox_1 = new XboxController(0);
-	LogitechX3 logitech_1 = new LogitechX3(1);
 	
-	// Examples
-	boolean value = xbox_1.button_a.get();
-	double axis_value = xbox_1.getLeftStickX();
+	XboxController xboxController = new XboxController(0);
+	LogitechX3 logitechController = new LogitechX3(1);
 	
-	
-			
-	
-	
-	
-	// Hello World
-    //// CREATING BUTTONS
-    // One type of button is a joystick button which is any button on a joystick.
-    // You create one by telling it which joystick it's on and which button
-    // number it is.
-    // Joystick stick = new Joystick(port);
-    // Button button = new JoystickButton(stick, buttonNumber);
-    
-    // There are a few additional built in buttons you can use. Additionally,
-    // by subclassing Button you can create custom triggers and bind those to
-    // commands the same as any other Button.
+	public OI() {
+
+	}
     
     //// TRIGGERING COMMANDS WITH BUTTONS
     // Once you have a button, it's trivial to bind it to a button in one of

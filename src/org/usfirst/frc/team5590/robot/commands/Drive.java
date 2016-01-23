@@ -1,30 +1,28 @@
 package org.usfirst.frc.team5590.robot.commands;
 
 import org.usfirst.frc.team5590.robot.Robot;
+import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**This command sets the speed of both speed controllers to -0.6
- * To make make both tracks drive the robot backwards
+/** This command sets the speed of both speed controllers to 0.6
+ * To make make both tracks drive the robot forward
  */
-public class DriveBackwards extends Command {
+public class Drive extends Command {
 	
-	private double speed;
+	private Drivetrain drivetrain = Robot.drivetrain;
 
-    public DriveBackwards(double desiredSpeed) {
-    	speed = desiredSpeed;
-        // Use requires() here to declare subsystem dependencies
-    	requires(Robot.drivetrain);
+    public Drive() {
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivetrain.stop();
-    	Robot.drivetrain.setSpeed(-speed);
+    	drivetrain.stop();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	drivetrain.updateSpeed();
     }
 
     // Make this return true when this Command no longer needs to run execute()

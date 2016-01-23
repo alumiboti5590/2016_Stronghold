@@ -6,33 +6,33 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class LogitechX3 extends Joystick{
 	
-	Button button_1,
-			button_2,
-			button_3 ,
-			button_4,
-			button_5,
-			button_6 ,
-			button_7 ,
-			button_8 ,
-			button_9,
-			button_10,
-			button_11,
-			button_12;
+	Button button1,
+			button2,
+			button3 ,
+			button4,
+			button5,
+			button6 ,
+			button7 ,
+			button8 ,
+			button9,
+			button10,
+			button11,
+			button12;
 		
 	public LogitechX3(int port) {
 		super(port);
-		button_1 = new JoystickButton(this, 1);
-		button_2 = new JoystickButton(this, 2);
-		button_3 = new JoystickButton(this, 3);
-		button_4 = new JoystickButton(this, 4);
-		button_5 = new JoystickButton(this, 5);
-		button_6 = new JoystickButton(this, 6);
-		button_7 = new JoystickButton(this, 7);
-		button_8 = new JoystickButton(this, 8);
-		button_9 = new JoystickButton(this, 9);
-		button_10 = new JoystickButton(this, 10);
-		button_11 = new JoystickButton(this, 11);
-		button_12 = new JoystickButton(this, 12);
+		button1 = new JoystickButton(this, 1);
+		button2 = new JoystickButton(this, 2);
+		button3 = new JoystickButton(this, 3);
+		button4 = new JoystickButton(this, 4);
+		button5 = new JoystickButton(this, 5);
+		button6 = new JoystickButton(this, 6);
+		button7 = new JoystickButton(this, 7);
+		button8 = new JoystickButton(this, 8);
+		button9 = new JoystickButton(this, 9);
+		button10 = new JoystickButton(this, 10);
+		button11 = new JoystickButton(this, 11);
+		button12 = new JoystickButton(this, 12);
 		
 		
 	}
@@ -53,6 +53,42 @@ public class LogitechX3 extends Joystick{
 	}
 	public double getThumbStickY() {
 		return 0;
+	}
+	public boolean getbutton1() {
+		return button1.get();
+	}
+	public boolean getbutton2() {
+		return button2.get();
+	}
+	public boolean getbutton3() {
+		return button3.get();
+	}
+	public boolean getbutton4() {
+		return button4.get();
+	}
+	public boolean getbutton5() {
+		return button5.get();
+	}
+	public boolean getbutton6() {
+		return button6.get();
+	}
+	public boolean getbutton7() {
+		return button7.get();
+	}
+	public boolean getbutton8() {
+		return button8.get();
+	}
+	public boolean getbutton9() {
+		return button9.get();
+	}
+	public boolean getbutton10() {
+		return button10.get();
+	}
+	public boolean getbutton11() {
+		return button11.get();
+	}
+	public boolean getbutton12() {
+		return button12.get();
 	}
 }
 
