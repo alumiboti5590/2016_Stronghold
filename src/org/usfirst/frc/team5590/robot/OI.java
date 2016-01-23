@@ -11,6 +11,7 @@ import org.usfirst.frc.team5590.robot.commands.ExampleCommand;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	
 	XboxController xbox_1 = new XboxController(0);
 	LogitechX3 logitech_1 = new LogitechX3(1);
 	
