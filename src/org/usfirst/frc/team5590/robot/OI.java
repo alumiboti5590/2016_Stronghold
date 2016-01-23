@@ -6,6 +6,7 @@ import org.usfirst.frc.team5590.robot.controllers.XboxController;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
+ * xbox controller should always be port 1 and logitech should be port 2
  */
 public class OI {
 	

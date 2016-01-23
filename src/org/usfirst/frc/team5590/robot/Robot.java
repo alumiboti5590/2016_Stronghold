@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team5590.robot;
 
-import org.usfirst.frc.team5590.robot.subsystems.BallCollector;
+import org.usfirst.frc.team5590.robot.subsystems.Shooter;
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class Robot extends IterativeRobot {
 
 	public static final Drivetrain drivetrain = new Drivetrain();
-	public static final BallCollector ballCollector = new BallCollector();
+	public static final Shooter shooter = new Shooter();
 	public static OI oi;
 
     Command autonomousCommand;

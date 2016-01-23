@@ -1,21 +1,21 @@
 package org.usfirst.frc.team5590.robot.commands;
 
+import org.usfirst.frc.team5590.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team5590.robot.Robot;
-import org.usfirst.frc.team5590.robot.subsystems.*;
 /**
  *
  */
-public class StopCollecting extends Command {
+public class StopShooting extends Command {
 
-    public StopCollecting() {
+    public StopShooting() {
         requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.stopCollector();
+    	Robot.shooter.stopShooter();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,7 +29,7 @@ public class StopCollecting extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.stopCollector();
+    	Robot.shooter.stopShooter();
     }
 
     // Called when another command which requires one or more of the same

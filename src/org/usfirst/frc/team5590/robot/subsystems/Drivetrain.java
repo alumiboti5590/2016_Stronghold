@@ -10,34 +10,31 @@ import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drivetrain extends Subsystem {
-	
-	private static int leftTrackSlot = 1;
-    private static int rightTrackSlot = 2;
-    
-    private static DriverStation driverstation;
-    
+
+	private static final int leftTrackDIO = 0;
+	private static final int rightTrackDIO = 1;
+
 	private static RobotDrive robotDrive;
-    
-    /**
+
+	/**
 	 * Initializes Talon Speed Controllers without needing an existing instance.
 	 */
-	public static void initializeControllers(){
-		
-		driverstation = DriverStation.getInstance();
-		
-		SpeedController leftTrackController = new TalonSRX(leftTrackSlot);
-		SpeedController rightTrackController = new TalonSRX(rightTrackSlot);
+	public static void initializeControllers() {
+
+		SpeedController leftTrackController = new TalonSRX(leftTrackDIO);
+		SpeedController rightTrackController = new TalonSRX(rightTrackDIO);
+
 		robotDrive = new RobotDrive(leftTrackController, rightTrackController);
-    	robotDrive.setSafetyEnabled(false);
-    	robotDrive.setExpiration(.1);
-    	robotDrive.setSensitivity(.5);
-    	robotDrive.setMaxOutput(1.0);
+		robotDrive.setSafetyEnabled(false);
+		robotDrive.setExpiration(.1);
+		robotDrive.setSensitivity(.5);
+		robotDrive.setMaxOutput(1.0);
 	}
-    
-    public void initDefaultCommand() {
-    	setDefaultCommand(new Drive());
-    }
-	
+
+	public void initDefaultCommand() {
+		setDefaultCommand(new Drive());
+	}
+
 	/**
 	 * 
 	 */
@@ -45,26 +42,25 @@ public class Drivetrain extends Subsystem {
 		double axisValue = OI.xboxController.getLeftStickY();
 		robotDrive.tankDrive(axisValue, axisValue, true);
 	}
-	
+
 	public void takeJoystickInput(double left, double right) {
 		robotDrive.tankDrive(left, right);
 	}
-	
+
 	public void setSpeed(double speed) {
 		robotDrive.tankDrive(speed, speed);
 	}
-	
+
 	public void rotateLeft(double speed) {
 		robotDrive.tankDrive(-speed, speed);
 	}
-	
+
 	public void rotateRight(double speed) {
 		robotDrive.tankDrive(speed, -speed);
 	}
-	
+
 	public void stop() {
 		robotDrive.drive(0, 0);
 	}
-   
-}
 
+}
