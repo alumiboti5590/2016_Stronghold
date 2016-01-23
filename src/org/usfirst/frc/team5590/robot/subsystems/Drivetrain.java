@@ -8,8 +8,8 @@ import org.usfirst.frc.team5590.robot.commands.Drive;
 
 public class Drivetrain extends Subsystem {
 	
-	private static int leftTrackSlot = 1;
-    private static int rightTrackSlot = 2;
+	private static final int leftTrackDIO = 0;
+    private static final int rightTrackDIO = 1;
     
 	private static RobotDrive robotDrive;
     
@@ -17,8 +17,8 @@ public class Drivetrain extends Subsystem {
 	 * Initializes Talon Speed Controllers without needing an existing instance.
 	 */
 	public static void initializeControllers(){
-		SpeedController leftTrackController = new TalonSRX(leftTrackSlot);
-		SpeedController rightTrackController = new TalonSRX(rightTrackSlot);
+		SpeedController leftTrackController = new TalonSRX(leftTrackDIO);
+		SpeedController rightTrackController = new TalonSRX(rightTrackDIO);
 		robotDrive = new RobotDrive(leftTrackController, rightTrackController);
     	robotDrive.setSafetyEnabled(false);
     	robotDrive.setExpiration(.1);
