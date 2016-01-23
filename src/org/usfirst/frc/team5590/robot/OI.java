@@ -19,11 +19,6 @@ public class OI {
 	boolean value = xbox_1.button_a.get();
 	double axis_value = xbox_1.getLeftStickX();
 	
-	
-			
-	
-	
-	
 	// Hello World
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
