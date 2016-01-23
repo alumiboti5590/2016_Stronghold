@@ -17,14 +17,12 @@ public class Shooter extends Subsystem {
     public static SpeedController ballCollector = RobotMap.ballCollectorMotor;
     public static SpeedController ballShooter = RobotMap.ballShooterMotor;
     
-    public static int ballCollectorSlot = RobotMap.ballCollectorSlot;
-    public static int ballShooterSlot = RobotMap.ballCollectorSlot;
+    public static final int ballCollectorDIO = 3;
+    public static final int ballShooterDIO = 4;
     
     public static void initializeControllers(){
-    	ballCollector = new TalonSRX(ballCollectorSlot);
-    	ballShooter = new TalonSRX(ballShooterSlot);
-    	LiveWindow.addActuator("Ball Shooter", "Shooter", (LiveWindowSendable) ballShooter);
-    	LiveWindow.addActuator("Ball Collector", "Collector", (LiveWindowSendable) ballCollector);
+    	ballCollector = new TalonSRX(ballCollectorDIO);
+    	ballShooter = new TalonSRX(ballShooterDIO);
     }
     
     public void initDefaultCommand() {

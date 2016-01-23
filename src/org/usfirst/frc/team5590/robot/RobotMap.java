@@ -27,10 +27,6 @@ public class RobotMap {
     public static Encoder breachArmEncoder;
     
     //DIO slots
-    public static int leftTrackSlot = 1;
-    public static int rightTrackSlot = 2;
-    public static int ballCollectorSlot = 3;
-    public static int ballShooterSlot = 4;
     public static int breachArmMotorSlot = 5;
     
     //PWM slots
