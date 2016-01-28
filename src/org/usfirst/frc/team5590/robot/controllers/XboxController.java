@@ -7,7 +7,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class XboxController extends Joystick{
+public class XboxController extends Joystick {
+	
 	Button buttonA, 
 			buttonB,
 			buttonX,
