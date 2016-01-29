@@ -17,7 +17,7 @@ public class OI {
 	public OI() { 
 		logitechController.button1.whenPressed(new Shoot());
 		logitechController.button1.whenReleased(new StopShooting());
-		logitechController.button2.whenPressed(new Collect());
+		logitechController.button2.whileHeld(new Collect());
 		logitechController.button2.whenReleased(new StopCollecting());
 	}
     
