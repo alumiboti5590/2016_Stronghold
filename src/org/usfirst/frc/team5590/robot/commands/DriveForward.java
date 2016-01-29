@@ -1,27 +1,32 @@
 package org.usfirst.frc.team5590.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
-import org.usfirst.frc.team5590.robot.Robot;
 import org.usfirst.frc.team5590.robot.subsystems.*;
+import org.usfirst.frc.team5590.robot.Robot;
 
 /**
  *
  */
-public class Collect extends Command {
+public class DriveForward extends Command {
 	
-    public Collect() {
-    	requires(Robot.collector);
-    	// TODO: Timeout change based on tests
-    	setTimeout(1.0);
+	public Drivetrain drivetrain = Robot.drivetrain;
+
+    public DriveForward() {
+    	requires(drivetrain);
+        //TODO Set a time out
+        setTimeout(1.0);
     }
 
+    // Called just before this Command runs the first time
     protected void initialize() {
-    	// TODO: Speed changed according to tests
-    	Robot.collector.stopCollector();
-    	Robot.collector.setCollectorSpeed(.0);
+    	drivetrain.stop();
+    	System.out.println("Driving Forward");
+    	drivetrain.setSpeed(.7);
     }
 
+    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     }
 
@@ -32,12 +37,11 @@ public class Collect extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.collector.stopCollector();
+    	drivetrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.collector.stopCollector();
     }
 }
