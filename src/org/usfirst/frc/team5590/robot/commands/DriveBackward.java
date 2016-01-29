@@ -22,8 +22,8 @@ public class DriveBackward extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	drivetrain.stop();
-    	System.out.println("Driving Forward");
-    	drivetrain.setSpeed(.7);
+    	System.out.println("Driving Backward");
+    	drivetrain.setSpeed(-.7);
     }
 
     // Called repeatedly when this Command is scheduled to run
