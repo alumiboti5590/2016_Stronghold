@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class LogitechX3 extends Joystick{
 	
-	Button button1,
+	public Button button1,
 			button2,
 			button3 ,
 			button4,
@@ -32,10 +32,9 @@ public class LogitechX3 extends Joystick{
 		button9 = new JoystickButton(this, 9);
 		button10 = new JoystickButton(this, 10);
 		button11 = new JoystickButton(this, 11);
-		button12 = new JoystickButton(this, 12);
-		
-		
+		button12 = new JoystickButton(this, 12);	
 	}
+	
 	public double getMainStickX() {
 		return 0;
 	}
