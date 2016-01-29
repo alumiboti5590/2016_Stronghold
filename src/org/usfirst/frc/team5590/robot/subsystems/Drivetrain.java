@@ -48,7 +48,7 @@ public class Drivetrain extends Subsystem {
 		if (this.leftMotorSpeed == 0 && this.rightMotorSpeed == 0) {
 			this.leftMotorSpeed = rotateSpeed;
 			this.rightMotorSpeed = rotateSpeed*-1;
-			robotDrive.tankDrive(this.leftMotorSpeed, this.rightMotorSpeed);
+			robotDrive.tankDrive(this.leftMotorSpeed*-1, this.rightMotorSpeed*-1);
 			System.out.println("Setting rotate speed.. motors are not moving");
 		}
 		System.out.println("right: " + rightTrigger + " left: "+ leftTrigger);
@@ -58,18 +58,17 @@ public class Drivetrain extends Subsystem {
 	 * 
 	 */
 	public void updateSpeed() {
-		double axisValueY = roundToTenth(OI.xboxController.getLeftStickY())/2;
-		double axisValueX = roundToTenth(OI.xboxController.getLeftStickX())/1.5;
-		this.rightMotorSpeed = axisValueY;
-		this.leftMotorSpeed = axisValueX;
-		robotDrive.arcadeDrive(axisValueY*-1, axisValueX*-1, true);
-		System.out.println("Y Axis Left Stick: " + axisValueY);
-		System.out.println("X Axis Left Stick: " + axisValueX + "\n");
+		double leftStickY = roundToTenth(OI.xboxController.getLeftStickY());
+		double rightStickY = roundToTenth(OI.xboxController.getRightStickY());
+		this.rightMotorSpeed = leftStickY;
+		this.leftMotorSpeed = rightStickY;
+		robotDrive.tankDrive(this.leftMotorSpeed, this.rightMotorSpeed);
+		System.out.println("Y Axis Left Stick: " + leftStickY);
+		System.out.println("X Axis Left Stick: " + rightStickY + "\n");
 	}
 	
 	private double roundToTenth(double speed) {
 		double value = Math.round(speed*10);
-		System.out.println(value);
 		System.out.println(value/10);
 		return value/10;
 	}
