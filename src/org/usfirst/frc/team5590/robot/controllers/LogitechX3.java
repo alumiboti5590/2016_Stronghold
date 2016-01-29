@@ -36,22 +36,16 @@ public class LogitechX3 extends Joystick{
 	}
 	
 	public double getMainStickX() {
-		return 0;
+		return this.getRawAxis(0);
 	}
 	public double getMainStickY() {
-		return 0;
+		return this.getRawAxis(1);
 	}
 	public double getMainStickZ () {
-		return 0;
+		return this.getRawAxis(2);
 	}
 	public double getSliderY() {
-		return 0;
-	}
-	public double getThumbStickX() {
-		return 0;
-	}
-	public double getThumbStickY() {
-		return 0;
+		return this.getRawAxis(3);
 	}
 	public boolean getbutton1() {
 		return button1.get();
