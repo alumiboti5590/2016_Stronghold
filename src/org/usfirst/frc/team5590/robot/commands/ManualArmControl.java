@@ -8,19 +8,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ExtendArm extends Command {
+public class ManualArmControl extends Command {
 
-    public ExtendArm() {
-    	System.out.println("Initializing Arm Extension Command");
+    public ManualArmControl() {
     	requires(Robot.arm);
     }
 
     protected void initialize() {
+    	System.out.println("Initializing Manual Arm Control Command");
+    	Arm.breachArmHorizontalEncoder.reset();
     	Arm.breachArmVerticalEncoder.reset();
     }
 
     protected void execute() {
-    	Robot.arm.updateBreachArmY();
     }
 
     protected boolean isFinished() {
