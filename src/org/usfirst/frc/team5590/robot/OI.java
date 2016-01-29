@@ -14,9 +14,11 @@ public class OI {
 	public static XboxController xboxController = new XboxController(0);
 	public static LogitechX3 logitechController = new LogitechX3(1);
 	
-	public OI() {
-		logitechController.button1.whenPressed(new StopCollecting());
-
+	public OI() { 
+		logitechController.button1.whenPressed(new Shoot());
+		logitechController.button1.whenReleased(new StopShooting());
+		logitechController.button2.whenPressed(new Collect());
+		logitechController.button2.whenReleased(new StopCollecting());
 	}
     
     //// TRIGGERING COMMANDS WITH BUTTONS
