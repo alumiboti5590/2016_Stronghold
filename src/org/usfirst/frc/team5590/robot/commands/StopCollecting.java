@@ -10,12 +10,12 @@ import org.usfirst.frc.team5590.robot.subsystems.*;
 public class StopCollecting extends Command {
 
     public StopCollecting() {
-        requires(Robot.shooter);
+        requires(Robot.collector);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.stopCollector();
+    	Robot.collector.stopCollector();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,7 +29,7 @@ public class StopCollecting extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.stopCollector();
+    	Robot.collector.stopCollector();
     }
 
     // Called when another command which requires one or more of the same
