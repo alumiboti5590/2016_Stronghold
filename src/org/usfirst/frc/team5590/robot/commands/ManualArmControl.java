@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5590.robot.commands;
 
+import org.usfirst.frc.team5590.robot.OI;
 import org.usfirst.frc.team5590.robot.Robot;
 import org.usfirst.frc.team5590.robot.subsystems.Arm;
 
@@ -21,7 +22,7 @@ public class ManualArmControl extends Command {
     }
 
     protected void execute() {
-    	Robot.arm.updateBreachArmZ();
+		Robot.arm.updateBreachArmZ();
     	Robot.arm.updateBreachArmY();
     }
 

@@ -14,6 +14,7 @@ import java.util.Vector;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
+import org.usfirst.frc.team5590.robot.subsystems.Arm;
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5590.robot.subsystems.Shooter;
 
@@ -37,6 +38,7 @@ public class RobotMap {
     	
     	Drivetrain.initializeControllers();
     	Shooter.initializeControllers();
+    	Arm.initializeControllers();
    
     	breachArmMotor = new TalonSRX(breachArmMotorSlot);
     	LiveWindow.addActuator("Breach Arm", "Arm", (LiveWindowSendable) breachArmMotor);

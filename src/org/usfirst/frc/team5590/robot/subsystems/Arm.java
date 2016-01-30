@@ -3,6 +3,7 @@ package org.usfirst.frc.team5590.robot.subsystems;
 import org.usfirst.frc.team5590.robot.OI;
 import org.usfirst.frc.team5590.robot.commands.Disabled;
 import org.usfirst.frc.team5590.robot.commands.Drive;
+import org.usfirst.frc.team5590.robot.commands.ManualArmControl;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -48,17 +49,16 @@ public class Arm extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new Disabled());
-
+		setDefaultCommand(new ManualArmControl());
 	}
 
 	public void updateBreachArmY() {
-		double logitechJoystickY = roundToTenth(OI.logitechController.getMainStickY());
+		double logitechJoystickY = OI.logitechController.getMainStickY();
 		this.verticalMotorSpeed = logitechJoystickY;
 	}
 
 	public void updateBreachArmZ() {
-		double logitechJoystickZ = roundToTenth(OI.logitechController.getMainStickZ());
+		double logitechJoystickZ = OI.logitechController.getMainStickZ();
 		this.horizontalMotorSpeed = logitechJoystickZ;
 	}
 
@@ -87,11 +87,5 @@ public class Arm extends Subsystem {
 			}
 		}
 		breachArmHorizontalMotor.set(0);
-	}
-
-	private double roundToTenth(double speed) {
-		double value = Math.round(speed * 10);
-		System.out.println(value / 10);
-		return value / 10;
 	}
 }

@@ -14,11 +14,22 @@ public class OI {
 	public static XboxController xboxController = new XboxController(0);
 	public static LogitechX3 logitechController = new LogitechX3(1);
 	
+	public static boolean shooterMode = false;
+	
 	public OI() { 
-		logitechController.button1.whenPressed(new Shoot());
-		logitechController.button1.whenReleased(new StopShooting());
-		logitechController.button2.whileHeld(new Collect());
-		logitechController.button2.whenReleased(new StopCollecting());
+		
+		logitechController.button7.whenPressed(new ToggleMode());
+		
+		if (shooterMode) {
+			logitechController.button1.whenPressed(new Shoot());
+			logitechController.button1.whenReleased(new StopShooting());
+			logitechController.button2.whileHeld(new Collect());
+			logitechController.button2.whenReleased(new StopCollecting());
+		} else {
+			
+		}
+		
+		
 	}
     
     //// TRIGGERING COMMANDS WITH BUTTONS
