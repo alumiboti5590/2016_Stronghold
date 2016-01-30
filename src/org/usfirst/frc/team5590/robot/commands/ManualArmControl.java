@@ -21,6 +21,8 @@ public class ManualArmControl extends Command {
     }
 
     protected void execute() {
+    	Robot.arm.updateBreachArmZ();
+    	Robot.arm.updateBreachArmY();
     }
 
     protected boolean isFinished() {

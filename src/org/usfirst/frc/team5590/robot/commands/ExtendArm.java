@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ExtendArm extends Command {
 
     public ExtendArm() {
-    	System.out.println("Initializing Arm Extension Command");
     	requires(Robot.arm);
     }
 
     protected void initialize() {
     	Arm.breachArmVerticalEncoder.reset();
+    	System.out.println("Initializing Arm Extension Command");
     }
 
     protected void execute() {
