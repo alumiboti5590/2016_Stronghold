@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5590.robot;
 
+import org.usfirst.frc.team5590.robot.commands.*;
 import org.usfirst.frc.team5590.robot.controllers.LogitechX3;
 import org.usfirst.frc.team5590.robot.controllers.XboxController;
 
@@ -13,8 +14,11 @@ public class OI {
 	public static XboxController xboxController = new XboxController(0);
 	public static LogitechX3 logitechController = new LogitechX3(1);
 	
-	public OI() {
-
+	public OI() { 
+		logitechController.button1.whenPressed(new Shoot());
+		logitechController.button1.whenReleased(new StopShooting());
+		logitechController.button2.whileHeld(new Collect());
+		logitechController.button2.whenReleased(new StopCollecting());
 	}
     
     //// TRIGGERING COMMANDS WITH BUTTONS
@@ -32,5 +36,6 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
+	//cackerman
 }
 
