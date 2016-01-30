@@ -17,12 +17,14 @@ public class Arm extends Subsystem {
 	private double verticalMotorSpeed = 0.0;
 	private double horizontalMotorSpeed = 0.0;
 
-	private static int breachArmHorizontalMotorSlot = 1;
-	private static int breachArmVerticalMotorSlot = 2;
-	private static int breachArmHorizontalEncoderSlot_A = 1;
-	private static int breachArmHorizontalEncoderSlot_B = 2;
-	private static int breachArmVerticalEncoderSlot_A = 3;
-	private static int breachArmVerticalEncoderSlot_B = 4;
+	private static final int ARM_ROTATIONAL_DIO = 4;
+	private static final int ARM_VERTICAL_DIO = 5;
+	
+	private static int breachArmHorizontalEncoderSlot_A = 0;
+	private static int breachArmHorizontalEncoderSlot_B = 1;
+	
+	private static int breachArmVerticalEncoderSlot_A = 2;
+	private static int breachArmVerticalEncoderSlot_B = 3;
 
 	private static SpeedController breachArmHorizontalMotor;
 	private static SpeedController breachArmVerticalMotor;
@@ -32,8 +34,8 @@ public class Arm extends Subsystem {
 
 	public static void initializeControllers() {
 
-		breachArmHorizontalMotor = new TalonSRX(breachArmHorizontalMotorSlot);
-		breachArmVerticalMotor = new TalonSRX(breachArmVerticalMotorSlot);
+		breachArmHorizontalMotor = new TalonSRX(ARM_ROTATIONAL_DIO);
+		breachArmVerticalMotor = new TalonSRX(ARM_VERTICAL_DIO);
 
 		breachArmHorizontalEncoder = new Encoder(breachArmHorizontalEncoderSlot_A, breachArmHorizontalEncoderSlot_B,
 				false, EncodingType.k2X);

@@ -11,9 +11,9 @@ import org.usfirst.frc.team5590.robot.commands.StopCollecting;
  */
 public class Collector extends Subsystem {
 	
-	public static SpeedController ballCollector = RobotMap.ballCollectorMotor;
+	private static SpeedController ballCollector;
 	
-	public static final int ballCollectorDIO = 3;
+	public static final int ballCollectorDIO = 2;
 	
 	public static void initializeControllers(){
 		ballCollector = new TalonSRX(ballCollectorDIO);

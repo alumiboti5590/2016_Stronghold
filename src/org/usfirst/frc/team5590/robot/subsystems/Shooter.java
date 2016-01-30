@@ -11,9 +11,9 @@ import org.usfirst.frc.team5590.robot.commands.StopShooting;
  */
 public class Shooter extends Subsystem {
    
-    public static SpeedController ballShooter = RobotMap.ballShooterMotor;
+    private static SpeedController ballShooter;
     
-    public static final int ballShooterDIO = 4;
+    public static final int ballShooterDIO = 3;
     
     public static void initializeControllers(){
     	ballShooter = new TalonSRX(ballShooterDIO);
