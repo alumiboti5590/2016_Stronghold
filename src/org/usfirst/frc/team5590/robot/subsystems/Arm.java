@@ -15,33 +15,33 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Arm extends Subsystem {
 
 	private double verticalMotorSpeed = 0.0;
-	private double horizontalMotorSpeed = 0.0;
+	private double rotationalMotorSpeed = 0.0;
 
 	private static final int ARM_ROTATIONAL_DIO = 4;
 	private static final int ARM_VERTICAL_DIO = 5;
 	
-	private static int breachArmHorizontalEncoderSlot_A = 0;
-	private static int breachArmHorizontalEncoderSlot_B = 1;
+	private static int breachArmRotationalEncoderSlot_A = 0;
+	private static int breachArmRotationalEncoderSlot_B = 1;
 	
 	private static int breachArmVerticalEncoderSlot_A = 2;
 	private static int breachArmVerticalEncoderSlot_B = 3;
 
-	private static SpeedController breachArmHorizontalMotor;
+	private static SpeedController breachArmRotationalMotor;
 	private static SpeedController breachArmVerticalMotor;
 
-	public static Encoder breachArmHorizontalEncoder;
+	public static Encoder breachArmRotationalEncoder;
 	public static Encoder breachArmVerticalEncoder;
 
 	public static void initializeControllers() {
 
-		breachArmHorizontalMotor = new TalonSRX(ARM_ROTATIONAL_DIO);
+		breachArmRotationalMotor = new TalonSRX(ARM_ROTATIONAL_DIO);
 		breachArmVerticalMotor = new TalonSRX(ARM_VERTICAL_DIO);
 
-		breachArmHorizontalEncoder = new Encoder(breachArmHorizontalEncoderSlot_A, breachArmHorizontalEncoderSlot_B,
+		breachArmRotationalEncoder = new Encoder(breachArmRotationalEncoderSlot_A, breachArmRotationalEncoderSlot_B,
 				false, EncodingType.k2X);
-		breachArmHorizontalEncoder.setMinRate(.1);
-		breachArmHorizontalEncoder.setDistancePerPulse(.014);
-		breachArmHorizontalEncoder.setSamplesToAverage(30);
+		breachArmRotationalEncoder.setMinRate(.1);
+		breachArmRotationalEncoder.setDistancePerPulse(.014);
+		breachArmRotationalEncoder.setSamplesToAverage(30);
 
 		breachArmVerticalEncoder = new Encoder(breachArmVerticalEncoderSlot_A, breachArmVerticalEncoderSlot_B, false,
 				EncodingType.k2X);
@@ -61,7 +61,7 @@ public class Arm extends Subsystem {
 
 	public void updateBreachArmZ() {
 		double logitechJoystickZ = OI.logitechController.getMainStickZ();
-		this.horizontalMotorSpeed = logitechJoystickZ;
+		this.rotationalMotorSpeed = logitechJoystickZ;
 	}
 
 	public void updateVerticalEncoder(double degrees) {
@@ -80,14 +80,14 @@ public class Arm extends Subsystem {
 
 	public void updateHorizontalEncoder(double degrees) {
 		if (degrees > 0){
-			while (breachArmHorizontalEncoder.getDistance() < degrees) {
-				breachArmHorizontalMotor.set(0.5);
+			while (breachArmRotationalEncoder.getDistance() < degrees) {
+				breachArmRotationalMotor.set(0.5);
 			}
 		} else {
-			while (breachArmHorizontalEncoder.getDistance() > degrees) {
-				breachArmHorizontalMotor.set(-0.5);
+			while (breachArmRotationalEncoder.getDistance() > degrees) {
+				breachArmRotationalMotor.set(-0.5);
 			}
 		}
-		breachArmHorizontalMotor.set(0);
+		breachArmRotationalMotor.set(0);
 	}
 }
