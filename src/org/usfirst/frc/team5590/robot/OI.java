@@ -26,6 +26,10 @@ public class OI {
 			logitechController.button2.whileHeld(new Collect());
 			logitechController.button2.whenReleased(new StopCollecting());
 		} else {
+			logitechController.button5.whenPressed(new TurnByDegree(90));
+			logitechController.button3.whenPressed(new TurnByDegree(-90));
+			logitechController.button6.whenPressed(new TurnByDegree(180));
+			logitechController.button4.whenPressed(new TurnByDegree(-180));
 			
 		}
 		

@@ -16,11 +16,11 @@ public class RotateArm extends Command {
 
     protected void initialize() {
     	System.out.println("Initializing Arm Rotation Command");
-    	Arm.breachArmRotationalEncoder.reset();
+    	Arm.rotationalEncoder.reset();
     }
 
     protected void execute() {
-    	Robot.arm.updateBreachArmZ();
+    	Robot.arm.updateRotationalMotor();
     }
 
     protected boolean isFinished() {

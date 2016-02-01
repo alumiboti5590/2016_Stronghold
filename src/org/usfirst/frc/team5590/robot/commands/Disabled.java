@@ -16,8 +16,8 @@ public class Disabled extends Command {
 
     protected void initialize() {
     	System.out.println("Encoders Have Been Reset For Start");
-    	Arm.breachArmRotationalEncoder.reset();
-    	Arm.breachArmVerticalEncoder.reset();
+    	Arm.rotationalEncoder.reset();
+//    	Arm.breachArmVerticalEncoder.reset();
     }
 
     protected void execute() {

@@ -9,25 +9,30 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ManualArmControl extends Command {
+public class TurnByDegree extends Command {
 
+	private int degree;
+	private boolean isComplete;
 	
-    public ManualArmControl() {
+	public TurnByDegree(int degree) {
     	requires(Robot.arm);
+    	this.degree = degree;
+    	this.isComplete = false;
     }
 
     protected void initialize() {
-    	System.out.println("Initializing Manual Arm Control Command");
+    	System.out.println("Initializing Degree Arm Control Command");
     	Arm.rotationalEncoder.reset();
+    	//Arm.breachArmVerticalEncoder.reset();
     }
 
     protected void execute() {
-		Robot.arm.updateRotationalMotor();
-    	//Robot.arm.updateBreachArmY();
+    	Robot.arm.turnPerDegree(this.degree);
+    	this.isComplete = false;
     }
 
     protected boolean isFinished() {
-        return false;
+        return isComplete;
     }
 
     protected void end() {

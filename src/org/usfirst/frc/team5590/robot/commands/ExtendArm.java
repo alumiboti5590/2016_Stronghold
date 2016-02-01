@@ -15,7 +15,7 @@ public class ExtendArm extends Command {
     }
 
     protected void initialize() {
-    	Arm.breachArmVerticalEncoder.reset();
+//    	Arm.breachArmVerticalEncoder.reset();
     	System.out.println("Initializing Arm Extension Command");
     }
 
