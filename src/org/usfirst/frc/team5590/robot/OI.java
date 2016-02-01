@@ -30,6 +30,7 @@ public class OI {
 			logitechController.button3.whenPressed(new TurnByDegree(-90));
 			logitechController.button6.whenPressed(new TurnByDegree(180));
 			logitechController.button4.whenPressed(new TurnByDegree(-180));
+			logitechController.button2.whenPressed(new ManualArmControl());
 			
 		}
 		
