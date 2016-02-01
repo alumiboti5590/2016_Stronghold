@@ -17,7 +17,7 @@ public class ManualArmControl extends Command {
 
     protected void initialize() {
     	System.out.println("Initializing Manual Arm Control Command");
-    	Arm.breachArmHorizontalEncoder.reset();
+    	Arm.breachArmRotationalEncoder.reset();
     	Arm.breachArmVerticalEncoder.reset();
     }
 

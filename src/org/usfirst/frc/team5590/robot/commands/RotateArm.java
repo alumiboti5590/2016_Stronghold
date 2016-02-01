@@ -16,7 +16,7 @@ public class RotateArm extends Command {
 
     protected void initialize() {
     	System.out.println("Initializing Arm Rotation Command");
-    	Arm.breachArmHorizontalEncoder.reset();
+    	Arm.breachArmRotationalEncoder.reset();
     }
 
     protected void execute() {
