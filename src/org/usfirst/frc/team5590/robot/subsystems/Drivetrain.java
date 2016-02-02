@@ -60,13 +60,24 @@ public class Drivetrain extends Subsystem {
 	public void updateSpeed() {
 		double leftStickY = roundToTenth(OI.xboxController.getLeftStickY());
 		double rightStickY = roundToTenth(OI.xboxController.getRightStickY());
-		this.leftMotorSpeed = logisticScale(leftStickY);
-		this.rightMotorSpeed = logisticScale(rightStickY);
+		this.leftMotorSpeed = logisticScale(rightStickY*.75);
+		this.rightMotorSpeed = logisticScale(leftStickY*.75);
 		//this.rightMotorSpeed = leftStickY*.75;
 		//this.leftMotorSpeed = rightStickY*.75;
 		robotDrive.tankDrive(this.leftMotorSpeed, this.rightMotorSpeed);
 		System.out.println("Y Axis Left Stick: " + leftStickY);
 		System.out.println("X Axis Left Stick: " + rightStickY + "\n");
+	}
+	
+	public void updateSpeedStraight() {
+		double leftStickY = roundToTenth(OI.xboxController.getLeftStickY());
+		this.leftMotorSpeed = logisticScale(leftStickY*.75);
+		this.rightMotorSpeed = logisticScale(leftStickY*.75);
+		//this.rightMotorSpeed = leftStickY*.75;
+		//this.leftMotorSpeed = rightStickY*.75;
+		robotDrive.tankDrive(this.leftMotorSpeed, this.rightMotorSpeed);
+		System.out.println("Y Axis Left Stick: " + leftStickY);
+		System.out.println("X Axis Left Stick: " + leftStickY + "\n");
 	}
 	
 	private double roundToTenth(double speed) {

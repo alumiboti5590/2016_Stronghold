@@ -20,6 +20,7 @@ public class OI {
 		
 		logitechController.button7.whenPressed(new ToggleMode());
 		xboxController.buttonSelect.whenPressed(new Drive());
+		xboxController.buttonA.whileHeld(new DriveStraight());
 		
 		if (shooterMode) {
 			logitechController.button1.whenPressed(new Shoot());
