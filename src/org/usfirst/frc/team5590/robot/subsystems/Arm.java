@@ -3,6 +3,8 @@ package org.usfirst.frc.team5590.robot.subsystems;
 import org.usfirst.frc.team5590.robot.OI;
 import org.usfirst.frc.team5590.robot.commands.ManualArmControl;
 
+import com.ni.vision.NIVision.GeometricSetupDataItem;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
@@ -55,7 +57,7 @@ public class Arm extends Subsystem {
 	}
 
 	public void updateRotationalMotor() {
-		double logitechJoystickZ = OI.logitechController.getMainStickZ() / 5;
+		double logitechJoystickZ = OI.logitechController.getMainStickZ() / 4;
 		if (rotationalEncoder.getDistance() > 480) {
 			rotationalSpeedController.set(0.0);
 		} else {
@@ -68,13 +70,32 @@ public class Arm extends Subsystem {
 	public void turnPerDegree(double desiredDegree) {
 		double desiredDistance = (4 * desiredDegree) / 3;
 		int outputDistance = (int) desiredDistance;
+		int precision = 1;
 		if (desiredDegree > 0) {
 			while (rotationalEncoder.getDistance() < outputDistance) {
-				rotationalSpeedController.set(.2);
+				rotationalSpeedController.set(.5 / precision);
+			}
+			// Error handling
+			if (Math.abs(rotationalEncoder.getDistance() - outputDistance) > 25) {
+				double error = rotationalEncoder.getDistance();
+				while (rotationalEncoder.getDistance() > 5 + outputDistance) {
+					rotationalSpeedController.set(-.2 / precision);
+				}
+				precision+=5;
+				// End error
 			}
 		} else {
 			while (rotationalEncoder.getDistance() > outputDistance) {
-				rotationalSpeedController.set(-.2);
+				rotationalSpeedController.set(-.5 / precision);
+			}
+			// Error Handling
+			if (Math.abs(rotationalEncoder.getDistance() - outputDistance) > 25) {
+				double error = rotationalEncoder.getDistance();
+				while (rotationalEncoder.getDistance() < outputDistance - 5) {
+					rotationalSpeedController.set(.2 / precision);
+				}
+				precision+=5;
+				// End error
 			}
 		}
 			rotationalSpeedController.set(0.0);
