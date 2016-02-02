@@ -1,27 +1,29 @@
 package org.usfirst.frc.team5590.robot.commands;
 
+import org.usfirst.frc.team5590.robot.OI;
 import org.usfirst.frc.team5590.robot.Robot;
 import org.usfirst.frc.team5590.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Resets Encoders when the Arm subsystem is initialized.
+ *
  */
-public class Disabled extends Command {
+public class ManualArmControl extends Command {
 
-    public Disabled() {
+	
+    public ManualArmControl() {
     	requires(Robot.arm);
     }
 
     protected void initialize() {
-    	System.out.println("Encoders Have Been Reset For Start");
+    	System.out.println("Initializing Manual Arm Control Command");
     	Arm.rotationalEncoder.reset();
-//    	Arm.breachArmVerticalEncoder.reset();
     }
 
     protected void execute() {
-    	
+		Robot.arm.updateRotationalMotor();
+    	//Robot.arm.updateBreachArmY();
     }
 
     protected boolean isFinished() {
@@ -29,6 +31,7 @@ public class Disabled extends Command {
     }
 
     protected void end() {
+    	Arm.rotationalEncoder.reset();
     }
 
     protected void interrupted() {

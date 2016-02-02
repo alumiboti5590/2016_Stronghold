@@ -36,7 +36,7 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	/**
-	 * This function is called contiously. If we are currently in driving mode
+	 * This function is called continuously. If we are currently in driving mode
 	 * ( The motors are already spinning ) no spin will occur. This means that 
 	 * the only time this will function is when the robot is not moving. 
 	 * 
@@ -94,7 +94,7 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void stop() {
-		robotDrive.tankDrive(0, 0);
+		robotDrive.tankDrive(0.0, 0.0);
 		System.out.println("Stopped");
 	}
 

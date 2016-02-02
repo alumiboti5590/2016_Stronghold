@@ -14,39 +14,17 @@ import java.util.Vector;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
+import org.usfirst.frc.team5590.robot.subsystems.Arm;
+import org.usfirst.frc.team5590.robot.subsystems.Collector;
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5590.robot.subsystems.Shooter;
 
 public class RobotMap {
-	public static SpeedController drivetrainLeftTrackMotor;
-    public static SpeedController drivetrainRightTrackMotor;
-    public static SpeedController ballCollectorMotor;
-    public static SpeedController ballShooterMotor;
-    public static SpeedController breachArmMotor;
-    
-    public static Encoder breachArmEncoder;
-    
-    //DIO slots
-    public static int breachArmMotorSlot = 5;
-    
-    //PWM slots
-    public static int breachArmEncoderSlot0 = 1;
-    public static int breachArmEncoderSlot1 = 2;
     
     public static void init(){
-    	
     	Drivetrain.initializeControllers();
     	Shooter.initializeControllers();
-   
-    	breachArmMotor = new TalonSRX(breachArmMotorSlot);
-    	LiveWindow.addActuator("Breach Arm", "Arm", (LiveWindowSendable) breachArmMotor);
-    	
-    	// !!! THESE ENCODER VALEUS NEED TO BE VALIDATED/CHANGED FOR THIS
-    	// YEAR'S SPECS !!!
-    	breachArmEncoder = new Encoder(breachArmEncoderSlot0, breachArmEncoderSlot1, false, EncodingType.k2X);
-    	breachArmEncoder.setMinRate(.1);
-    	breachArmEncoder.setDistancePerPulse(.014);
-    	breachArmEncoder.setSamplesToAverage(30);
-    	
+    	Arm.initializeControllers();
+    	Collector.initializeControllers();
     }
 }

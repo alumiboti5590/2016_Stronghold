@@ -1,43 +1,40 @@
 package org.usfirst.frc.team5590.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
+import org.usfirst.frc.team5590.robot.OI;
 import org.usfirst.frc.team5590.robot.Robot;
-import org.usfirst.frc.team5590.robot.subsystems.*;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Collect extends Command {
-	
-    public Collect() {
-    	requires(Robot.collector);
-    	// TODO: Timeout change based on tests
-    	setTimeout(1.0);
+public class ToggleMode extends Command {
+
+    public ToggleMode() {
+        
     }
 
+    // Called just before this Command runs the first time
     protected void initialize() {
-    	// TODO: Speed changed according to tests
-    	Robot.collector.stopCollector();
-    	Robot.collector.setCollectorSpeed(.0);
+    	OI.shooterMode = !OI.shooterMode;
+        System.out.println("Switching Logitech Mode: Shooter Mode=" + OI.shooterMode);
     }
 
+    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.collector.stopCollector();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.collector.stopCollector();
     }
 }

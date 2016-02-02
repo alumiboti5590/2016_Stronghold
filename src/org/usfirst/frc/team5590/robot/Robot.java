@@ -1,7 +1,8 @@
-
 package org.usfirst.frc.team5590.robot;
 
 import org.usfirst.frc.team5590.robot.subsystems.Shooter;
+import org.usfirst.frc.team5590.robot.subsystems.Arm;
+import org.usfirst.frc.team5590.robot.subsystems.Collector;
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -21,6 +22,9 @@ public class Robot extends IterativeRobot {
 
 	public static final Drivetrain drivetrain = new Drivetrain();
 	public static final Shooter shooter = new Shooter();
+	public static final Arm arm = new Arm();
+	public static final Collector collector = new Collector();
+
 	public static OI oi;
 
     Command autonomousCommand;
