@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class XboxController extends Joystick {
 	
-	Button buttonA, 
+	public Button buttonA, 
 			buttonB,
 			buttonX,
 			buttonY,
