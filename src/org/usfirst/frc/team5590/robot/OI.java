@@ -23,9 +23,7 @@ public class OI {
 		
 		if (shooterMode) {
 			logitechController.button1.whenPressed(new Shoot());
-			logitechController.button1.whenReleased(new StopShooting());
 			logitechController.button2.whileHeld(new Collect());
-			logitechController.button2.whenReleased(new StopCollecting());
 		} else {
 			logitechController.button5.whenPressed(new TurnByDegree(90));
 			logitechController.button3.whenPressed(new TurnByDegree(-90));

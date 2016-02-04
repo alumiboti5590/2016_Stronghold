@@ -30,6 +30,8 @@ public class Arm extends Subsystem {
 
 	public static Encoder rotationalEncoder;
 	// public static Encoder breachArmVerticalEncoder;
+	
+	private double encoderRawPosition = 0.0;
 
 	public static void initializeControllers() {
 

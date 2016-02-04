@@ -3,9 +3,6 @@ package org.usfirst.frc.team5590.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.*;
 
-import org.usfirst.frc.team5590.robot.RobotMap;
-import org.usfirst.frc.team5590.robot.commands.StopCollecting;
-
 /**
  *
  */
@@ -36,7 +33,6 @@ public class Collector extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-    	setDefaultCommand(new StopCollecting());
     }
 }
 
