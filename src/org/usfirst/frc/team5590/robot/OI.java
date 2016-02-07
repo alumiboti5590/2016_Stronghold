@@ -2,7 +2,6 @@ package org.usfirst.frc.team5590.robot;
 
 import org.usfirst.frc.team5590.robot.commands.*;
 import org.usfirst.frc.team5590.robot.commands.arm.ArmFloor;
-import org.usfirst.frc.team5590.robot.commands.arm.ManualArmControl;
 import org.usfirst.frc.team5590.robot.commands.arm.ResetArm;
 import org.usfirst.frc.team5590.robot.controllers.LogitechX3;
 import org.usfirst.frc.team5590.robot.controllers.XboxController;

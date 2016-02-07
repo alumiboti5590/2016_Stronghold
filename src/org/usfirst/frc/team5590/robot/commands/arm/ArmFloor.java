@@ -13,7 +13,6 @@ public class ArmFloor extends Command {
 
     public ArmFloor() {
     	requires(Robot.arm);
-    	
     }
 
     // Called just before this Command runs the first time

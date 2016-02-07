@@ -1,11 +1,5 @@
 package org.usfirst.frc.team5590.robot.subsystems;
 
-import org.usfirst.frc.team5590.robot.OI;
-import org.usfirst.frc.team5590.robot.Robot;
-import org.usfirst.frc.team5590.robot.commands.arm.ManualArmControl;
-
-import com.ni.vision.NIVision.GeometricSetupDataItem;
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
@@ -25,15 +19,11 @@ public class Arm extends Subsystem {
 	private static SpeedController rotationalSpeedController;
 	private static Encoder         rotationalEncoder;
 	
-	private double encoderRawPosition = 0.0;
-	
-	public boolean isMoving = false;
-	
 	public void initDefaultCommand() {
 	}
 	
 	public void resetArm() {
-		this.rotateClockwise(0);
+		this.rotate(0, -1);
 		rotationalEncoder.reset();
 	}
 
@@ -44,91 +34,46 @@ public class Arm extends Subsystem {
 	}
 
 	public void setPosition(double degrees){
-    	boolean direction = degrees > getDegrees();
-    	if (direction) {
-    		rotateCounterClockwise(getDistance(degrees));
+    	if (degrees > this.getDegrees()) {
+    		System.out.println("Rotating");
+    		rotate(this.getDistance(degrees), 1);
     	} else {
-    		rotateClockwise(getDistance(degrees));
+    		rotate(this.getDistance(degrees) ,-1);
     	}
 	}
 	
 	/**
-	 * @param rawDistance
+	 * This method takes in a raw distance and direction parameter, and rotates
+	 * the arm at a speed of 0.5. The direction is determined by -1, and 1.
+	 * 
+	 * As the arm reaches 90% of its desired rotation distance, the arm will then
+	 * slow down to a speed of 0.2 until desired destination is reached. This will 
+	 * reduce error from the values on the encoder.
+	 * 
+	 * @param rawDistance is the desired rotational value
+	 * @param direction -1 rotates arm clockwise, 1 rotates arm counterclockwise
 	 */
-	public void rotateClockwise(double rawDistance) {
-		while (rotationalEncoder.getDistance() > rawDistance) {
-			rotationalSpeedController.set(-0.5);
+	public void rotate(double rawDistance, double direction) {
+		double speedControlApex = rawDistance * 0.1;
+		if (rawDistance == 0){
+			speedControlApex = rotationalEncoder.getDistance() * 0.1;
+		}
+		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
+			if (Math.abs(rotationalEncoder.getDistance() - rawDistance) < speedControlApex){
+				rotationalSpeedController.set(0.2*direction);
+			} else {
+				rotationalSpeedController.set(0.5*direction);
+			}
 		}
 		System.out.println("Current Location: " + rotationalEncoder.getDistance() + " Final Location: " + rawDistance);
 		rotationalSpeedController.set(0.0);
-	}
-	
-	/**
-	 * @param rawDistance The distance for the encoder to compare against.
-	 */
-	private void rotateCounterClockwise(double rawDistance) {
-		while (rotationalEncoder.getDistance() < rawDistance) {
-			rotationalSpeedController.set(0.5);
-			isMoving = true;
-		}
-		System.out.println("Current Location: " + rotationalEncoder.getDistance() + " Final Location: " + rawDistance);
-		rotationalSpeedController.set(0.0);
-		isMoving = false;
-	}
-	
-	public void updateRotationalMotor() {
-		double logitechJoystickZ = OI.logitechController.getMainStickZ() / 4;
-		if (rotationalEncoder.getDistance() > 480) {
-			rotationalSpeedController.set(0.0);
-		} else {
-			rotationalSpeedController.set(logitechJoystickZ * -1);
-		}
-		System.out.println("Distance: " + rotationalEncoder.getDistance() + " Direction: "
-				+ rotationalEncoder.getDirection());
-		encoderRawPosition = rotationalEncoder.getDistance();
 	}
 
 	public double getDegrees(){
-		return .27355*encoderRawPosition;
+		return .27355*rotationalEncoder.getDistance();
 	}
 	
 	public double getDistance(double degrees){
 		return 3.6555*degrees;
-	}
-	
-	public void turnPerDegree(double desiredDegree) {
-		double desiredDistance = (4 * desiredDegree) / 3;
-		int outputDistance = (int) desiredDistance;
-		int precision = 1;
-		if (desiredDegree > 0) {
-			while (rotationalEncoder.getDistance() < outputDistance) {
-				rotationalSpeedController.set(.5 / precision);
-			}
-			// Error handling
-			if (Math.abs(rotationalEncoder.getDistance() - outputDistance) > 25) {
-				double error = rotationalEncoder.getDistance();
-				while (rotationalEncoder.getDistance() > 5 + outputDistance) {
-					rotationalSpeedController.set(-.2 / precision);
-				}
-				precision+=5;
-				// End error
-			}
-		} else {
-			while (rotationalEncoder.getDistance() > outputDistance) {
-				rotationalSpeedController.set(-.5 / precision);
-			}
-			// Error Handling
-			if (Math.abs(rotationalEncoder.getDistance() - outputDistance) > 25) {
-				double error = rotationalEncoder.getDistance();
-				while (rotationalEncoder.getDistance() < outputDistance - 5) {
-					rotationalSpeedController.set(.2 / precision);
-				}
-				precision+=5;
-				// End error
-			}
-		}
-			rotationalSpeedController.set(0.0);
-			System.out.println("Distance: " + rotationalEncoder.getDistance() + " Direction: "
-					+ rotationalEncoder.getDirection());
 	}
 }
