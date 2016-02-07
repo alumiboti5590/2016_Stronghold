@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5590.robot.commands;
+package org.usfirst.frc.team5590.robot.commands.arm;
 
 import org.usfirst.frc.team5590.robot.Robot;
 
@@ -7,15 +7,15 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class StopShooting extends Command {
+public class ResetArm extends Command {
 
-    public StopShooting() {
-        requires(Robot.shooter);
+    public ResetArm() {
+    	requires(Robot.arm);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.stopShooter();
+    	Robot.arm.resetArm();    	
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,7 +29,6 @@ public class StopShooting extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.stopShooter();
     }
 
     // Called when another command which requires one or more of the same

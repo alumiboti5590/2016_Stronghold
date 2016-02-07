@@ -1,10 +1,5 @@
 package org.usfirst.frc.team5590.robot.subsystems;
 
-import org.usfirst.frc.team5590.robot.OI;
-import org.usfirst.frc.team5590.robot.commands.ManualArmControl;
-
-import com.ni.vision.NIVision.GeometricSetupDataItem;
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
@@ -13,121 +8,72 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Arm extends Subsystem {
 
-	private double verticalMotorSpeed = 0.0;
-	private double rotationalMotorSpeed = 0.0;
-
 	private static final int ARM_ROTATIONAL_PWM = 4;
-	private static final int ARM_VERTICAL_PWM = 5;
 
+	/**
+	 * DIO Ports for Encoder
+	 */
 	private static int ROTATIONAL_ENCODER_SIGNAL_A = 0;
 	private static int ROTATIONAL_ENCODER_SIGNAL_B = 1;
-
-	private static int VERTICAL_ENCODER_SIGNAL_A = 2;
-	private static int VERTICAL_ENCODER_SIGNAL_B = 3;
-
+	
 	private static SpeedController rotationalSpeedController;
-	private static SpeedController breachArmVerticalMotor;
-
-	public static Encoder rotationalEncoder;
-	// public static Encoder breachArmVerticalEncoder;
-
-	public static void initializeControllers() {
-
-		rotationalSpeedController = new TalonSRX(ARM_ROTATIONAL_PWM);
-		// breachArmVerticalMotor = new TalonSRX(ARM_VERTICAL_PWM);
-
-		rotationalEncoder = new Encoder(ROTATIONAL_ENCODER_SIGNAL_A, ROTATIONAL_ENCODER_SIGNAL_B,
-				false, EncodingType.k4X);
-
-		// breachArmVerticalEncoder = new Encoder(VERTICAL_ENCODER_SIGNAL_A,
-		// VERTICAL_ENCODER_SIGNAL_B, false,
-		// EncodingType.k2X);
-		// breachArmVerticalEncoder.setMinRate(.1);
-		// breachArmVerticalEncoder.setDistancePerPulse(.014);
-		// breachArmVerticalEncoder.setSamplesToAverage(30);
-	}
-
+	private static Encoder         rotationalEncoder;
+	
 	public void initDefaultCommand() {
-		setDefaultCommand(new ManualArmControl());
+	}
+	
+	public void resetArm() {
+		this.rotate(0, -1);
+		rotationalEncoder.reset();
 	}
 
-	public void updateBreachArmY() {
-		double logitechJoystickY = OI.logitechController.getMainStickY();
-		this.verticalMotorSpeed = logitechJoystickY;
+	public static void initializeControllers() {	
+		rotationalSpeedController = new TalonSRX(ARM_ROTATIONAL_PWM);
+		rotationalEncoder = new Encoder(ROTATIONAL_ENCODER_SIGNAL_A, ROTATIONAL_ENCODER_SIGNAL_B,
+				false, EncodingType.k2X);
 	}
 
-	public void updateRotationalMotor() {
-		double logitechJoystickZ = OI.logitechController.getMainStickZ() / 4;
-		if (rotationalEncoder.getDistance() > 480) {
-			rotationalSpeedController.set(0.0);
-		} else {
-			rotationalSpeedController.set(logitechJoystickZ * -1);
+	public void setPosition(double degrees){
+    	if (degrees > this.getDegrees()) {
+    		System.out.println("Rotating");
+    		rotate(this.getDistance(degrees), 1);
+    	} else {
+    		rotate(this.getDistance(degrees) ,-1);
+    	}
+	}
+	
+	/**
+	 * This method takes in a raw distance and direction parameter, and rotates
+	 * the arm at a speed of 0.5. The direction is determined by -1, and 1.
+	 * 
+	 * As the arm reaches 90% of its desired rotation distance, the arm will then
+	 * slow down to a speed of 0.2 until desired destination is reached. This will 
+	 * reduce error from the values on the encoder.
+	 * 
+	 * @param rawDistance is the desired rotational value
+	 * @param direction -1 rotates arm clockwise, 1 rotates arm counterclockwise
+	 */
+	public void rotate(double rawDistance, double direction) {
+		double speedControlApex = rawDistance * 0.1;
+		if (rawDistance == 0){
+			speedControlApex = rotationalEncoder.getDistance() * 0.1;
 		}
-		System.out.println("Distance: " + rotationalEncoder.getDistance() + " Direction: "
-				+ rotationalEncoder.getDirection());
-	}
-
-	public void turnPerDegree(double desiredDegree) {
-		double desiredDistance = (4 * desiredDegree) / 3;
-		int outputDistance = (int) desiredDistance;
-		int precision = 1;
-		if (desiredDegree > 0) {
-			while (rotationalEncoder.getDistance() < outputDistance) {
-				rotationalSpeedController.set(.5 / precision);
-			}
-			// Error handling
-			if (Math.abs(rotationalEncoder.getDistance() - outputDistance) > 25) {
-				double error = rotationalEncoder.getDistance();
-				while (rotationalEncoder.getDistance() > 5 + outputDistance) {
-					rotationalSpeedController.set(-.2 / precision);
-				}
-				precision+=5;
-				// End error
-			}
-		} else {
-			while (rotationalEncoder.getDistance() > outputDistance) {
-				rotationalSpeedController.set(-.5 / precision);
-			}
-			// Error Handling
-			if (Math.abs(rotationalEncoder.getDistance() - outputDistance) > 25) {
-				double error = rotationalEncoder.getDistance();
-				while (rotationalEncoder.getDistance() < outputDistance - 5) {
-					rotationalSpeedController.set(.2 / precision);
-				}
-				precision+=5;
-				// End error
+		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
+			if (Math.abs(rotationalEncoder.getDistance() - rawDistance) < speedControlApex){
+				rotationalSpeedController.set(0.2*direction);
+			} else {
+				rotationalSpeedController.set(0.5*direction);
 			}
 		}
-			rotationalSpeedController.set(0.0);
-			System.out.println("Distance: " + rotationalEncoder.getDistance() + " Direction: "
-					+ rotationalEncoder.getDirection());
+		System.out.println("Current Location: " + rotationalEncoder.getDistance() + " Final Location: " + rawDistance);
+		rotationalSpeedController.set(0.0);
+	}
+
+	public double getDegrees(){
+		return .27355*rotationalEncoder.getDistance();
+	}
+	
+	public double getDistance(double degrees){
+		return 3.6555*degrees;
 	}
 }
-
-// public void updateVerticalEncoder(double degrees) {
-// breachArmVerticalEncoder.reset();
-// if (degrees > 0) {
-// while (breachArmVerticalEncoder.getDistance() < degrees) {
-// breachArmVerticalMotor.set(0.5);
-// }
-// } else {
-// while (breachArmVerticalEncoder.getDistance() > degrees) {
-// breachArmVerticalMotor.set(-0.5);
-// }
-// }
-// breachArmVerticalMotor.set(0);
-// }
-//
-// public void updateHorizontalEncoder(double degrees) {
-// if (degrees > 0){
-// while (breachArmRotationalEncoder.getDistance() < degrees) {
-// rotationalSpeedController.set(0.5);
-// }
-// } else {
-// while (breachArmRotationalEncoder.getDistance() > degrees) {
-// rotationalSpeedController.set(-0.5);
-// }
-// }
-// rotationalSpeedController.set(0);
-// }
-// }

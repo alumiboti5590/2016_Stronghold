@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5590.robot.commands;
+package org.usfirst.frc.team5590.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -9,12 +9,12 @@ import org.usfirst.frc.team5590.robot.Robot;
 /**
  *
  */
-public class DriveForward extends Command {
+public class DriveBackward extends Command {
 	
 	public Drivetrain drivetrain = Robot.drivetrain;
 
-    public DriveForward() {
-    	requires(drivetrain);
+    public DriveBackward() {
+        requires(drivetrain);
         //TODO Set a time out
         setTimeout(1.0);
     }
@@ -22,8 +22,8 @@ public class DriveForward extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	drivetrain.stop();
-    	System.out.println("Driving Forward");
-    	drivetrain.setSpeed(.7);
+    	System.out.println("Driving Backward");
+    	drivetrain.setSpeed(-.7);
     }
 
     // Called repeatedly when this Command is scheduled to run
