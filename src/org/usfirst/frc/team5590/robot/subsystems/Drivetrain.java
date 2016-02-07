@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5590.robot.subsystems;
 
 import org.usfirst.frc.team5590.robot.OI;
+import org.usfirst.frc.team5590.robot.Robot;
 import org.usfirst.frc.team5590.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -42,8 +43,8 @@ public class Drivetrain extends Subsystem {
 	 * 
 	 */
 	public void updateSpin() {
-		double rightTrigger = OI.xboxController.getRightTrigger()/2;
-		double leftTrigger = OI.xboxController.getLeftTrigger()/2;
+		double rightTrigger = Robot.oi.xboxController.getRightTrigger()/2;
+		double leftTrigger = Robot.oi.xboxController.getLeftTrigger()/2;
 		double rotateSpeed = rightTrigger - leftTrigger;
 		if (this.leftMotorSpeed == 0 && this.rightMotorSpeed == 0) {
 			this.leftMotorSpeed = rotateSpeed;
@@ -56,8 +57,8 @@ public class Drivetrain extends Subsystem {
 	 * 
 	 */
 	public void updateSpeed() {
-		double leftStickY = roundToTenth(OI.xboxController.getLeftStickY());
-		double rightStickY = roundToTenth(OI.xboxController.getRightStickY());
+		double leftStickY = roundToTenth(Robot.oi.xboxController.getLeftStickY());
+		double rightStickY = roundToTenth(Robot.oi.xboxController.getRightStickY());
 		this.leftMotorSpeed = logisticScale(rightStickY);
 		this.rightMotorSpeed = logisticScale(leftStickY);
 		//this.rightMotorSpeed = leftStickY*.75;
@@ -66,7 +67,7 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void updateSpeedStraight() {
-		double leftStickY = roundToTenth(OI.xboxController.getLeftStickY());
+		double leftStickY = roundToTenth(Robot.oi.xboxController.getLeftStickY());
 		this.leftMotorSpeed = logisticScale(leftStickY);
 		this.rightMotorSpeed = logisticScale(leftStickY);
 		//this.rightMotorSpeed = leftStickY*.75;
@@ -101,7 +102,7 @@ public class Drivetrain extends Subsystem {
 
 	public void stop() {
 		robotDrive.tankDrive(0.0, 0.0);
-		System.out.println("Stopped");
+		System.out.println("Drivetrain: Stopped");
 	}
 	
 	public static double logisticScale(double joystickIn){

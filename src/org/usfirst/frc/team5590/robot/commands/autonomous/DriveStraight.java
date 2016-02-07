@@ -1,27 +1,31 @@
-package org.usfirst.frc.team5590.robot.commands.arm;
-
-import org.usfirst.frc.team5590.robot.Robot;
+package org.usfirst.frc.team5590.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+import org.usfirst.frc.team5590.robot.subsystems.*;
+import org.usfirst.frc.team5590.robot.Robot;
 
 /**
  *
  */
-public class ArmFloor extends Command {
+public class DriveStraight extends Command {
 	
-	private static final double DEGREE_POSITION = 223;
+	public Drivetrain drivetrain = Robot.drivetrain;
 
-    public ArmFloor() {
-    	requires(Robot.arm);
+    public DriveStraight() {
+        requires(drivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.arm.setPosition(DEGREE_POSITION);    	
+    	drivetrain.stop();
+    	System.out.println("Driving straight");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	drivetrain.updateSpeedStraight();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,10 +35,12 @@ public class ArmFloor extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	drivetrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	drivetrain.stop();
     }
 }

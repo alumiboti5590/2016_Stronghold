@@ -1,5 +1,9 @@
 package org.usfirst.frc.team5590.robot.subsystems;
 
+import org.usfirst.frc.team5590.robot.OI;
+import org.usfirst.frc.team5590.robot.Robot;
+import org.usfirst.frc.team5590.robot.commands.arm.ManualArmControl;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
@@ -20,6 +24,7 @@ public class Arm extends Subsystem {
 	private static Encoder         rotationalEncoder;
 	
 	public void initDefaultCommand() {
+		setDefaultCommand(new ManualArmControl());
 	}
 	
 	public void resetArm() {
@@ -75,5 +80,13 @@ public class Arm extends Subsystem {
 	
 	public double getDistance(double degrees){
 		return 3.6555*degrees;
+	}
+
+	public void updateRotation(){
+		if (Math.abs(Robot.oi.logitechController.getMainStickY()) > 0.5){
+			rotationalSpeedController.set(Robot.oi.logitechController.getMainStickY());
+		} else {
+			rotationalSpeedController.set(0);
+		}
 	}
 }

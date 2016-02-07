@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ArmFloor extends Command {
-	
-	private static final double DEGREE_POSITION = 223;
+public class ArmOpenGate extends Command {
 
-    public ArmFloor() {
+	private static final double DEGREE_POSITION = 135;
+
+    public ArmOpenGate() {
     	requires(Robot.arm);
     }
 

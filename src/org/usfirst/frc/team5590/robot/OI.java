@@ -2,9 +2,13 @@ package org.usfirst.frc.team5590.robot;
 
 import org.usfirst.frc.team5590.robot.commands.*;
 import org.usfirst.frc.team5590.robot.commands.arm.ArmFloor;
+import org.usfirst.frc.team5590.robot.commands.arm.ArmOpenGate;
+import org.usfirst.frc.team5590.robot.commands.arm.ManualArmControl;
 import org.usfirst.frc.team5590.robot.commands.arm.ResetArm;
+import org.usfirst.frc.team5590.robot.commands.autonomous.DriveStraight;
 import org.usfirst.frc.team5590.robot.controllers.LogitechX3;
 import org.usfirst.frc.team5590.robot.controllers.XboxController;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -13,26 +17,35 @@ import org.usfirst.frc.team5590.robot.controllers.XboxController;
  */
 public class OI {
 	
-	public static XboxController xboxController = new XboxController(0);
-	public static LogitechX3 logitechController = new LogitechX3(1);
+	public XboxController xboxController = new XboxController(0);
+	public LogitechX3 logitechController = new LogitechX3(1);
 	
-	public static boolean shooterMode = false;
+	public boolean shooterMode = false;
 	
 	public OI() { 
 		
-		logitechController.button7.whenPressed(new ToggleMode());
+		// Xbox Controller
 		xboxController.buttonSelect.whenPressed(new Drive());
 		xboxController.buttonA.whileHeld(new DriveStraight());
 		
-		if (shooterMode) {
-			logitechController.button1.whenPressed(new Shoot());
-			logitechController.button2.whileHeld(new Collect());
-		} else {
-			logitechController.button5.whenPressed(new ArmFloor());	
-			logitechController.button3.whenPressed(new ResetArm());	
-		}
+		// Logitech Controller
+		logitechController.button7.whenPressed(new ToggleMode());
 		
+		initArmButtons();
+		System.out.println("Starting in ARM Mode");
+	}
+	
+	public void initShooterButtons() {
 		
+		logitechController.button1.whenPressed(new Shoot());
+		logitechController.button2.whileHeld(new Collect());
+		
+	}
+	
+	public void initArmButtons() {
+		logitechController.button3.whenPressed(new ArmFloor());	
+		logitechController.button4.whenPressed(new ResetArm());	
+		logitechController.button1.whenPressed(new ArmOpenGate());
 	}
 }
 
