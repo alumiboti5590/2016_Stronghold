@@ -17,11 +17,6 @@ public class ToggleMode extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.oi.shooterMode = !Robot.oi.shooterMode;
-        if (Robot.oi.shooterMode) {
-        	Robot.oi.initShooterButtons();
-        } else {
-        	Robot.oi.initArmButtons();
-        }
         System.out.println("Switching Logitech Mode: Shooter Mode=" + Robot.oi.shooterMode);
     }
 

@@ -1,19 +1,29 @@
 package org.usfirst.frc.team5590.robot.commands;
 
+import org.usfirst.frc.team5590.robot.Robot;
+import org.usfirst.frc.team5590.robot.commands.arm.ArmOpenGate;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class NullCommand extends Command {
+public class TriggerCommands extends Command {
+	
+	private Shoot shootCommand;
+	private ArmOpenGate openGate;
 
-    public NullCommand() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    public TriggerCommands() {
+    	shootCommand = new Shoot();
+    	openGate = new ArmOpenGate();
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
+    	if (Robot.oi.shooterMode) {
+    		shootCommand.start();
+    	} else {
+    		openGate.start();
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run

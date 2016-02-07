@@ -6,6 +6,8 @@ import org.usfirst.frc.team5590.robot.commands.arm.ArmOpenGate;
 import org.usfirst.frc.team5590.robot.commands.arm.ManualArmControl;
 import org.usfirst.frc.team5590.robot.commands.arm.ResetArm;
 import org.usfirst.frc.team5590.robot.commands.autonomous.DriveStraight;
+import org.usfirst.frc.team5590.robot.commands.shooter.ShooterDeploy;
+import org.usfirst.frc.team5590.robot.commands.shooter.ShooterRetract;
 import org.usfirst.frc.team5590.robot.controllers.LogitechX3;
 import org.usfirst.frc.team5590.robot.controllers.XboxController;
 
@@ -28,24 +30,16 @@ public class OI {
 		xboxController.buttonSelect.whenPressed(new Drive());
 		xboxController.buttonA.whileHeld(new DriveStraight());
 		
+		System.out.println("Yolo");
 		// Logitech Controller
 		logitechController.button7.whenPressed(new ToggleMode());
-		
-		initArmButtons();
-		System.out.println("Starting in ARM Mode");
-	}
-	
-	public void initShooterButtons() {
-		
-		logitechController.button1.whenPressed(new Shoot());
 		logitechController.button2.whileHeld(new Collect());
-		
-	}
-	
-	public void initArmButtons() {
 		logitechController.button3.whenPressed(new ArmFloor());	
 		logitechController.button4.whenPressed(new ResetArm());	
-		logitechController.button1.whenPressed(new ArmOpenGate());
+		logitechController.button1.whenPressed(new TriggerCommands());
+		logitechController.button5.whenPressed(new ShooterDeploy());
+		logitechController.button6.whenPressed(new ShooterRetract());
+		
 	}
 }
 
