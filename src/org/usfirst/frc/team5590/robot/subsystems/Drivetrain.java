@@ -106,7 +106,7 @@ public class Drivetrain extends Subsystem {
 	
 	public static double logisticScale(double joystickIn){
 		double driveIn = Math.abs(joystickIn);
-		double denominator = 1+(Math.exp(-10*(driveIn-.5)));
+		double denominator = 1+(Math.exp(-10*(driveIn-.6)));
 		double outputSpeed = 1/denominator;
 		if(joystickIn < 0){
 			outputSpeed*=-1;
@@ -114,6 +114,5 @@ public class Drivetrain extends Subsystem {
 		
 		return outputSpeed;
 	}
-	
 	
 }
