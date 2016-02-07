@@ -58,9 +58,22 @@ public class Drivetrain extends Subsystem {
 	public void updateSpeed() {
 		double leftStickY = roundToTenth(OI.xboxController.getLeftStickY());
 		double rightStickY = roundToTenth(OI.xboxController.getRightStickY());
-		this.rightMotorSpeed = leftStickY*.75;
-		this.leftMotorSpeed = rightStickY*.75;
+		this.leftMotorSpeed = logisticScale(rightStickY);
+		this.rightMotorSpeed = logisticScale(leftStickY);
+		//this.rightMotorSpeed = leftStickY*.75;
+		//this.leftMotorSpeed = rightStickY*.75;
 		robotDrive.tankDrive(this.leftMotorSpeed, this.rightMotorSpeed);
+	}
+	
+	public void updateSpeedStraight() {
+		double leftStickY = roundToTenth(OI.xboxController.getLeftStickY());
+		this.leftMotorSpeed = logisticScale(leftStickY);
+		this.rightMotorSpeed = logisticScale(leftStickY);
+		//this.rightMotorSpeed = leftStickY*.75;
+		//this.leftMotorSpeed = rightStickY*.75;
+		robotDrive.tankDrive(this.leftMotorSpeed, this.rightMotorSpeed);
+		System.out.println("Y Axis Left Stick: " + leftStickY);
+		System.out.println("X Axis Left Stick: " + leftStickY + "\n");
 	}
 	
 	private double roundToTenth(double speed) {
@@ -90,5 +103,17 @@ public class Drivetrain extends Subsystem {
 		robotDrive.tankDrive(0.0, 0.0);
 		System.out.println("Stopped");
 	}
-
+	
+	public static double logisticScale(double joystickIn){
+		double driveIn = Math.abs(joystickIn);
+		double denominator = 1+(Math.exp(-10*(driveIn-.5)));
+		double outputSpeed = 1/denominator;
+		if(joystickIn < 0){
+			outputSpeed*=-1;
+		}
+		
+		return outputSpeed;
+	}
+	
+	
 }
