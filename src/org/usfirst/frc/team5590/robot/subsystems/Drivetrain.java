@@ -49,9 +49,7 @@ public class Drivetrain extends Subsystem {
 			this.leftMotorSpeed = rotateSpeed;
 			this.rightMotorSpeed = rotateSpeed*-1;
 			robotDrive.tankDrive(this.leftMotorSpeed*-1, this.rightMotorSpeed*-1);
-			System.out.println("Setting rotate speed.. motors are not moving");
 		}
-		System.out.println("right: " + rightTrigger + " left: "+ leftTrigger);
 	}
 
 	/**
@@ -63,24 +61,19 @@ public class Drivetrain extends Subsystem {
 		this.rightMotorSpeed = leftStickY*.75;
 		this.leftMotorSpeed = rightStickY*.75;
 		robotDrive.tankDrive(this.leftMotorSpeed, this.rightMotorSpeed);
-		System.out.println("Y Axis Left Stick: " + leftStickY);
-		System.out.println("X Axis Left Stick: " + rightStickY + "\n");
 	}
 	
 	private double roundToTenth(double speed) {
 		double value = Math.round(speed*10);
-		System.out.println(value/10);
 		return value/10;
 	}
 
 	public void takeJoystickInput(double left, double right) {
 		robotDrive.tankDrive(left, right);
-		System.out.println("Left: " + left + "...Right:" + right);
 	}
 
 	public void setSpeed(double speed) {
 		robotDrive.tankDrive(speed, speed);
-		System.out.println("Speed: " + speed);
 	}
 
 	public void rotateLeft(double speed) {
