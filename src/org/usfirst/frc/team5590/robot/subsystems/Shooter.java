@@ -23,10 +23,7 @@ public class Shooter extends Subsystem {
    
     private static SpeedController ballShooter;
     
-    public static final int ballShooterDIO = 3;
-    
     public static void initializeControllers(){
-    	ballShooter = new TalonSRX(ballShooterDIO);
     	rotationalSpeedController = new TalonSRX(ARM_ROTATIONAL_PWM);
 		rotationalEncoder = new Encoder(ROTATIONAL_ENCODER_SIGNAL_A, ROTATIONAL_ENCODER_SIGNAL_B,
 				false, EncodingType.k2X);

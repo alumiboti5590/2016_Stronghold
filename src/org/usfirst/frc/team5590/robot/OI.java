@@ -36,6 +36,7 @@ public class OI {
 		logitechController.button2.whileHeld(new Collect());
 		logitechController.button3.whenPressed(new ArmFloor());	
 		logitechController.button4.whenPressed(new ResetArm());	
+		
 		logitechController.button1.whenPressed(new TriggerCommands());
 		logitechController.button5.whenPressed(new ShooterDeploy());
 		logitechController.button6.whenPressed(new ShooterRetract());

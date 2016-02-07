@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5590.robot.commands.shooter;
 
+import org.usfirst.frc.team5590.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -7,13 +9,15 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ShooterRetract extends Command {
 
+	private static final double DEGREE_POSITION = 0;
+
     public ShooterRetract() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    	requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.shooter.setPosition(DEGREE_POSITION);   	
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -22,7 +26,7 @@ public class ShooterRetract extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
