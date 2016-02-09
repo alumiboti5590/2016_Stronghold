@@ -6,6 +6,7 @@ import org.usfirst.frc.team5590.robot.commands.arm.ArmOpenGate;
 import org.usfirst.frc.team5590.robot.commands.arm.ManualArmControl;
 import org.usfirst.frc.team5590.robot.commands.arm.ResetArm;
 import org.usfirst.frc.team5590.robot.commands.autonomous.DriveStraight;
+import org.usfirst.frc.team5590.robot.commands.shooter.Shoot;
 import org.usfirst.frc.team5590.robot.commands.shooter.ShooterDeploy;
 import org.usfirst.frc.team5590.robot.commands.shooter.ShooterRetract;
 import org.usfirst.frc.team5590.robot.controllers.LogitechX3;
@@ -32,6 +33,7 @@ public class OI {
 		
 		System.out.println("Yolo");
 		// Logitech Controller
+		logitechController.button11.whileHeld(new Shoot());
 		logitechController.button7.whenPressed(new ToggleMode());
 		logitechController.button2.whileHeld(new Collect());
 		logitechController.button3.whenPressed(new ArmFloor());	

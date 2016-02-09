@@ -2,6 +2,7 @@ package org.usfirst.frc.team5590.robot.commands;
 
 import org.usfirst.frc.team5590.robot.Robot;
 import org.usfirst.frc.team5590.robot.commands.arm.ArmOpenGate;
+import org.usfirst.frc.team5590.robot.commands.shooter.Shoot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
