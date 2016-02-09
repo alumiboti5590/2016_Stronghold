@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import org.usfirst.frc.team5590.robot.Robot;
 import org.usfirst.frc.team5590.robot.subsystems.*;
+import org.usfirst.frc.team5590.robot.commands.*;
 
 /**
  *
@@ -35,7 +36,7 @@ public class AutonomousGroup extends CommandGroup {
     	this.processPosition();
     	
     	addSequential(this.defenseCommand);
-    	addSequential(new Rotation(degrees));
+    	addSequential(new Rotate(degrees));
     	if(this.shoot){addSequential(new Shoot());}
        
     }
