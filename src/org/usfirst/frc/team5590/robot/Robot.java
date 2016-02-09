@@ -27,8 +27,14 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 
-    Command autonomousCommand;
-    SendableChooser chooser;
+    public Command autonomousCommand;
+    public SendableChooser defenseChooser;
+    public int autonomousPosition = 0;
+    public SendableChooser positionChooser;
+    public boolean highGoalScoring = false;
+    public boolean lowGoalScoring  = false;
+    public SendableChooser scoringChooser;
+    
 
     /**
      * This function is run when the robot is first started up and should be
@@ -37,6 +43,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	RobotMap.init();
 		oi = new OI();
+		
     }
 	
 	/**
@@ -62,7 +69,9 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+    	positionChooser = new SendableChooser();
+    	positionChooser.addDefault("Position 1", 1);
+    	defenseChooser = new SendableChooser();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
