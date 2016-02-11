@@ -35,8 +35,8 @@ public class AutonomousGroup extends CommandGroup {
     	this.processPosition();
     	
     	addSequential(this.defenseCommand);
-    	addSequential(new Rotation(degrees));
-    	if(this.shoot){addSequential(new Shoot());}
+//    	addSequential(new Rotation(degrees));
+//    	if(this.shoot){addSequential(new Shoot());}
        
     }
     

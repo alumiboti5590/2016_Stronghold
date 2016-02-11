@@ -17,8 +17,8 @@ public class Arm extends Subsystem {
 	/**
 	 * DIO Ports for Encoder
 	 */
-	private static int ROTATIONAL_ENCODER_SIGNAL_A = 0;
-	private static int ROTATIONAL_ENCODER_SIGNAL_B = 1;
+	private static int ROTATIONAL_ENCODER_SIGNAL_A = 7;
+	private static int ROTATIONAL_ENCODER_SIGNAL_B = 8;
 	
 	private static SpeedController rotationalSpeedController;
 	private static Encoder         rotationalEncoder;
@@ -64,6 +64,7 @@ public class Arm extends Subsystem {
 			speedControlApex = rotationalEncoder.getDistance() * 0.1;
 		}
 		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
+			System.out.println("Current Location: " + rotationalEncoder.getDistance() + " Final Location: " + rawDistance);
 			if (Math.abs(rotationalEncoder.getDistance() - rawDistance) < speedControlApex){
 				rotationalSpeedController.set(0.2*direction);
 			} else {

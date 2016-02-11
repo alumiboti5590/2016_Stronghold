@@ -29,8 +29,7 @@ public class OI {
 		// Xbox Controller
 		xboxController.buttonSelect.whenPressed(new Drive());
 		xboxController.buttonA.whileHeld(new DriveStraight());
-		
-		System.out.println("Yolo");
+
 		// Logitech Controller
 		logitechController.button7.whenPressed(new ToggleMode());
 		logitechController.button2.whileHeld(new Collect());
