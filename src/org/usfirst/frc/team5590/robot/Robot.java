@@ -1,11 +1,14 @@
 package org.usfirst.frc.team5590.robot;
 
-import org.usfirst.frc.team5590.robot.subsystems.Shooter;
+import org.usfirst.frc.team5590.robot.commands.CheivalDeFrise;
+import org.usfirst.frc.team5590.robot.commands.LowBar;
+import org.usfirst.frc.team5590.robot.commands.Portcullis;
+import org.usfirst.frc.team5590.robot.commands.autonomous.AutonomousGroup;
+import org.usfirst.frc.team5590.robot.commands.autonomous.DriveForward;
 import org.usfirst.frc.team5590.robot.subsystems.Arm;
 import org.usfirst.frc.team5590.robot.subsystems.Collector;
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team5590.robot.commands.autonomous.*;
-import org.usfirst.frc.team5590.robot.commands.*;
+import org.usfirst.frc.team5590.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -13,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -49,6 +53,28 @@ public class Robot extends IterativeRobot {
 		server = CameraServer.getInstance();
 	    server.setQuality(50);
 	    server.startAutomaticCapture("cam0");
+	    
+	    defenseChooser = new SendableChooser();
+    	defenseChooser.addDefault("Low Bar", new LowBar());
+    	defenseChooser.addObject("Portcullis", new Portcullis());
+    	defenseChooser.addObject("Chieval De Frise", new CheivalDeFrise());
+    	defenseChooser.addObject("Drive Forward", new DriveForward());
+    	SmartDashboard.putData("Defensive Breach", defenseChooser);
+
+    	positionChooser = new SendableChooser();
+    	positionChooser.addObject("0/Low Bar", 0);
+    	positionChooser.addObject("1", 1);
+    	positionChooser.addObject("2", 2);
+    	positionChooser.addObject("3", 3);
+    	positionChooser.addObject("4", 4);
+    	positionChooser.addDefault("5/Spy Box", 5);
+    	SmartDashboard.putData("Position Chooser", positionChooser);
+    	
+    	scoringChooser = new SendableChooser();
+    	scoringChooser.addObject("High Goal Scoring", 2);
+    	scoringChooser.addObject("Low Goal Scoring", 1);
+    	scoringChooser.addDefault("NO GOAL SCORING", 0);
+    	SmartDashboard.putData("Shoot Chooser", scoringChooser);
 		
     }
 	
@@ -75,24 +101,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	defenseChooser = new SendableChooser();
-    	defenseChooser.addDefault("Low Bar", new LowBar());
-    	defenseChooser.addObject("Portcullis", new Portcullis());
-    	defenseChooser.addObject("Chieval De Frise", new CheivalDeFrise());
-    	defenseChooser.addObject("Drive Forward", new DriveForward());
-
-    	positionChooser = new SendableChooser();
-    	positionChooser.addObject("0/Low Bar", 0);
-    	positionChooser.addObject("1", 1);
-    	positionChooser.addObject("2", 2);
-    	positionChooser.addObject("3", 3);
-    	positionChooser.addObject("4", 4);
-    	positionChooser.addDefault("5", 5);
     	
-    	scoringChooser = new SendableChooser();
-    	scoringChooser.addObject("High Goal Scoring", 2);
-    	scoringChooser.addObject("Low Goal Scoring", 1);
-    	scoringChooser.addDefault("NO GOAL SCORING", 0);
     	
         autonomousCommand = new AutonomousGroup(defenseChooser.getSelected(), 
     		   positionChooser.getSelected(), scoringChooser.getSelected());

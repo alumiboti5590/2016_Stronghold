@@ -15,7 +15,7 @@ public class Collect extends Command {
     public Collect(Button button) {
     	requires(Robot.collector);
     	// TODO: Timeout change based on tests
-    	setTimeout(1.0);
+    	setTimeout(5.0);
     	this.button = button;
     }
 

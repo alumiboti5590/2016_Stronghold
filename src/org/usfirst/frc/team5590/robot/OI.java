@@ -32,7 +32,7 @@ public class OI {
 
 		// Logitech Controller
 		logitechController.button1.whenPressed(new Shoot(logitechController.button1));
-		logitechController.button2.whileHeld(new Collect(logitechController.button2));
+		logitechController.button2.whenPressed(new Collect(logitechController.button2));
 		logitechController.button3.whenPressed(new ArmFloor());	
 		logitechController.button4.whenPressed(new ResetArm());	
 		

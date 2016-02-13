@@ -31,10 +31,12 @@ public class Arm extends Subsystem {
 	
 	public void resetArm() {
 		this.rotate(0, -1);
-		while (safetySwitch.getVoltage() < 1.0) {
+		while (safetySwitch.getVoltage() < .8) {
 			rotationalSpeedController.set(-0.1);
+			System.out.println("Reseting Arm");
 		}
 		rotationalEncoder.reset();
+		System.out.println("&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*");
 	}
 
 	public static void initializeControllers() {	
