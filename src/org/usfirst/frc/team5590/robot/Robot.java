@@ -29,13 +29,9 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
  
 	private Command autonomousCommand;
-	
-	public Command defenseCommand;
+
 	public SendableChooser defenseChooser;
-	public int autonomousPosition = 0;
 	public SendableChooser positionChooser;
-	public boolean highGoalScoring = false;
-	public boolean lowGoalScoring  = false;
 	public SendableChooser scoringChooser;
 	
     /**
