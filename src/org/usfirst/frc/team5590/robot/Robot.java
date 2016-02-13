@@ -5,6 +5,7 @@ import org.usfirst.frc.team5590.robot.subsystems.Arm;
 import org.usfirst.frc.team5590.robot.subsystems.Collector;
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5590.robot.commands.autonomous.*;
+import org.usfirst.frc.team5590.robot.commands.*;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -68,7 +69,7 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
     	defenseChooser = new SendableChooser();
-    	defenseChooser.addDefault("Low Bar", new Lowbar());
+    	defenseChooser.addDefault("Low Bar", new LowBar());
     	defenseChooser.addObject("Portcullis", new Portcullis());
     	defenseChooser.addObject("Chieval De Frise", new CheivalDeFrise());
     	defenseChooser.addObject("Drive Forward", new DriveForward());
