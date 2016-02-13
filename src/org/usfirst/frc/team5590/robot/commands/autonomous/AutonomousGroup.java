@@ -19,25 +19,27 @@ public class AutonomousGroup extends CommandGroup {
 	
 	private Command defenseCommand;
 	private int position;
-	private boolean shoot = false;
+	private int shoot = 0;
     
 	private static double degrees = 0.0;
 	
 	
-    public  AutonomousGroup(Command defenseCommand, int position, boolean shoot) {
+    public  AutonomousGroup(Object defenseCommand, Object position, Object shoot) {
     	requires(drivetrain);
     	requires(arm);
     	requires(shooter);
     	
-    	this.defenseCommand = defenseCommand;
-    	this.position = position;
-    	this.shoot = shoot;
+    	this.defenseCommand = (Command) defenseCommand;
+    	this.position = (int) position;
+    	this.shoot = (int) shoot;
     	
     	this.processPosition();
     	
     	addSequential(this.defenseCommand);
     	addSequential(new Rotate(degrees));
-    	if(this.shoot){addSequential(new Shoot());}
+    	if(this.shoot==2){ addSequential(new HighGoalScore());
+    	} else if(this.shoot==1){ addSequential(new LowGoalScore());
+    	} else {}
        
     }
     

@@ -4,6 +4,7 @@ import org.usfirst.frc.team5590.robot.subsystems.Shooter;
 import org.usfirst.frc.team5590.robot.subsystems.Arm;
 import org.usfirst.frc.team5590.robot.subsystems.Collector;
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team5590.robot.commands.autonomous.*;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -27,7 +28,16 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
  
-
+	private Command autonomousCommand;
+	
+	public Command defenseCommand;
+	public SendableChooser defenseChooser;
+	public int autonomousPosition = 0;
+	public SendableChooser positionChooser;
+	public boolean highGoalScoring = false;
+	public boolean lowGoalScoring  = false;
+	public SendableChooser scoringChooser;
+	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -61,20 +71,28 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
+    	defenseChooser = new SendableChooser();
+    	defenseChooser.addDefault("Low Bar", new Lowbar());
+    	defenseChooser.addObject("Portcullis", new Portcullis());
+    	defenseChooser.addObject("Chieval De Frise", new CheivalDeFrise());
+    	defenseChooser.addObject("Drive Forward", new DriveForward());
+
+    	positionChooser = new SendableChooser();
+    	positionChooser.addObject("0/Low Bar", 0);
+    	positionChooser.addObject("1", 1);
+    	positionChooser.addObject("2", 2);
+    	positionChooser.addObject("3", 3);
+    	positionChooser.addObject("4", 4);
+    	positionChooser.addDefault("5", 5);
     	
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
+    	scoringChooser = new SendableChooser();
+    	scoringChooser.addObject("High Goal Scoring", 2);
+    	scoringChooser.addObject("Low Goal Scoring", 1);
+    	scoringChooser.addDefault("NO GOAL SCORING", 0);
     	
-    	// schedule the autonomous command (example)
-       // if (autonomousCommand != null) autonomousCommand.start();
+        autonomousCommand = new AutonomousGroup(defenseChooser.getSelected(), 
+    		   positionChooser.getSelected(), scoringChooser.getSelected());
+        autonomousCommand.start();
     }
 
     /**
