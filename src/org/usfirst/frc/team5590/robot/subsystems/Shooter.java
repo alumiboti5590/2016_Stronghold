@@ -41,6 +41,8 @@ public class Shooter extends Subsystem {
     public void setShooterSpeed(double speed){
     	ballShooterBottom.set(speed);
     	ballShooterTop.set(-1 * (speed - 0.05));
+    	System.out.println("\n\nShooter Bottom: "+ ballShooterBottom.get());
+    	System.out.println("Shooter Top: "+ ballShooterTop.get());
     }
     
     public double getShooterSpeed(){
