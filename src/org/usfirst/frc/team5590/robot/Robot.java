@@ -4,6 +4,8 @@ import org.usfirst.frc.team5590.robot.subsystems.Shooter;
 import org.usfirst.frc.team5590.robot.subsystems.Arm;
 import org.usfirst.frc.team5590.robot.subsystems.Collector;
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team5590.robot.commands.autonomous.*;
+import org.usfirst.frc.team5590.robot.commands.*;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -29,11 +31,13 @@ public class Robot extends IterativeRobot {
 	private CameraServer server;
 
 	public static OI oi;
-	
-	Command autonomousCommand;
-	SendableChooser chooser;
  
+	private Command autonomousCommand;
 
+	public SendableChooser defenseChooser;
+	public SendableChooser positionChooser;
+	public SendableChooser scoringChooser;
+	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -71,20 +75,28 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	autonomousCommand = (Command) chooser.getSelected();
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
+    	defenseChooser = new SendableChooser();
+    	defenseChooser.addDefault("Low Bar", new LowBar());
+    	defenseChooser.addObject("Portcullis", new Portcullis());
+    	defenseChooser.addObject("Chieval De Frise", new CheivalDeFrise());
+    	defenseChooser.addObject("Drive Forward", new DriveForward());
+
+    	positionChooser = new SendableChooser();
+    	positionChooser.addObject("0/Low Bar", 0);
+    	positionChooser.addObject("1", 1);
+    	positionChooser.addObject("2", 2);
+    	positionChooser.addObject("3", 3);
+    	positionChooser.addObject("4", 4);
+    	positionChooser.addDefault("5", 5);
     	
-    	// schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+    	scoringChooser = new SendableChooser();
+    	scoringChooser.addObject("High Goal Scoring", 2);
+    	scoringChooser.addObject("Low Goal Scoring", 1);
+    	scoringChooser.addDefault("NO GOAL SCORING", 0);
+    	
+        autonomousCommand = new AutonomousGroup(defenseChooser.getSelected(), 
+    		   positionChooser.getSelected(), scoringChooser.getSelected());
+        autonomousCommand.start();
     }
 
     /**
