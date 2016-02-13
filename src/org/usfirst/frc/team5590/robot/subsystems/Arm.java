@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Arm extends Subsystem {
 
-	private static final int ARM_ROTATIONAL_PWM = 4;
+	private static final int ARM_ROTATIONAL_PWM = 2;
 
 	/**
 	 * DIO Ports for Encoder
@@ -19,7 +19,7 @@ public class Arm extends Subsystem {
 	private static int ROTATIONAL_ENCODER_SIGNAL_A = 7;
 	private static int ROTATIONAL_ENCODER_SIGNAL_B = 8;
 	
-	private static int ANALOG_SAFETY_SWITCH_PORT = 0;
+	private static int ANALOG_SAFETY_SWITCH_PORT = 2;
 	
 	private static SpeedController rotationalSpeedController;
 	private static Encoder         rotationalEncoder;

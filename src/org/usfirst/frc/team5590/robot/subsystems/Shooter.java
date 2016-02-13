@@ -10,7 +10,10 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
  */
 public class Shooter extends Subsystem {
 	
-	private static final int ARM_ROTATIONAL_PWM = 5;
+	private static final int SHOOTER_ROTATIONAL_PWM = 4;
+	
+	private static final int SHOOTER_BOTTOM_PWM = 5;
+	private static final int SHOOTER_TOP_PWM = 6;
 
 	/**
 	 * DIO Ports for Encoder
@@ -21,10 +24,13 @@ public class Shooter extends Subsystem {
 	private static SpeedController rotationalSpeedController;
 	private static Encoder         rotationalEncoder;
    
-    private static SpeedController ballShooter;
+    private static SpeedController ballShooterBottom;
+    private static SpeedController ballShooterTop;
     
     public static void initializeControllers(){
-    	rotationalSpeedController = new TalonSRX(ARM_ROTATIONAL_PWM);
+    	rotationalSpeedController = new TalonSRX(SHOOTER_ROTATIONAL_PWM);
+    	ballShooterBottom = new TalonSRX(SHOOTER_BOTTOM_PWM);
+    	ballShooterTop = new TalonSRX(SHOOTER_TOP_PWM);
 		rotationalEncoder = new Encoder(ROTATIONAL_ENCODER_SIGNAL_A, ROTATIONAL_ENCODER_SIGNAL_B,
 				false, EncodingType.k2X);
     }
@@ -33,15 +39,18 @@ public class Shooter extends Subsystem {
     }
     
     public void setShooterSpeed(double speed){
-    	ballShooter.set(speed);
+    	ballShooterBottom.set(speed);
+    	ballShooterTop.set(speed - 0.05);
     }
     
     public double getShooterSpeed(){
-    	return ballShooter.get();
+    	return ballShooterBottom.get();
+    	
     }
     
     public void stopShooter(){
-    	ballShooter.set(0);
+    	ballShooterBottom.set(0);
+        ballShooterTop.set(0);
     }
     
     public void stopAll(){
