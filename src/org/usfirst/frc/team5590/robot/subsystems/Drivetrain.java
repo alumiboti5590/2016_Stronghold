@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drivetrain extends Subsystem {
 
-	private static final int leftTrackDIO = 0;
-	private static final int rightTrackDIO = 1;
+	private static final int leftTrackPWM = 0;
+	private static final int rightTrackPWM = 1;
 
 	private static RobotDrive robotDrive;
 	
@@ -24,8 +24,8 @@ public class Drivetrain extends Subsystem {
 	 */
 	public static void initializeControllers() {
 
-		SpeedController leftTrackController = new TalonSRX(leftTrackDIO);
-		SpeedController rightTrackController = new TalonSRX(rightTrackDIO);
+		SpeedController leftTrackController = new TalonSRX(leftTrackPWM);
+		SpeedController rightTrackController = new TalonSRX(rightTrackPWM);
 
 		robotDrive = new RobotDrive(leftTrackController, rightTrackController);
 		robotDrive.setSafetyEnabled(false);

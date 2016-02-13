@@ -3,6 +3,7 @@ package org.usfirst.frc.team5590.robot.commands;
 import org.usfirst.frc.team5590.robot.Robot;
 import org.usfirst.frc.team5590.robot.commands.arm.ArmOpenGate;
 
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -12,16 +13,19 @@ public class TriggerCommands extends Command {
 	
 	private Shoot shootCommand;
 	private ArmOpenGate openGate;
+	private Button button;
 
-    public TriggerCommands() {
-    	shootCommand = new Shoot();
+    public TriggerCommands(Button button) {
+    	shootCommand = new Shoot(button);
     	openGate = new ArmOpenGate();
     }
 
     protected void initialize() {
     	if (Robot.oi.shooterMode) {
+    		System.out.println("Running: Shoot");
     		shootCommand.start();
     	} else {
+    		System.out.println("Running Arm");
     		openGate.start();
     	}
     }

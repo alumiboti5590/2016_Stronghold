@@ -10,10 +10,10 @@ public class Collector extends Subsystem {
 	
 	private static SpeedController ballCollector;
 	
-	public static final int ballCollectorDIO = 2;
+	public static final int ballCollectorPWM = 3;
 	
 	public static void initializeControllers(){
-		ballCollector = new TalonSRX(ballCollectorDIO);
+		ballCollector = new TalonSRX(ballCollectorPWM);
 	}
     
 	public double getCollectorSpeed(){

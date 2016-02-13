@@ -39,8 +39,9 @@ public class AutonomousGroup extends CommandGroup {
     	addSequential(new Rotate(degrees));
     	if(this.shoot==2){ addSequential(new HighGoalScore());
     	} else if(this.shoot==1){ addSequential(new LowGoalScore());
-    	} else {}
-       
+    	} else {
+    		
+    	}   
     }
     
     public void processPosition(){

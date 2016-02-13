@@ -1,19 +1,22 @@
 package org.usfirst.frc.team5590.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team5590.robot.Robot;
-import org.usfirst.frc.team5590.robot.subsystems.*;
+
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class Collect extends Command {
 	
-    public Collect() {
+	Button button;
+	
+    public Collect(Button button) {
     	requires(Robot.collector);
     	// TODO: Timeout change based on tests
     	setTimeout(1.0);
+    	this.button = button;
     }
 
     protected void initialize() {
@@ -23,11 +26,15 @@ public class Collect extends Command {
     }
 
     protected void execute() {
+    	Robot.collector.setCollectorSpeed(1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+    	if (isTimedOut() || !button.get()) {
+    		return true;
+    	}
+        return false;
     }
 
     // Called once after isFinished returns true

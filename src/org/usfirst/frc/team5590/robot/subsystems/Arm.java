@@ -1,27 +1,29 @@
 package org.usfirst.frc.team5590.robot.subsystems;
-
-import org.usfirst.frc.team5590.robot.OI;
 import org.usfirst.frc.team5590.robot.Robot;
 import org.usfirst.frc.team5590.robot.commands.arm.ManualArmControl;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Arm extends Subsystem {
 
-	private static final int ARM_ROTATIONAL_PWM = 4;
+	private static final int ARM_ROTATIONAL_PWM = 2;
 
 	/**
 	 * DIO Ports for Encoder
 	 */
-	private static int ROTATIONAL_ENCODER_SIGNAL_A = 0;
-	private static int ROTATIONAL_ENCODER_SIGNAL_B = 1;
+	private static int ROTATIONAL_ENCODER_SIGNAL_A = 7;
+	private static int ROTATIONAL_ENCODER_SIGNAL_B = 8;
+	
+	private static int ANALOG_SAFETY_SWITCH_PORT = 2;
 	
 	private static SpeedController rotationalSpeedController;
 	private static Encoder         rotationalEncoder;
+	private static AnalogInput     safetySwitch;
 	
 	public void initDefaultCommand() {
 		setDefaultCommand(new ManualArmControl());
@@ -29,6 +31,9 @@ public class Arm extends Subsystem {
 	
 	public void resetArm() {
 		this.rotate(0, -1);
+		while (safetySwitch.getVoltage() < 1.0) {
+			rotationalSpeedController.set(-0.1);
+		}
 		rotationalEncoder.reset();
 	}
 
@@ -36,6 +41,7 @@ public class Arm extends Subsystem {
 		rotationalSpeedController = new TalonSRX(ARM_ROTATIONAL_PWM);
 		rotationalEncoder = new Encoder(ROTATIONAL_ENCODER_SIGNAL_A, ROTATIONAL_ENCODER_SIGNAL_B,
 				false, EncodingType.k2X);
+		 safetySwitch = new AnalogInput(ANALOG_SAFETY_SWITCH_PORT);
 	}
 
 	public void setPosition(double degrees){
@@ -64,6 +70,9 @@ public class Arm extends Subsystem {
 			speedControlApex = rotationalEncoder.getDistance() * 0.1;
 		}
 		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
+			if (safetySwitch.getVoltage() > 1.0) {
+				break;
+			}
 			if (Math.abs(rotationalEncoder.getDistance() - rawDistance) < speedControlApex){
 				rotationalSpeedController.set(0.2*direction);
 			} else {
