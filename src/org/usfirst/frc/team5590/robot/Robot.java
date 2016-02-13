@@ -5,6 +5,7 @@ import org.usfirst.frc.team5590.robot.subsystems.Arm;
 import org.usfirst.frc.team5590.robot.subsystems.Collector;
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -24,6 +25,8 @@ public class Robot extends IterativeRobot {
 	public static final Shooter shooter = new Shooter();
 	public static final Arm arm = new Arm();
 	public static final Collector collector = new Collector();
+	
+	private CameraServer server;
 
 	public static OI oi;
 	
@@ -38,6 +41,10 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	RobotMap.init();
 		oi = new OI();
+		
+		server = CameraServer.getInstance();
+	    server.setQuality(50);
+	    server.startAutomaticCapture("cam0");
 		
     }
 	
