@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShooterDown extends Command {
 
     public ShooterDown() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.shooter);
     }
 

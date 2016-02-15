@@ -35,6 +35,7 @@ public class Arm extends Subsystem {
 			rotationalSpeedController.set(-0.1);
 			System.out.println("Reseting Arm");
 		}
+		rotationalSpeedController.set(0.0);
 		rotationalEncoder.reset();
 	}
 
@@ -71,7 +72,6 @@ public class Arm extends Subsystem {
 			speedControlApex = rotationalEncoder.getDistance() * 0.1;
 		}
 		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
-			System.out.println("Current Location: " + rotationalEncoder.getDistance() + " Final Location: " + rawDistance);
 			if (safetySwitch.get()) {
 				break;
 			}

@@ -72,8 +72,8 @@ public class Shooter extends Subsystem {
 		this.rotate(0, -1);
 		while (!safetySwitch.get()) {
 			rotationalSpeedController.set(-0.1);
-			System.out.println("Reseting Shooter");
 		}
+		rotationalSpeedController.set(0.0);
 		rotationalEncoder.reset();
 	}
     
@@ -100,7 +100,7 @@ public class Shooter extends Subsystem {
 			if (Math.abs(rotationalEncoder.getDistance() - rawDistance) < speedControlApex){
 				rotationalSpeedController.set(0.2*direction);
 			} else {
-				rotationalSpeedController.set(0.5*direction);
+				rotationalSpeedController.set(0.4*direction);
 			}
 		}
 		System.out.println("Current Location: " + rotationalEncoder.getDistance() + " Final Location: " + rawDistance);
