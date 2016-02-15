@@ -56,6 +56,15 @@ public class Shooter extends Subsystem {
     	stopShooter(); 
     }
     
+    public void resetShooter() {
+		this.rotate(0, -1);
+		while (!safetySwitch.get()) {
+			rotationalSpeedController.set(-0.1);
+			System.out.println("Reseting Shooter");
+		}
+		rotationalEncoder.reset();
+	}
+    
     public void setPosition(double degrees){
     	if (degrees > this.getDegrees()) {
     		System.out.println("Rotating");

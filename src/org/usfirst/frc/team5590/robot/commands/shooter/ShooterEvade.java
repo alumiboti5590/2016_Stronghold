@@ -7,15 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShooterRetract extends Command {
+public class ShooterEvade extends Command {
 
-    public ShooterRetract() {
+	private static final double DEGREE_POSITION = 90;
+
+    public ShooterEvade() {
     	requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.resetShooter();	
+    	Robot.shooter.setPosition(DEGREE_POSITION);   	
     }
 
     // Called repeatedly when this Command is scheduled to run
