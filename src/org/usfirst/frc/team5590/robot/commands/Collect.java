@@ -9,11 +9,12 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Collect extends Command {
-	
+
 	Button button;
 	
     public Collect(Button button) {
     	requires(Robot.collector);
+    	requires(Robot.shooter);
     	this.button = button;
     }
 
@@ -23,18 +24,25 @@ public class Collect extends Command {
     }
 
     protected void execute() {
-    	Robot.collector.setCollectorSpeed(1);
+    		Robot.collector.setCollectorSpeed(1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return !this.button.get();
+    	// If either switch was hit after command started or button lifted
+    	return (timeSinceInitialized() > .15 && Robot.collector.getSwitchVoltage()) || !this.button.get();
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	System.out.println("collector control ended");
     	Robot.collector.stopCollector();
+    	double startTime = timeSinceInitialized();
+    	// Slight set back to make sure not in shooter
+    	while(timeSinceInitialized() - startTime < .05) {
+    		Robot.shooter.setShooterSpeed(-.1);
+    	}
+    	Robot.shooter.stopShooter();
     }
 
     // Called when another command which requires one or more of the same
