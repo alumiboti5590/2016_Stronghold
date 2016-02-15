@@ -34,6 +34,7 @@ public class Shoot extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("Stopping shooter");
     	Robot.shooter.stopShooter();
     }
 

@@ -101,8 +101,6 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	
-    	
         autonomousCommand = new AutonomousGroup(defenseChooser.getSelected(), 
     		   positionChooser.getSelected(), scoringChooser.getSelected());
         autonomousCommand.start();
