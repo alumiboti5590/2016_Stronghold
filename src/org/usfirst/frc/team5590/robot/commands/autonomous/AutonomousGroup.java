@@ -36,7 +36,13 @@ public class AutonomousGroup extends CommandGroup {
     	
     	this.processPosition();
     	
+    	addSequential(new ReachDefense());
+    	
+    	if(this.position<5){
     	addSequential(this.defenseCommand);
+    	addSequential(new DriveStraightTimed(.4,2.5));
+    	}
+    	
     	addSequential(new Rotate(degrees));
     	if(this.shoot==2){ addSequential(new HighGoalScore());
     	} else if(this.shoot==1){ addSequential(new LowGoalScore());
@@ -48,18 +54,18 @@ public class AutonomousGroup extends CommandGroup {
     public void processPosition(){
     	//Position 5 is spy box
     	switch(this.position){
-    		case 0: degrees = 60;
+    		case 0: degrees = 49;
     		break;
-    		case 1: degrees = 15;
+    		case 1: degrees = 42;
     		break;
-    		case 2: degrees = 0;
+    		case 2: degrees = 18;
     		break;
-    		case 3: degrees = -15;
+    		case 3: degrees = -5;
     		break;
-    		case 4: degrees = -60;
+    		case 4: degrees = -25;
     		break;
     		//Spy box
-    		case 5: degrees = 10;
+    		case 5: degrees = 116;
     		break;
     		default: degrees = 0;
     		break;
