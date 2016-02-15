@@ -30,6 +30,17 @@ public class Shooter extends Subsystem {
     private static SpeedController ballShooterTop;
     private static DigitalInput    safetySwitch;
     
+    /**
+     * Down is when the shooter is full retracted into the frame of the robot.
+     * Shoot is when the shooter is tilted up to about 45 degrees to fire.
+     * Evade is when the shooter is titled all the way to about 90 degrees.
+     */
+    public static enum Position {
+    	DOWN, SHOOT, EVADE
+    }
+    
+    public static Position shooterPosition;
+    
     public static void initializeControllers(){
     	rotationalSpeedController = new TalonSRX(SHOOTER_ROTATIONAL_PWM);
     	ballShooterBottom = new TalonSRX(SHOOTER_BOTTOM_PWM);
@@ -37,6 +48,7 @@ public class Shooter extends Subsystem {
 		rotationalEncoder = new Encoder(ROTATIONAL_ENCODER_SIGNAL_A, ROTATIONAL_ENCODER_SIGNAL_B,
 				false, EncodingType.k2X);
 		safetySwitch = new DigitalInput(DIO_SAFETY_SWITCH_PORT);
+		shooterPosition = Position.DOWN;
     }
     
     public void initDefaultCommand() {
@@ -68,10 +80,10 @@ public class Shooter extends Subsystem {
     public void setPosition(double degrees){
     	if (degrees > this.getDegrees()) {
     		System.out.println("Rotating Positive");
-    		rotate(this.getDistance(degrees), -1);
+    		rotate(this.getDistance(degrees), 1);
     	} else {
     		System.out.println("Rotating Negative");
-    		rotate(this.getDistance(degrees) ,1);
+    		rotate(this.getDistance(degrees), -1);
     	}
     } 	
     
@@ -81,7 +93,7 @@ public class Shooter extends Subsystem {
 			speedControlApex = rotationalEncoder.getDistance() * 0.1;
 		}
 		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
-			System.out.println("Encoder: " + rotationalEncoder.getDistance());
+//			System.out.println("Encoder: " + rotationalEncoder.getDistance());
 			if (safetySwitch.get()) {
 				break;
 			}
@@ -94,6 +106,10 @@ public class Shooter extends Subsystem {
 		System.out.println("Current Location: " + rotationalEncoder.getDistance() + " Final Location: " + rawDistance);
     		rotationalSpeedController.set(0.0);
     }
+	
+	public Position getPosition() {
+		return shooterPosition;
+	}
 
 	public double getDegrees(){
 		return .27355*rotationalEncoder.getDistance();

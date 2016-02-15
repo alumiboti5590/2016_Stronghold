@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5590.robot.commands.shooter;
 
 import org.usfirst.frc.team5590.robot.Robot;
+import org.usfirst.frc.team5590.robot.subsystems.Shooter.Position;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -17,11 +18,11 @@ public class ShooterDown extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double degrees = Robot.shooter.getDegrees();
-    	if (degrees > 0 && degrees <= 45) {
+    	Position position = Robot.shooter.getPosition();
+    	if (position == Position.SHOOT) {
     		System.out.println("Shooter Moving to 0 degrees");
     		new ShooterRetract().start();
-    	} else if (degrees > 45) {
+    	} else if (position == Position.EVADE) {
     		System.out.println("Shooter moving to 45 degrees");
     		new ShooterDeploy().start();
     	}

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5590.robot.commands.shooter;
 
 import org.usfirst.frc.team5590.robot.Robot;
+import org.usfirst.frc.team5590.robot.subsystems.Shooter.Position;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,18 +11,16 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShooterUp extends Command {
 
 	public ShooterUp() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double degrees = Robot.shooter.getDegrees();
-    	if (degrees < 45) {
+    	Position position = Robot.shooter.getPosition();
+    	if (position == Position.DOWN) {
     		System.out.println("Shooter Moving to 45 degrees");
     		new ShooterDeploy().start();
-    	} else if (degrees < 90 && degrees >= 45) {
+    	} else if (position == Position.SHOOT) {
     		System.out.println("Shooter moving to 90 degrees");
     		new ShooterEvade().start();
     	}

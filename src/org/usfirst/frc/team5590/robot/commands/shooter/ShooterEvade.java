@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5590.robot.commands.shooter;
 
 import org.usfirst.frc.team5590.robot.Robot;
+import org.usfirst.frc.team5590.robot.subsystems.Shooter.Position;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -18,6 +19,7 @@ public class ShooterEvade extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.shooter.setPosition(DEGREE_POSITION);   	
+		Robot.shooter.shooterPosition = Position.EVADE;
     }
 
     // Called repeatedly when this Command is scheduled to run
