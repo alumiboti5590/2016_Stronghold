@@ -13,7 +13,6 @@ public class TriggerCommands extends Command {
 	
 	private Shoot shootCommand;
 	private ArmOpenGate openGate;
-	private Button button;
 
     public TriggerCommands(Button button) {
     	shootCommand = new Shoot(button);

@@ -12,17 +12,12 @@ public class Collect extends Command {
 	
 	Button button;
 	
-    public Collect(Button button) {
+    public Collect() {
     	requires(Robot.collector);
-    	// TODO: Timeout change based on tests
-    	setTimeout(5.0);
-    	this.button = button;
     }
 
     protected void initialize() {
-    	// TODO: Speed changed according to tests
-    	Robot.collector.stopCollector();
-    	Robot.collector.setCollectorSpeed(.0);
+
     }
 
     protected void execute() {
@@ -31,10 +26,7 @@ public class Collect extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (isTimedOut() || !button.get()) {
-    		return true;
-    	}
-        return false;
+    	return true;
     }
 
     // Called once after isFinished returns true

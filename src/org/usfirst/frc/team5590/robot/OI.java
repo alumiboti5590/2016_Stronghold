@@ -29,19 +29,18 @@ public class OI {
 		// Xbox Controller
 		xboxController.buttonSelect.whenPressed(new Drive());
 		xboxController.buttonA.whileHeld(new DriveStraight());
+		
+		logitechController.button1.whenPressed(new TriggerCommands(logitechController.button1));
 
 		// Logitech Controller
-		logitechController.button1.whenPressed(new Shoot(logitechController.button1));
-		logitechController.button2.whenPressed(new Collect(logitechController.button2));
+		logitechController.button2.whileHeld(new Collect());
 		logitechController.button3.whenPressed(new ArmFloor());	
 		logitechController.button4.whenPressed(new ResetArm());	
 		
-		// logitechController.button1.whenPressed(new TriggerCommands(logitechController.button1));
 		logitechController.button5.whenPressed(new ShooterDeploy());
 		logitechController.button6.whenPressed(new ShooterRetract());
 		logitechController.button7.whenPressed(new ToggleMode());
 		logitechController.button8.whenPressed(new ArmOpenGate());
-		
 	}
 }
 

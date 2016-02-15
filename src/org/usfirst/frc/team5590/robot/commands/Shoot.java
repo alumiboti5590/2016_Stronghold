@@ -14,15 +14,12 @@ public class Shoot extends Command {
 	
     public Shoot(Button button) {
         requires(Robot.shooter);
-        setTimeout(15.0);
         this.button = button;
     }
 
     protected void initialize() {
-    	System.out.println("Shooting Ball");
+    	System.out.println("Initializing shoot ball");
     	Robot.shooter.stopShooter();
-    	//TODO Speed Changed according to tests
-    	Robot.shooter.setShooterSpeed(.0);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,10 +29,7 @@ public class Shoot extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (isTimedOut() || !button.get()) {
-    		return true;
-    	}
-        return false;
+    	return !this.button.get();
     }
 
     // Called once after isFinished returns true
@@ -46,6 +40,6 @@ public class Shoot extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	//Robot.shooter.stopShooter();
+    	Robot.shooter.stopShooter();
     }
 }

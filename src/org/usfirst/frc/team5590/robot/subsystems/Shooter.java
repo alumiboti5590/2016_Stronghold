@@ -45,18 +45,13 @@ public class Shooter extends Subsystem {
     	System.out.println("Shooter Top: "+ ballShooterTop.get());
     }
     
-    public double getShooterSpeed(){
-    	return ballShooterBottom.get();
-    	
-    }
-    
     public void stopShooter(){
     	ballShooterBottom.set(0);
         ballShooterTop.set(0);
     }
     
     public void stopAll(){
-    	stopShooter();
+    	stopShooter(); 
     }
     
     public void setPosition(double degrees){

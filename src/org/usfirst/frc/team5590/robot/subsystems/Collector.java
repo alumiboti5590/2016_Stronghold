@@ -8,24 +8,24 @@ import edu.wpi.first.wpilibj.*;
  */
 public class Collector extends Subsystem {
 	
-	private static SpeedController ballCollector;
+	private static SpeedController ballCollectorController;
 	
 	public static final int ballCollectorPWM = 3;
 	
 	public static void initializeControllers(){
-		ballCollector = new TalonSRX(ballCollectorPWM);
+		ballCollectorController = new TalonSRX(ballCollectorPWM);
 	}
     
 	public double getCollectorSpeed(){
-    	return ballCollector.get();
+    	return ballCollectorController.get();
     }
 	
 	public void setCollectorSpeed(double speed){
-    	ballCollector.set(speed);
+    	ballCollectorController.set(speed);
     }
 	
 	public void stopCollector(){
-    	ballCollector.set(0);
+    	ballCollectorController.set(0);
     }
 	
 	public void stopAll(){
