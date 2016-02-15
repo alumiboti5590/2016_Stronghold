@@ -67,10 +67,11 @@ public class Shooter extends Subsystem {
     
     public void setPosition(double degrees){
     	if (degrees > this.getDegrees()) {
-    		System.out.println("Rotating");
-    		rotate(this.getDistance(degrees), 1);
+    		System.out.println("Rotating Positive");
+    		rotate(this.getDistance(degrees), -1);
     	} else {
-    		rotate(this.getDistance(degrees) ,-1);
+    		System.out.println("Rotating Negative");
+    		rotate(this.getDistance(degrees) ,1);
     	}
     } 	
     
@@ -80,6 +81,7 @@ public class Shooter extends Subsystem {
 			speedControlApex = rotationalEncoder.getDistance() * 0.1;
 		}
 		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
+			System.out.println("Encoder: " + rotationalEncoder.getDistance());
 			if (safetySwitch.get()) {
 				break;
 			}
