@@ -18,14 +18,17 @@ public class Shooter extends Subsystem {
 	/**
 	 * DIO Ports for Encoder
 	 */
-	private static int ROTATIONAL_ENCODER_SIGNAL_A = 2;
-	private static int ROTATIONAL_ENCODER_SIGNAL_B = 3;
+	private static final int ROTATIONAL_ENCODER_SIGNAL_A = 2;
+	private static final int ROTATIONAL_ENCODER_SIGNAL_B = 3;
+	
+	private static final int DIO_SAFETY_SWITCH_PORT = 8;
 	
 	private static SpeedController rotationalSpeedController;
 	private static Encoder         rotationalEncoder;
    
     private static SpeedController ballShooterBottom;
     private static SpeedController ballShooterTop;
+    private static DigitalInput    safetySwitch;
     
     public static void initializeControllers(){
     	rotationalSpeedController = new TalonSRX(SHOOTER_ROTATIONAL_PWM);
@@ -33,6 +36,7 @@ public class Shooter extends Subsystem {
     	ballShooterTop = new TalonSRX(SHOOTER_TOP_PWM);
 		rotationalEncoder = new Encoder(ROTATIONAL_ENCODER_SIGNAL_A, ROTATIONAL_ENCODER_SIGNAL_B,
 				false, EncodingType.k2X);
+		safetySwitch = new DigitalInput(DIO_SAFETY_SWITCH_PORT);
     }
     
     public void initDefaultCommand() {
@@ -67,6 +71,9 @@ public class Shooter extends Subsystem {
 			speedControlApex = rotationalEncoder.getDistance() * 0.1;
 		}
 		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
+			if (safetySwitch.get()) {
+				break;
+			}
 			if (Math.abs(rotationalEncoder.getDistance() - rawDistance) < speedControlApex){
 				rotationalSpeedController.set(0.2*direction);
 			} else {
