@@ -1,53 +1,55 @@
-package org.usfirst.frc.team5590.robot.commands;
+package org.usfirst.frc.team5590.robot.commands.shooter;
 
 import org.usfirst.frc.team5590.robot.Robot;
 
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Shoot extends Command {
+public class BallEject extends Command {
 
-	private Button button;
 	private boolean isComplete = false;
 	
-    public Shoot(Button button) {
-        requires(Robot.shooter);
-        requires(Robot.collector);
-        this.button = button;
+    public BallEject() {
+    	requires(Robot.shooter);
+    	requires(Robot.collector);
     }
 
+    // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("Initializing shoot ball");
     	Robot.shooter.stopShooter();
+    	Robot.collector.stopCollector();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	while (timeSinceInitialized() < 3.0) {
-    		Robot.shooter.setShooterSpeed(1);
+    	while(timeSinceInitialized() < .1) {
+    		Robot.shooter.setShooterSpeed(.1);
+    		Robot.collector.setCollectorSpeed(.5);
     	}
-    	Robot.collector.setCollectorSpeed(1);
+    	while(timeSinceInitialized() < 3.1) {
+    		Robot.collector.setCollectorSpeed(-1);
+    	}
+    	while(timeSinceInitialized() < 4.1) {
+    		Robot.shooter.setShooterSpeed(-1);
+    	}
     	isComplete = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return !this.button.get() || isComplete;
+        return isComplete;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Stopping shooter");
-    	Robot.collector.stopCollector();
     	Robot.shooter.stopShooter();
+    	Robot.collector.stopCollector();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.shooter.stopShooter();
     }
 }

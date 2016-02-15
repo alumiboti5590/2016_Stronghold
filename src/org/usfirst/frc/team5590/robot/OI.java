@@ -5,7 +5,6 @@ import org.usfirst.frc.team5590.robot.commands.arm.ArmFloor;
 import org.usfirst.frc.team5590.robot.commands.arm.ArmOpenGate;
 import org.usfirst.frc.team5590.robot.commands.arm.ManualArmControl;
 import org.usfirst.frc.team5590.robot.commands.arm.ResetArm;
-import org.usfirst.frc.team5590.robot.commands.autonomous.DriveStraight;
 import org.usfirst.frc.team5590.robot.commands.shooter.ShooterDeploy;
 import org.usfirst.frc.team5590.robot.commands.shooter.ShooterRetract;
 import org.usfirst.frc.team5590.robot.commands.shooter.ShooterUp;

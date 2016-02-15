@@ -99,6 +99,11 @@ public class Drivetrain extends Subsystem {
 		robotDrive.tankDrive(speed, -speed);
 		System.out.println("Speed: " + speed);
 	}
+	
+	public void spinDrive(double speed, double spin){
+		robotDrive.drive(speed, spin);
+		System.out.println("Speed: "+speed+"/nSpin: "+spin);
+	}
 
 	public void stop() {
 		robotDrive.tankDrive(0.0, 0.0);
@@ -114,6 +119,10 @@ public class Drivetrain extends Subsystem {
 		}
 		
 		return outputSpeed;
+	}
+
+	public void setExpiration(double timeout) {
+		robotDrive.setExpiration(timeout);		
 	}
 	
 }
