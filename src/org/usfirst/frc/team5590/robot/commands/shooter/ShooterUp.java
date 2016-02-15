@@ -7,15 +7,24 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShooterRetract extends Command {
+public class ShooterUp extends Command {
 
-    public ShooterRetract() {
+	public ShooterUp() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     	requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.resetShooter();	
+    	double degrees = Robot.shooter.getDegrees();
+    	if (degrees < 45) {
+    		System.out.println("Shooter Moving to 45 degrees");
+    		new ShooterDeploy().start();
+    	} else if (degrees < 90 && degrees >= 45) {
+    		System.out.println("Shooter moving to 90 degrees");
+    		new ShooterEvade().start();
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -24,7 +33,7 @@ public class ShooterRetract extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
