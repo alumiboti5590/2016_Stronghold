@@ -50,7 +50,7 @@ public class Arm extends Subsystem {
     		System.out.println("Rotating");
     		rotate(this.getDistance(degrees), 1);
     	} else {
-    		rotate(this.getDistance(degrees) ,-1);
+    		rotate(this.getDistance(degrees), -1);
     	}
 	}
 	
@@ -71,6 +71,7 @@ public class Arm extends Subsystem {
 			speedControlApex = rotationalEncoder.getDistance() * 0.1;
 		}
 		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
+			System.out.println("Current Location: " + rotationalEncoder.getDistance() + " Final Location: " + rawDistance);
 			if (safetySwitch.get()) {
 				break;
 			}

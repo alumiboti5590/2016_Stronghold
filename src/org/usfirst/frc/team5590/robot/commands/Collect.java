@@ -24,13 +24,13 @@ public class Collect extends Command {
     }
 
     protected void execute() {
-    		Robot.collector.setCollectorSpeed(1);
+    	Robot.collector.setCollectorSpeed(1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	// If either switch was hit after command started or button lifted
-    	return (timeSinceInitialized() > .15 && Robot.collector.getSwitchVoltage()) || !this.button.get();
+    	return (Robot.collector.getSafetySwitch()) || !this.button.get();
     }
 
     // Called once after isFinished returns true

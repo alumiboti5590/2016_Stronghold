@@ -29,7 +29,9 @@ public class Shoot extends Command {
     	while (timeSinceInitialized() < 3.0) {
     		Robot.shooter.setShooterSpeed(1);
     	}
-    	Robot.collector.setCollectorSpeed(1);
+    	while (timeSinceInitialized() < 4.0) {
+    		Robot.collector.setCollectorSpeed(1);
+    	}
     	isComplete = true;
     }
 

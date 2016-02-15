@@ -40,7 +40,7 @@ public class Collector extends Subsystem {
     public void initDefaultCommand() {
     }
     
-    public boolean getSwitchVoltage() {
+    public boolean getSafetySwitch() {
     	return this.collectorSwitch.get();
     }
 }
