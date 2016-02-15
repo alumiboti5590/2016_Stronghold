@@ -33,7 +33,7 @@ public class OI {
 		logitechController.button1.whenPressed(new TriggerCommands(logitechController.button1));
 
 		// Logitech Controller
-		logitechController.button2.whileHeld(new Collect());
+		logitechController.button2.whenPressed(new Collect(logitechController.button2));
 		logitechController.button3.whenPressed(new ArmFloor());	
 		logitechController.button4.whenPressed(new ResetArm());	
 		

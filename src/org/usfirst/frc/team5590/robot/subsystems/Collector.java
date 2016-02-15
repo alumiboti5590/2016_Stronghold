@@ -22,6 +22,7 @@ public class Collector extends Subsystem {
 	
 	public void setCollectorSpeed(double speed){
     	ballCollectorController.set(speed);
+    	System.out.println("Current Collector Speed: " + ballCollectorController.get());
     }
 	
 	public void stopCollector(){

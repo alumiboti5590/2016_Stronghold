@@ -14,6 +14,7 @@ public class Shoot extends Command {
 	
     public Shoot(Button button) {
         requires(Robot.shooter);
+        requires(Robot.collector);
         this.button = button;
     }
 
@@ -24,6 +25,7 @@ public class Shoot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.collector.setCollectorSpeed(0.5);
     	Robot.shooter.setShooterSpeed(1);
     }
 

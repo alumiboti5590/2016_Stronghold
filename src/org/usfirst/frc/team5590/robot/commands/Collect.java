@@ -12,12 +12,14 @@ public class Collect extends Command {
 	
 	Button button;
 	
-    public Collect() {
+    public Collect(Button button) {
     	requires(Robot.collector);
+    	this.button = button;
     }
 
     protected void initialize() {
-
+    	System.out.println("Starting Collector");
+    	Robot.collector.stopCollector();
     }
 
     protected void execute() {
@@ -26,17 +28,19 @@ public class Collect extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return true;
+    	return !this.button.get();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("collector control ended");
     	Robot.collector.stopCollector();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	System.out.println("Interrupted collector");
     	Robot.collector.stopCollector();
     }
 }

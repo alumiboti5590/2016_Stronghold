@@ -5,8 +5,8 @@ import org.usfirst.frc.team5590.robot.commands.arm.ManualArmControl;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Arm extends Subsystem {
@@ -16,14 +16,14 @@ public class Arm extends Subsystem {
 	/**
 	 * DIO Ports for Encoder
 	 */
-	private static int ROTATIONAL_ENCODER_SIGNAL_A = 7;
-	private static int ROTATIONAL_ENCODER_SIGNAL_B = 8;
+	private static int ROTATIONAL_ENCODER_SIGNAL_A = 0;
+	private static int ROTATIONAL_ENCODER_SIGNAL_B = 1;
 	
-	private static int ANALOG_SAFETY_SWITCH_PORT = 2;
+	private static int DIO_SAFETY_SWITCH_PORT = 9;
 	
 	private static SpeedController rotationalSpeedController;
 	private static Encoder         rotationalEncoder;
-	private static AnalogInput     safetySwitch;
+	private static DigitalInput    safetySwitch;
 	
 	public void initDefaultCommand() {
 		setDefaultCommand(new ManualArmControl());
@@ -31,19 +31,18 @@ public class Arm extends Subsystem {
 	
 	public void resetArm() {
 		this.rotate(0, -1);
-		while (safetySwitch.getVoltage() < .8) {
+		while (!safetySwitch.get()) {
 			rotationalSpeedController.set(-0.1);
 			System.out.println("Reseting Arm");
 		}
 		rotationalEncoder.reset();
-		System.out.println("&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*");
 	}
 
 	public static void initializeControllers() {	
 		rotationalSpeedController = new TalonSRX(ARM_ROTATIONAL_PWM);
 		rotationalEncoder = new Encoder(ROTATIONAL_ENCODER_SIGNAL_A, ROTATIONAL_ENCODER_SIGNAL_B,
 				false, EncodingType.k2X);
-		 safetySwitch = new AnalogInput(ANALOG_SAFETY_SWITCH_PORT);
+		 safetySwitch = new DigitalInput(DIO_SAFETY_SWITCH_PORT);
 	}
 
 	public void setPosition(double degrees){
@@ -72,7 +71,7 @@ public class Arm extends Subsystem {
 			speedControlApex = rotationalEncoder.getDistance() * 0.1;
 		}
 		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
-			if (safetySwitch.getVoltage() > 1.0) {
+			if (safetySwitch.get()) {
 				break;
 			}
 			if (Math.abs(rotationalEncoder.getDistance() - rawDistance) < speedControlApex){
