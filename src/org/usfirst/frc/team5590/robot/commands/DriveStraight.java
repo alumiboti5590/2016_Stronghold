@@ -19,7 +19,7 @@ public class DriveStraight extends Command {
     public DriveStraight() {
         requires(drivetrain);
         gyro = new ADXRS450_Gyro();             
-        drivetrain.setExpiration(0.1);
+        drivetrain.setExpiration(696.9);
     }
 
     // Called just before this Command runs the first time
@@ -30,13 +30,9 @@ public class DriveStraight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	gyro.reset();
-        while (!isTimedOut()) {
-            double angle = gyro.getAngle(); // get current heading
-            drivetrain.spinDrive(-1.0, -angle*Kp); // drive towards heading 0
-            Timer.delay(0.004);
-        }
-        drivetrain.spinDrive(0.0, 0.0);
+        double angle = gyro.getAngle(); // get current heading
+        drivetrain.spinDrive(-1.0, -angle*Kp); // drive towards heading 0
+        Timer.delay(0.004);
     }
 
     // Make this return true when this Command no longer needs to run execute()
