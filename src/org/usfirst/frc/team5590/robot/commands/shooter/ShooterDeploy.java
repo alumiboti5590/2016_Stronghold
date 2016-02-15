@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ShooterDeploy extends Command {
 
-	private static final double DEGREE_POSITION = 45;
+	private static final double DEGREE_POSITION = -45;
 
     public ShooterDeploy() {
     	requires(Robot.shooter);

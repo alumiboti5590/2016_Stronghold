@@ -30,12 +30,11 @@ public class Arm extends Subsystem {
 	}
 	
 	public void resetArm() {
-		this.rotate(0, -1);
+		this.rotate(0, 1);
+		System.out.println("Reseting Arm");
 		while (!safetySwitch.get()) {
-			rotationalSpeedController.set(-0.1);
-			System.out.println("Reseting Arm");
+			rotationalSpeedController.set(0.1);
 		}
-		rotationalSpeedController.set(0.0);
 		rotationalEncoder.reset();
 	}
 
@@ -67,9 +66,9 @@ public class Arm extends Subsystem {
 	 * @param direction -1 rotates arm clockwise, 1 rotates arm counterclockwise
 	 */
 	public void rotate(double rawDistance, double direction) {
-		double speedControlApex = rawDistance * 0.1;
+		double speedControlApex = Math.abs(rawDistance * 0.15);
 		if (rawDistance == 0){
-			speedControlApex = rotationalEncoder.getDistance() * 0.1;
+			speedControlApex = Math.abs(rotationalEncoder.getDistance() * 0.15);
 		}
 		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
 			if (safetySwitch.get()) {

@@ -69,9 +69,9 @@ public class Shooter extends Subsystem {
     }
     
     public void resetShooter() {
-		this.rotate(0, -1);
+		this.rotate(0, 1);
 		while (!safetySwitch.get()) {
-			rotationalSpeedController.set(-0.1);
+			rotationalSpeedController.set(0.1);
 		}
 		rotationalSpeedController.set(0.0);
 		rotationalEncoder.reset();
@@ -79,21 +79,18 @@ public class Shooter extends Subsystem {
     
     public void setPosition(double degrees){
     	if (degrees > this.getDegrees()) {
-    		System.out.println("Rotating Positive");
     		rotate(this.getDistance(degrees), 1);
     	} else {
-    		System.out.println("Rotating Negative");
     		rotate(this.getDistance(degrees), -1);
     	}
     } 	
     
 	public void rotate(double rawDistance, double direction) {
-		double speedControlApex = rawDistance * 0.1;
+		double speedControlApex = Math.abs(rawDistance * 0.15);
 		if (rawDistance == 0){
-			speedControlApex = rotationalEncoder.getDistance() * 0.1;
+			speedControlApex = Math.abs(rotationalEncoder.getDistance() * 0.15);
 		}
 		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
-//			System.out.println("Encoder: " + rotationalEncoder.getDistance());
 			if (safetySwitch.get()) {
 				break;
 			}

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ArmOpenGate extends Command {
 
-	private static final double DEGREE_POSITION = 135;
+	private static final double DEGREE_POSITION = -135;
 
     public ArmOpenGate() {
     	requires(Robot.arm);
