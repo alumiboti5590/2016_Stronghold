@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Drivetrain extends Subsystem {
 
-	private static final int leftTrackPWM = 0;
-	private static final int rightTrackPWM = 1;
+	private static final int leftTrackPWM = 1;
+	private static final int rightTrackPWM = 0;
 
 	private static RobotDrive robotDrive;
 	

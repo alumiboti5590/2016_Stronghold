@@ -10,10 +10,10 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
  */
 public class Shooter extends Subsystem {
 	
-	private static final int SHOOTER_ROTATIONAL_PWM = 4;
+	private static final int SHOOTER_ROTATIONAL_PWM = 3;
 	
-	private static final int SHOOTER_BOTTOM_PWM = 5;
-	private static final int SHOOTER_TOP_PWM = 6;
+	private static final int SHOOTER_BOTTOM_PWM = 6;
+	private static final int SHOOTER_TOP_PWM = 5;
 
 	/**
 	 * DIO Ports for Encoder
