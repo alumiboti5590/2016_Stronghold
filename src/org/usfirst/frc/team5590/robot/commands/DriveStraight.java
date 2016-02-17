@@ -26,6 +26,7 @@ public class DriveStraight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	gyro.reset();
     	drivetrain.stop();
     	System.out.println("Driving straight");
     }

@@ -57,24 +57,11 @@ public class Drivetrain extends Subsystem {
 	 * 
 	 */
 	public void updateSpeed() {
-		double leftStickY = roundToTenth(Robot.oi.xboxController.getLeftStickY());
-		double rightStickY = roundToTenth(Robot.oi.xboxController.getRightStickY());
-		this.leftMotorSpeed = logisticScale(rightStickY);
-		this.rightMotorSpeed = logisticScale(leftStickY);
-		//this.rightMotorSpeed = leftStickY*.75;
-		//this.leftMotorSpeed = rightStickY*.75;
+		double leftStickY = -1*roundToTenth(Robot.oi.xboxController.getLeftStickY());
+		double rightStickY = -1*roundToTenth(Robot.oi.xboxController.getRightStickY());
+		this.leftMotorSpeed = .8*logisticScale(leftStickY);
+		this.rightMotorSpeed = .8*logisticScale(rightStickY);
 		robotDrive.tankDrive(this.leftMotorSpeed, this.rightMotorSpeed);
-	}
-	
-	public void updateSpeedStraight() {
-		double leftStickY = roundToTenth(Robot.oi.xboxController.getLeftStickY());
-		this.leftMotorSpeed = logisticScale(leftStickY);
-		this.rightMotorSpeed = logisticScale(leftStickY);
-		//this.rightMotorSpeed = leftStickY*.75;
-		//this.leftMotorSpeed = rightStickY*.75;
-		robotDrive.tankDrive(this.leftMotorSpeed, this.rightMotorSpeed);
-		System.out.println("Y Axis Left Stick: " + leftStickY);
-		System.out.println("X Axis Left Stick: " + leftStickY + "\n");
 	}
 	
 	private double roundToTenth(double speed) {
@@ -83,7 +70,7 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void takeJoystickInput(double left, double right) {
-		robotDrive.tankDrive(left, right);
+		robotDrive.tankDrive(right, left);
 	}
 
 	public void setSpeed(double speed) {
@@ -101,7 +88,7 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void spinDrive(double speed, double spin){
-		robotDrive.drive(-speed, -spin);
+		robotDrive.drive(speed, spin);
 		System.out.println("Speed: " + speed + " spin amount: " + spin);
 	}
 
