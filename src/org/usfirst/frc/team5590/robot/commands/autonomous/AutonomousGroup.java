@@ -24,13 +24,17 @@ public class AutonomousGroup extends CommandGroup {
     
 	private static double degrees = 0.0;
 	
-	
-    public  AutonomousGroup(Object defenseCommand, Object position, Object shoot) {
+    public AutonomousGroup(Class<Command> defenseCommand, int position, int shoot) {
     	requires(drivetrain);
     	requires(arm);
     	requires(shooter);
+
+    	try {
+			this.defenseCommand = (Command) defenseCommand.newInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     	
-    	this.defenseCommand = (Command) defenseCommand;
     	this.position = (int) position;
     	this.shoot = (int) shoot;
     	
@@ -38,17 +42,18 @@ public class AutonomousGroup extends CommandGroup {
     	
     	addSequential(new ReachDefense());
     	
-    	if(this.position<5){
-    	addSequential(this.defenseCommand);
-    	addSequential(new DriveStraightTimed(.4,2.5));
+    	if (this.position < 5){
+	    	addSequential(this.defenseCommand);
+	    	addSequential(new DriveStraightTimed(.4,2.5));
     	}
     	
     	addSequential(new Rotate(degrees));
-    	if(this.shoot==2){ addSequential(new HighGoalScore());
-    	} else if(this.shoot==1){ addSequential(new LowGoalScore());
-    	} else {
-    		
-    	}   
+    	
+    	if (this.shoot == 2) { 
+    		addSequential(new HighGoalScore());
+    	} else if (this.shoot == 1) { 
+    		addSequential(new LowGoalScore());
+    	}
     }
     
     public void processPosition(){

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class CheivalDeFrise extends CommandGroup {
     
-    public  CheivalDeFrise() {
+    public CheivalDeFrise() {
         requires(Robot.arm);
         requires(Robot.drivetrain);
         
