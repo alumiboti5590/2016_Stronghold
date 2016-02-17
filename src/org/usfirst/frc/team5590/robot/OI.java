@@ -29,7 +29,7 @@ public class OI {
 		
 		// Xbox Controller
 		xboxController.buttonSelect.whenPressed(new Drive());
-		xboxController.buttonA.whileHeld(new DriveStraight());
+		xboxController.buttonA.whileHeld(new DriveStraight(0.5));
 		
 		/**
 		 * Toggle mode only changes what the trigger on the front of the joystick does.

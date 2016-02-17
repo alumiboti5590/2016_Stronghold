@@ -71,7 +71,7 @@ public class Arm extends Subsystem {
 			speedControlApex = Math.abs(rotationalEncoder.getDistance() * 0.15);
 		}
 		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
-			if (safetySwitch.get()) {
+			if (safetySwitch.get() && direction == 1) {
 				break;
 			}
 			if (Math.abs(rotationalEncoder.getDistance() - rawDistance) < speedControlApex){
