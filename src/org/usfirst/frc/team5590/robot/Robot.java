@@ -55,10 +55,10 @@ public class Robot extends IterativeRobot {
 	    server.startAutomaticCapture("cam0");
 	    
 	    defenseChooser = new SendableChooser();
-    	defenseChooser.addDefault("Low Bar", new LowBar());
-    	defenseChooser.addObject("Portcullis", new Portcullis());
-    	defenseChooser.addObject("Chieval De Frise", new CheivalDeFrise());
-    	defenseChooser.addObject("Drive Forward", new DriveForward());
+    	defenseChooser.addDefault("Low Bar", LowBar.class);
+    	defenseChooser.addObject("Portcullis", Portcullis.class);
+    	defenseChooser.addObject("Chieval De Frise", CheivalDeFrise.class);
+    	defenseChooser.addObject("Drive Forward", DriveForward.class);
     	SmartDashboard.putData("Defensive Breach", defenseChooser);
 
     	positionChooser = new SendableChooser();
@@ -75,7 +75,6 @@ public class Robot extends IterativeRobot {
     	scoringChooser.addObject("Low Goal Scoring", 1);
     	scoringChooser.addDefault("NO GOAL SCORING", 0);
     	SmartDashboard.putData("Shoot Chooser", scoringChooser);
-		
     }
 	
 	/**
@@ -100,9 +99,10 @@ public class Robot extends IterativeRobot {
 	 * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
-    public void autonomousInit() {
-        autonomousCommand = new AutonomousGroup(defenseChooser.getSelected(), 
-    		   positionChooser.getSelected(), scoringChooser.getSelected());
+    @SuppressWarnings("unchecked")
+	public void autonomousInit() {
+        autonomousCommand = new AutonomousGroup((Class<Command>) defenseChooser.getSelected(), 
+    		  (int) positionChooser.getSelected(), (int) scoringChooser.getSelected());
         autonomousCommand.start();
     }
 

@@ -14,7 +14,7 @@ public class DriveStraight extends Command {
 	
 	public Drivetrain drivetrain = Robot.drivetrain;
 	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-	private double Kp = .05;
+	private static final double CORRECTION_DEGREE_PERCENT = .05;
 	double speed;
 
     public DriveStraight(double speed) {
@@ -32,8 +32,8 @@ public class DriveStraight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        double angle = gyro.getAngle(); // get current heading
-        drivetrain.spinDrive(-speed, -angle*Kp); // drive towards heading 0
+    	double correctionValue = gyro.getAngle() * CORRECTION_DEGREE_PERCENT;
+        drivetrain.spinDrive(speed, correctionValue); // drive towards heading 0
         Timer.delay(0.004);
     }
 

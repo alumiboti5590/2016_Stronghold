@@ -101,8 +101,8 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void spinDrive(double speed, double spin){
-		robotDrive.drive(speed, spin);
-		System.out.println("Speed: "+speed+"/nSpin: "+spin);
+		robotDrive.drive(-speed, -spin);
+		System.out.println("Speed: " + speed + " spin amount: " + spin);
 	}
 
 	public void stop() {
