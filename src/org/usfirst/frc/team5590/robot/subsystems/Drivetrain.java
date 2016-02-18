@@ -59,8 +59,8 @@ public class Drivetrain extends Subsystem {
 	public void updateSpeed() {
 		double leftStickY = roundToTenth(Robot.oi.xboxController.getLeftStickY());
 		double rightStickY = roundToTenth(Robot.oi.xboxController.getRightStickY());
-		this.leftMotorSpeed = .8*logisticScale(leftStickY);
-		this.rightMotorSpeed = .8*logisticScale(rightStickY);
+		this.leftMotorSpeed = .8*logisticScale(rightStickY);
+		this.rightMotorSpeed = .8*logisticScale(leftStickY);
 		robotDrive.tankDrive(this.leftMotorSpeed, this.rightMotorSpeed);
 	}
 	
