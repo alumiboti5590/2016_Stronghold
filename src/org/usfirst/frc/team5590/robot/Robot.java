@@ -75,6 +75,7 @@ public class Robot extends IterativeRobot {
     	scoringChooser.addObject("Low Goal Scoring", 1);
     	scoringChooser.addDefault("NO GOAL SCORING", 0);
     	SmartDashboard.putData("Shoot Chooser", scoringChooser);
+    	SmartDashboard.putData(Scheduler.getInstance());
     }
 	
 	/**

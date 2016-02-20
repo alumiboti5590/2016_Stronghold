@@ -1,5 +1,8 @@
 package org.usfirst.frc.team5590.robot.subsystems;
 
+import org.usfirst.frc.team5590.robot.Robot;
+import org.usfirst.frc.team5590.robot.commands.ManualShooter;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
@@ -52,6 +55,12 @@ public class Shooter extends Subsystem {
     }
     
     public void initDefaultCommand() {
+    	setDefaultCommand(new ManualShooter());
+    }
+    
+    public void updateShooter() {
+    	double speed = Robot.oi.logitechController.getMainStickY();
+    	rotationalSpeedController.set(speed);
     }
     
     public void setShooterSpeed(double speed){

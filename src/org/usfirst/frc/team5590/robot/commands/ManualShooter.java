@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5590.robot.commands.arm;
+package org.usfirst.frc.team5590.robot.commands;
 
 import org.usfirst.frc.team5590.robot.Robot;
 
@@ -7,18 +7,21 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ManualArmControl extends Command {
+public class ManualShooter extends Command {
 
-    public ManualArmControl() {
-    	requires(Robot.arm);
+    public ManualShooter() {
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.shooter);
     }
 
+    // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	Robot.shooter.resetShooter();
     }
 
+    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.arm.updateRotation();
+    	Robot.shooter.updateShooter();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -33,7 +36,6 @@ public class ManualArmControl extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	System.out.println("Manual Control Interupted");
-    	Robot.arm.resetArm();
+    	Robot.shooter.resetShooter();
     }
 }

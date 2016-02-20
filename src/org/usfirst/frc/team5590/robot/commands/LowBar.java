@@ -15,6 +15,7 @@ public class LowBar extends Command {
     }
 
     protected void initialize() {
+    	System.out.println(getClass().getName());
     	Robot.drivetrain.stop();
     	Robot.drivetrain.setSpeed(.2);
     }

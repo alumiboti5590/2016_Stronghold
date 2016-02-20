@@ -29,7 +29,7 @@ public class OI {
 		
 		// Xbox Controller
 		xboxController.buttonSelect.whenPressed(new Drive());
-		xboxController.buttonA.whileHeld(new DriveStraight(0.5));
+		xboxController.buttonA.whileHeld(new DriveStraight());
 		
 		/**
 		 * Toggle mode only changes what the trigger on the front of the joystick does.
@@ -42,7 +42,7 @@ public class OI {
 		logitechController.button3.whenPressed(new ArmFloor());	
 		logitechController.button4.whenPressed(new ResetArm());	
 		
-		
+		logitechController.button5.whenPressed(new ManualShooter());
 		logitechController.button11.whenPressed(new ShooterDown());
 		logitechController.button12.whenPressed(new ShooterUp());
 	}

@@ -20,6 +20,7 @@ public class AutoCollect extends Command {
 
     protected void initialize() {
     	// TODO: Speed changed according to tests
+    	System.out.println(getClass().getName());
     	Robot.collector.stopCollector();
     	Robot.collector.setCollectorSpeed(.0);
     }

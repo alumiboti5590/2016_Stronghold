@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ResetArm extends Command {
-
+	
+	
     public ResetArm() {
     	requires(Robot.arm);
     }
