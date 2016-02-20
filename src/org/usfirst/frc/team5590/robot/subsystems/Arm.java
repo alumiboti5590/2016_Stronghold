@@ -30,10 +30,12 @@ public class Arm extends Subsystem {
 	}
 	
 	public void resetArm() {
+		long t = System.currentTimeMillis();
+		long end = t+10000;
 		this.rotate(0, 1);
 		System.out.println("Reseting Arm");
-		while (!safetySwitch.get()) {
-			rotationalSpeedController.set(0.1);
+		while (!safetySwitch.get() && System.currentTimeMillis() < end) {
+			rotationalSpeedController.set(0.15);
 		}
 		rotationalEncoder.reset();
 	}

@@ -10,14 +10,14 @@ public class Collector extends Subsystem {
 	
 	private static SpeedController ballCollectorController;
 	
-	private static int DIO_SAFETY_SWITCH_PORT = 7;
+	// private static int DIO_SAFETY_SWITCH_PORT = 7;
 	
-	private static DigitalInput collectorSwitch; 
+	// private static DigitalInput collectorSwitch; 
 	public static final int ballCollectorPWM = 4;
 	
 	public static void initializeControllers(){
 		ballCollectorController = new TalonSRX(ballCollectorPWM);
-		collectorSwitch = new DigitalInput(DIO_SAFETY_SWITCH_PORT);
+		// collectorSwitch = new DigitalInput(DIO_SAFETY_SWITCH_PORT);
 	}
     
 	public double getCollectorSpeed(){
@@ -40,8 +40,8 @@ public class Collector extends Subsystem {
     public void initDefaultCommand() {
     }
     
-    public boolean getSafetySwitch() {
-    	return this.collectorSwitch.get();
-    }
+    //public boolean getSafetySwitch() {
+    	//return this.collectorSwitch.get();
+    //}
 }
 

@@ -30,7 +30,10 @@ public class Collect extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	// If either switch was hit after command started or button lifted
-    	return (Robot.collector.getSafetySwitch()) || !this.button.get();
+    	if (!this.button.get()) {
+    		System.out.print("Collector Button Released");
+    	}
+    	return !this.button.get();
     }
 
     // Called once after isFinished returns true

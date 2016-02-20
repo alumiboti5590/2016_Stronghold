@@ -90,7 +90,9 @@ public class Shooter extends Subsystem {
 		if (rawDistance == 0){
 			speedControlApex = Math.abs(rotationalEncoder.getDistance() * 0.15);
 		}
+		System.out.println("Starting shooter Movement");
 		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
+			System.out.println("Shootetr Rotation Speed: " + rotationalSpeedController.get());
 			if (safetySwitch.get()) {
 				break;
 			}
