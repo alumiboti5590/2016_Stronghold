@@ -3,7 +3,9 @@ package org.usfirst.frc.team5590.robot;
 import org.usfirst.frc.team5590.robot.commands.Collect;
 import org.usfirst.frc.team5590.robot.commands.Drive;
 import org.usfirst.frc.team5590.robot.commands.DriveStraight;
+import org.usfirst.frc.team5590.robot.commands.LowGoalShoot;
 import org.usfirst.frc.team5590.robot.commands.ManualShooterControl;
+import org.usfirst.frc.team5590.robot.commands.PassOff;
 import org.usfirst.frc.team5590.robot.commands.Shoot;
 import org.usfirst.frc.team5590.robot.commands.ToggleMode;
 import org.usfirst.frc.team5590.robot.commands.arm.ArmFloor;
@@ -50,8 +52,8 @@ public class OI {
 		logitechController.button4.whenPressed(new ResetArm());	
 		
 		
-		logitechController.button11.whenPressed(new ShooterDown());
-		logitechController.button12.whenPressed(new ShooterUp());
+		logitechController.button5.whenPressed(new LowGoalShoot(logitechController.button5));
+		logitechController.button6.whenPressed(new PassOff(logitechController.button6));
 	}
 }
 

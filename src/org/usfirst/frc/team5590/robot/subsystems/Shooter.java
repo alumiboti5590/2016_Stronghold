@@ -112,7 +112,7 @@ public class Shooter extends Subsystem {
     }
 	
 	public void updateShooterRotation() {
-		if (Math.abs(Robot.oi.logitechController.getMainStickY()) > 0.3){
+		if (Math.abs(Robot.oi.logitechController.getMainStickY()) > 0.15){
 			rotationalSpeedController.set(Robot.oi.logitechController.getMainStickY());
 		} else {
 			rotationalSpeedController.set(0);

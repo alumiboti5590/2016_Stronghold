@@ -32,5 +32,6 @@ public class Drive extends Command {
     }
 
     protected void interrupted() {
+    	Robot.drivetrain.stop();
     }
 }

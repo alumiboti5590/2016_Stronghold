@@ -24,6 +24,7 @@ public class Collect extends Command {
     }
 
     protected void execute() {
+    	Robot.shooter.updateShooterRotation();
     	Robot.collector.setCollectorSpeed(1);
     }
 
@@ -50,6 +51,7 @@ public class Collect extends Command {
     		Robot.shooter.collect(-.8);
     	}
     	Robot.shooter.stopShooter();
+    	Robot.shooter.stopAll();
     }
 
     // Called when another command which requires one or more of the same
@@ -57,5 +59,6 @@ public class Collect extends Command {
     protected void interrupted() {
     	System.out.println("Interrupted collector");
     	Robot.collector.stopCollector();
+    	Robot.shooter.stopAll();
     }
 }
