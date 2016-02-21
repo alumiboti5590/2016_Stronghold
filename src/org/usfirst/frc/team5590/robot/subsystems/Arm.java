@@ -26,7 +26,6 @@ public class Arm extends Subsystem {
 	private static DigitalInput    safetySwitch;
 	
 	public void initDefaultCommand() {
-		setDefaultCommand(new ManualArmControl());
 	}
 	
 	public void resetArm() {
@@ -95,10 +94,14 @@ public class Arm extends Subsystem {
 	}
 
 	public void updateRotation(){
-		if (Math.abs(Robot.oi.logitechController.getMainStickY()) > 0.5){
+		if (Math.abs(Robot.oi.logitechController.getMainStickY()) > 0.3){
 			rotationalSpeedController.set(Robot.oi.logitechController.getMainStickY());
 		} else {
 			rotationalSpeedController.set(0);
 		}
+	}
+	
+	public void stopArm() {
+		rotationalSpeedController.set(0);
 	}
 }

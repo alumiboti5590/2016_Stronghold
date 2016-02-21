@@ -42,8 +42,12 @@ public class Collect extends Command {
     	Robot.collector.stopCollector();
     	double startTime = timeSinceInitialized();
     	// Slight set back to make sure not in shooter
-    	while(timeSinceInitialized() - startTime < .05) {
-    		Robot.shooter.setShooterSpeed(-.1);
+    	while(timeSinceInitialized() - startTime < .5) {
+    		if (timeSinceInitialized() - startTime < .2) {
+    			Robot.collector.setCollectorSpeed(-.4);
+    		}
+    		Robot.collector.stopCollector();
+    		Robot.shooter.collect(-.8);
     	}
     	Robot.shooter.stopShooter();
     }

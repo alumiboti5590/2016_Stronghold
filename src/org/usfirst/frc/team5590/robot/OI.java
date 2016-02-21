@@ -1,14 +1,16 @@
 package org.usfirst.frc.team5590.robot;
 
-import org.usfirst.frc.team5590.robot.commands.*;
+import org.usfirst.frc.team5590.robot.commands.Collect;
+import org.usfirst.frc.team5590.robot.commands.Drive;
+import org.usfirst.frc.team5590.robot.commands.DriveStraight;
+import org.usfirst.frc.team5590.robot.commands.ManualShooterControl;
+import org.usfirst.frc.team5590.robot.commands.Shoot;
+import org.usfirst.frc.team5590.robot.commands.ToggleMode;
 import org.usfirst.frc.team5590.robot.commands.arm.ArmFloor;
-import org.usfirst.frc.team5590.robot.commands.arm.ArmOpenGate;
 import org.usfirst.frc.team5590.robot.commands.arm.ManualArmControl;
 import org.usfirst.frc.team5590.robot.commands.arm.ResetArm;
-import org.usfirst.frc.team5590.robot.commands.shooter.ShooterDeploy;
-import org.usfirst.frc.team5590.robot.commands.shooter.ShooterRetract;
-import org.usfirst.frc.team5590.robot.commands.shooter.ShooterUp;
 import org.usfirst.frc.team5590.robot.commands.shooter.ShooterDown;
+import org.usfirst.frc.team5590.robot.commands.shooter.ShooterUp;
 import org.usfirst.frc.team5590.robot.controllers.LogitechX3;
 import org.usfirst.frc.team5590.robot.controllers.XboxController;
 
@@ -32,11 +34,16 @@ public class OI {
 		xboxController.buttonA.whileHeld(new DriveStraight(0.5));
 		
 		/**
-		 * Toggle mode only changes what the trigger on the front of the joystick does.
+		 * Toggle mode only changes what the axis does
 		 */
 		logitechController.button7.whenPressed(new ToggleMode());
-		logitechController.button1.whenPressed(new TriggerCommands(logitechController.button1));
+		
 
+		logitechController.button1.whenPressed(new Shoot(logitechController.button1));
+		
+		logitechController.button9.whileHeld(new ManualArmControl(logitechController.button9));
+		logitechController.button10.whileHeld(new ManualShooterControl(logitechController.button10));
+		
 		// Logitech Controller
 		logitechController.button2.whenPressed(new Collect(logitechController.button2));
 		logitechController.button3.whenPressed(new ArmFloor());	

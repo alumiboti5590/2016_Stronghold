@@ -8,53 +8,38 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Shoot extends Command {
+public class ManualShooterControl extends Command {
 
 	private Button button;
-	private boolean isComplete = false;
 	
-    public Shoot(Button button) {
+    public ManualShooterControl(Button button) {
+        // Use requires() here to declare subsystem dependencies
         requires(Robot.shooter);
-        requires(Robot.collector);
         this.button = button;
     }
 
+    // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("Initializing shoot ball");
-    	Robot.shooter.stopShooter();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
     	Robot.shooter.updateShooterRotation();
-    	while (timeSinceInitialized() < 3.0) {
-    		Robot.shooter.updateShooterRotation();	
-    		Robot.shooter.setShooterSpeed(1);
-    	}
-    	while (timeSinceInitialized() < 4.0) {
-    		Robot.shooter.updateShooterRotation();
-    		Robot.collector.setCollectorSpeed(1);
-    	}
-    	isComplete = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return !this.button.get() || isComplete;
+        return !this.button.get();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Stopping shooter");
-    	Robot.collector.stopCollector();
-    	Robot.shooter.stopShooter();
     	Robot.shooter.stopAll();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.shooter.stopShooter();
+    	Robot.shooter.stopAll();
     }
 }

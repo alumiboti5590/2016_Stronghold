@@ -1,6 +1,9 @@
 package org.usfirst.frc.team5590.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import org.usfirst.frc.team5590.robot.Robot;
+
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 
@@ -65,8 +68,10 @@ public class Shooter extends Subsystem {
     }
     
     public void stopAll(){
-    	stopShooter(); 
+    	stopShooter();
+    	rotationalSpeedController.set(0);
     }
+  
     
     public void resetShooter() {
 		this.rotate(0, 1);
@@ -99,12 +104,24 @@ public class Shooter extends Subsystem {
 			if (Math.abs(rotationalEncoder.getDistance() - rawDistance) < speedControlApex){
 				rotationalSpeedController.set(0.2*direction);
 			} else {
-				rotationalSpeedController.set(0.4*direction);
+				rotationalSpeedController.set(0.6*direction);
 			}
 		}
 		System.out.println("Current Location: " + rotationalEncoder.getDistance() + " Final Location: " + rawDistance);
     		rotationalSpeedController.set(0.0);
     }
+	
+	public void updateShooterRotation() {
+		if (Math.abs(Robot.oi.logitechController.getMainStickY()) > 0.3){
+			rotationalSpeedController.set(Robot.oi.logitechController.getMainStickY());
+		} else {
+			rotationalSpeedController.set(0);
+		}
+	}
+	
+	public void collect(double speed) {
+		ballShooterBottom.set(speed);
+	}
 	
 	public Position getPosition() {
 		return shooterPosition;
