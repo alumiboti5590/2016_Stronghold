@@ -9,8 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ArmFloor extends Command {
 	
-	// private static final double DEGREE_POSITION = -223;
-	private static final double DEGREE_POSITION = -90;
+	private static final double DEGREE_POSITION = -223;
 
     public ArmFloor() {
     	requires(Robot.arm);

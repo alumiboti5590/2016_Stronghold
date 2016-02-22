@@ -9,6 +9,7 @@ import org.usfirst.frc.team5590.robot.commands.PassOff;
 import org.usfirst.frc.team5590.robot.commands.Shoot;
 import org.usfirst.frc.team5590.robot.commands.ToggleMode;
 import org.usfirst.frc.team5590.robot.commands.arm.ArmFloor;
+import org.usfirst.frc.team5590.robot.commands.arm.ArmOpenGate;
 import org.usfirst.frc.team5590.robot.commands.arm.ManualArmControl;
 import org.usfirst.frc.team5590.robot.commands.arm.ResetArm;
 import org.usfirst.frc.team5590.robot.commands.shooter.ShooterDown;
@@ -46,12 +47,12 @@ public class OI {
 		logitechController.button9.whileHeld(new ManualArmControl(logitechController.button9));
 		logitechController.button10.whileHeld(new ManualShooterControl(logitechController.button10));
 		
-		// Logitech Controller
 		logitechController.button2.whenPressed(new Collect(logitechController.button2));
+				
 		logitechController.button3.whenPressed(new ArmFloor());	
 		logitechController.button4.whenPressed(new ResetArm());	
-		
-		
+		logitechController.button7.whenPressed(new ArmOpenGate());
+			
 		logitechController.button5.whenPressed(new LowGoalShoot(logitechController.button5));
 		logitechController.button6.whenPressed(new PassOff(logitechController.button6));
 	}

@@ -23,19 +23,18 @@ public class Arm extends Subsystem {
 	
 	private static SpeedController rotationalSpeedController;
 	private static Encoder         rotationalEncoder;
-	private static DigitalInput    safetySwitch;
+	public static DigitalInput    safetySwitch;
 	
 	public void initDefaultCommand() {
 	}
 	
 	public void resetArm() {
-		long t = System.currentTimeMillis();
-		long end = t+10000;
 		this.rotate(0, 1);
 		System.out.println("Reseting Arm");
-		while (!safetySwitch.get() && System.currentTimeMillis() < end) {
-			rotationalSpeedController.set(0.15);
+		while (!safetySwitch.get()) {
+			rotationalSpeedController.set(0.1);
 		}
+		rotationalSpeedController.set(0.0);
 		rotationalEncoder.reset();
 	}
 
@@ -94,7 +93,7 @@ public class Arm extends Subsystem {
 	}
 
 	public void updateRotation(){
-		if (Math.abs(Robot.oi.logitechController.getMainStickY()) > 0.3){
+		if (Math.abs(Robot.oi.logitechController.getMainStickY()) > 0.3 && !safetySwitch.get()){
 			rotationalSpeedController.set(Robot.oi.logitechController.getMainStickY());
 		} else {
 			rotationalSpeedController.set(0);
