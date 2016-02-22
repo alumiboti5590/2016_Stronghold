@@ -44,7 +44,7 @@ public class AutonomousGroup extends CommandGroup {
     	
     	if (this.position < 5){
 	    	addSequential(this.defenseCommand);
-	    	addSequential(new DriveStraightTimed(.4,2.5));
+	    	addSequential(new DriveStraightLength(24));
     	}
     	
     	addSequential(new Rotate(degrees));

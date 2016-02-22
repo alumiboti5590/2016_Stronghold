@@ -10,20 +10,20 @@ import org.usfirst.frc.team5590.robot.Robot;
 /**
  *
  */
-public class DriveStraightTimed extends Command {
+public class DriveStraightLength extends Command {
 	
 	public Drivetrain drivetrain = Robot.drivetrain;
 	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	private double Kp = .05;
-	private double speed;
+	private final double SECONDS_PER_INCH = .0105;
 	private double time;
 
-    public DriveStraightTimed(double speed, double time) {
-    	this.speed = speed;
-    	this.time = time;
+    public DriveStraightLength(double length) {
+    	this.time = length * SECONDS_PER_INCH;
         requires(drivetrain);
         gyro = new ADXRS450_Gyro();             
         drivetrain.setExpiration(696.9);
+        setTimeout(this.time);
     }
 
     // Called just before this Command runs the first time
@@ -35,7 +35,7 @@ public class DriveStraightTimed extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         double angle = gyro.getAngle(); // get current heading
-        drivetrain.spinDrive(-speed, -angle*Kp); // drive towards heading 0
+        drivetrain.spinDrive(-.75, -angle*Kp); // drive towards heading 0
         Timer.delay(0.004);
     }
 

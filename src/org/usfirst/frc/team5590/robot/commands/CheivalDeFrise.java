@@ -17,7 +17,7 @@ public class CheivalDeFrise extends CommandGroup {
         
         addSequential(new ArmFloor());
         addSequential(new ArmOpenGate());
-        addSequential(new DriveStraightTimed(.4,4));
+        addSequential(new DriveStraightLength(12));
         
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!CheivalDeFrise deployed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }

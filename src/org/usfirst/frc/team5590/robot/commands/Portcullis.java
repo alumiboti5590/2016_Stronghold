@@ -3,7 +3,7 @@ package org.usfirst.frc.team5590.robot.commands;
 import org.usfirst.frc.team5590.robot.Robot;
 import org.usfirst.frc.team5590.robot.commands.arm.ArmFloor;
 import org.usfirst.frc.team5590.robot.commands.arm.ArmOpenGate;
-import org.usfirst.frc.team5590.robot.commands.autonomous.DriveStraightTimed;
+import org.usfirst.frc.team5590.robot.commands.autonomous.DriveStraightLength;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -18,7 +18,7 @@ public class Portcullis extends CommandGroup {
         
         addSequential(new ArmFloor());
         addSequential(new ArmOpenGate());
-        addSequential(new DriveStraightTimed(.4,4));
+        addSequential(new DriveStraightLength(12));
         
         System.out.println("!!!!!!!!!!!!!!!!!!!!!Portcullis deployed!!!!!!!!!!!!!!!!!!!!!!!!");
     }
