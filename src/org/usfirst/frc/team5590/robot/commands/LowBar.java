@@ -11,12 +11,12 @@ public class LowBar extends Command {
 
     public LowBar() {
     	requires(Robot.drivetrain);
-    	setTimeout(10);
+    	setTimeout(5);
     }
 
     protected void initialize() {
     	Robot.drivetrain.stop();
-    	Robot.drivetrain.setSpeed(.2);
+    	Robot.drivetrain.setSpeed(.15);
     }
 
     protected void execute() {

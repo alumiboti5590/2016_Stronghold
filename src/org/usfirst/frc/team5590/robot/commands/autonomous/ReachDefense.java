@@ -8,6 +8,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ReachDefense extends CommandGroup {
     
     public  ReachDefense() {
-        addSequential(new DriveStraightTimed(.75, 4));
+        addSequential(new DriveStraightTimed(.75, .88));
     }
 }
