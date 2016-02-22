@@ -49,7 +49,7 @@ public class Shooter extends Subsystem {
     	ballShooterBottom = new TalonSRX(SHOOTER_BOTTOM_PWM);
     	ballShooterTop = new TalonSRX(SHOOTER_TOP_PWM);
 		rotationalEncoder = new Encoder(ROTATIONAL_ENCODER_SIGNAL_A, ROTATIONAL_ENCODER_SIGNAL_B,
-				false, EncodingType.k2X);
+				true, EncodingType.k2X);
 		safetySwitch = new DigitalInput(DIO_SAFETY_SWITCH_PORT);
 		shooterPosition = Position.DOWN;
     }
@@ -93,22 +93,21 @@ public class Shooter extends Subsystem {
 	public void rotate(double rawDistance, double direction) {
 		double speedControlApex = Math.abs(rawDistance * 0.15);
 		if (rawDistance == 0){
-			speedControlApex = Math.abs(rotationalEncoder.getDistance() * 0.15);
+			speedControlApex = Math.abs(rotationalEncoder.getDistance() * 0.20);
 		}
 		System.out.println("Starting shooter Movement");
 		while ((rotationalEncoder.getDistance()*direction) < (rawDistance * direction)) {
-			System.out.println("Shootetr Rotation Speed: " + rotationalSpeedController.get());
 			if (safetySwitch.get()) {
 				break;
 			}
 			if (Math.abs(rotationalEncoder.getDistance() - rawDistance) < speedControlApex){
 				rotationalSpeedController.set(0.2*direction);
 			} else {
-				rotationalSpeedController.set(0.6*direction);
+				rotationalSpeedController.set(0.8*direction);
 			}
 		}
 		System.out.println("Current Location: " + rotationalEncoder.getDistance() + " Final Location: " + rawDistance);
-    		rotationalSpeedController.set(0.0);
+    	rotationalSpeedController.set(0.0);
     }
 	
 	public void updateShooterRotation() {
@@ -127,12 +126,16 @@ public class Shooter extends Subsystem {
 		return shooterPosition;
 	}
 
+	/**
+	 * 6337 counts per revolution
+	 * @return
+	 */
 	public double getDegrees(){
-		return .27355*rotationalEncoder.getDistance();
+		return 0.0568092*rotationalEncoder.getDistance();
 	}
 	
 	public double getDistance(double degrees){
-		return 3.6555*degrees;
+		return 17.60277*degrees;
 	}
     
 }

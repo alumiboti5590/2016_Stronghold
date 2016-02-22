@@ -52,6 +52,9 @@ public class OI {
 		logitechController.button3.whenPressed(new ArmFloor());	
 		logitechController.button4.whenPressed(new ResetArm());	
 		logitechController.button7.whenPressed(new ArmOpenGate());
+		
+		logitechController.button12.whenPressed(new ShooterUp());
+		logitechController.button11.whenPressed(new ShooterDown());
 			
 		logitechController.button5.whenPressed(new LowGoalShoot(logitechController.button5));
 		logitechController.button6.whenPressed(new PassOff(logitechController.button6));
