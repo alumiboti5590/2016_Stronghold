@@ -7,6 +7,10 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Xbox controller with all of the buttons mapped out.
+ * This can be reused if the controller is used.
+ */
 public class XboxController extends Joystick {
 	
 	public Button buttonA, 

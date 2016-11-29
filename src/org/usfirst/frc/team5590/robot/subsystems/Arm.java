@@ -27,7 +27,11 @@ public class Arm extends Subsystem {
 	
 	public void initDefaultCommand() {
 	}
-	
+
+	/**
+	 * Rotate the arm back to starting position until
+	 * the digital switch gets set (meaning we hit the reset point.)
+	 */
 	public void resetArm() {
 		this.rotate(0, 1);
 		System.out.println("Reseting Arm");
@@ -38,6 +42,9 @@ public class Arm extends Subsystem {
 		rotationalEncoder.reset();
 	}
 
+	/**
+	 * Setup the controllers with the desired ports
+	 */
 	public static void initializeControllers() {	
 		rotationalSpeedController = new TalonSRX(ARM_ROTATIONAL_PWM);
 		rotationalEncoder = new Encoder(ROTATIONAL_ENCODER_SIGNAL_A, ROTATIONAL_ENCODER_SIGNAL_B,
@@ -45,6 +52,10 @@ public class Arm extends Subsystem {
 		 safetySwitch = new DigitalInput(DIO_SAFETY_SWITCH_PORT);
 	}
 
+	/**
+	 * Set the position of the arm a certain amount of degrees.
+	 * @param degrees
+     */
 	public void setPosition(double degrees){
     	if (degrees > this.getDegrees()) {
     		System.out.println("Rotating");
@@ -84,6 +95,9 @@ public class Arm extends Subsystem {
 		rotationalSpeedController.set(0.0);
 	}
 
+	/*
+	 * Some fancy math functions below here
+     */
 	public double getDegrees(){
 		return .27355*rotationalEncoder.getDistance();
 	}

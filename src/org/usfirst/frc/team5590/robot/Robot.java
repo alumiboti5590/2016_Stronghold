@@ -27,17 +27,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static final Drivetrain drivetrain = new Drivetrain();
-	public static final Shooter shooter = new Shooter();
-	public static final Arm arm = new Arm();
-	public static final Collector collector = new Collector();
-	
+	// Initialize the Subsystems
+	// These directly represent the physical robot.
+	// They are located in `robot/subsystems`
+	public static final Drivetrain drivetrain = new Drivetrain();  // Create a drivetrain object
+	public static final Shooter shooter = new Shooter();           // Create a shooter object
+	public static final Arm arm = new Arm();                       // Create an Arm object
+	public static final Collector collector = new Collector();     // Create a ball collector object
+
+
+	// Look under the robotInit function for these
 	private CameraServer server;
-
 	public static OI oi;
- 
 	private Command autonomousCommand;
-
 	public SendableChooser defenseChooser;
 	public SendableChooser positionChooser;
 	public SendableChooser scoringChooser;
@@ -47,13 +49,19 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+
+		// Robot Map will initialize all the periferal connections
     	RobotMap.init();
+
+		// Create a Input/Output listener for the controllers
 		oi = new OI();
-		
+
+		// Setup camera
 		server = CameraServer.getInstance();
 	    server.setQuality(50);
 	    server.startAutomaticCapture("cam0");
-	    
+
+		// Setup a Chooser which will display on the dashboard (Picks to overcome a defense)
 	    defenseChooser = new SendableChooser();
     	defenseChooser.addDefault("Low Bar", LowBar.class);
     	defenseChooser.addObject("Portcullis", Portcullis.class);
@@ -61,6 +69,7 @@ public class Robot extends IterativeRobot {
     	defenseChooser.addObject("Drive Forward", DriveForward.class);
     	SmartDashboard.putData("Defensive Breach", defenseChooser);
 
+		// Setup a Chooser which will display on the dashboard (Picks to show starting position)
     	positionChooser = new SendableChooser();
     	positionChooser.addObject("0/Low Bar", 0);
     	positionChooser.addObject("1", 1);
@@ -69,7 +78,8 @@ public class Robot extends IterativeRobot {
     	positionChooser.addObject("4", 4);
     	positionChooser.addDefault("5/Spy Box", 5);
     	SmartDashboard.putData("Position Chooser", positionChooser);
-    	
+
+		// Setup a Chooser which will display on the dashboard (Picks to shoot/not shoot)
     	scoringChooser = new SendableChooser();
     	scoringChooser.addObject("High Goal Scoring", 2);
     	scoringChooser.addObject("Low Goal Scoring", 1);
@@ -101,6 +111,8 @@ public class Robot extends IterativeRobot {
 	 */
     @SuppressWarnings("unchecked")
 	public void autonomousInit() {
+
+		// Call autonomous when needed.
         autonomousCommand = new AutonomousGroup((Class<Command>) defenseChooser.getSelected(), 
     		  (int) positionChooser.getSelected(), (int) scoringChooser.getSelected());
         autonomousCommand.start();

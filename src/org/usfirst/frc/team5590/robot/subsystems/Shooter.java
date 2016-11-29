@@ -8,9 +8,6 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 
 
-/**
- *  
- */
 public class Shooter extends Subsystem {
 	
 	private static final int SHOOTER_ROTATIONAL_PWM = 3;
@@ -43,7 +40,10 @@ public class Shooter extends Subsystem {
     }
     
     public static Position shooterPosition;
-    
+
+	/**
+	 * Setup the controllers with the desired ports
+	 */
     public static void initializeControllers(){
     	rotationalSpeedController = new TalonSRX(SHOOTER_ROTATIONAL_PWM);
     	ballShooterBottom = new TalonSRX(SHOOTER_BOTTOM_PWM);
@@ -56,12 +56,19 @@ public class Shooter extends Subsystem {
     
     public void initDefaultCommand() {
     }
-    
+
+    /**
+	 * Starts the shooter motor
+	 * @param speed
+     */
     public void setShooterSpeed(double speed){
     	ballShooterBottom.set(speed);
     	ballShooterTop.set(-1 * (speed - 0.05));
     }
-    
+
+    /**
+	 * Stops the shooter motor
+	 */
     public void stopShooter(){
     	ballShooterBottom.set(0);
         ballShooterTop.set(0);
@@ -71,8 +78,10 @@ public class Shooter extends Subsystem {
     	stopShooter();
     	rotationalSpeedController.set(0);
     }
-  
-    
+
+    /**
+	 * Resets the position of the shooter
+	 */
     public void resetShooter() {
 		this.rotate(0, 1);
 		while (!safetySwitch.get()) {
@@ -81,15 +90,24 @@ public class Shooter extends Subsystem {
 		rotationalSpeedController.set(0.0);
 		rotationalEncoder.reset();
 	}
-    
+
+    /**
+	 * Sets the position of the shooter
+	 * @param degrees
+     */
     public void setPosition(double degrees){
     	if (degrees > this.getDegrees()) {
     		rotate(this.getDistance(degrees), 1);
     	} else {
     		rotate(this.getDistance(degrees), -1);
     	}
-    } 	
-    
+    }
+
+    /**
+	 * Move the shooter a certain amount/distance
+	 * @param rawDistance
+	 * @param direction
+     */
 	public void rotate(double rawDistance, double direction) {
 		double speedControlApex = Math.abs(rawDistance * 0.15);
 		if (rawDistance == 0){
@@ -109,7 +127,10 @@ public class Shooter extends Subsystem {
 		System.out.println("Current Location: " + rotationalEncoder.getDistance() + " Final Location: " + rawDistance);
     	rotationalSpeedController.set(0.0);
     }
-	
+
+	/**
+	 *  Uses logitech controller to move the shooter angle
+	 */
 	public void updateShooterRotation() {
 		if (Math.abs(Robot.oi.logitechController.getMainStickY()) > 0.15){
 			rotationalSpeedController.set(Robot.oi.logitechController.getMainStickY());

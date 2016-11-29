@@ -14,7 +14,10 @@ public class Collector extends Subsystem {
 	
 	// private static DigitalInput collectorSwitch; 
 	public static final int ballCollectorPWM = 4;
-	
+
+	/**
+	 * Setup the controllers with the desired ports
+	 */
 	public static void initializeControllers(){
 		ballCollectorController = new TalonSRX(ballCollectorPWM);
 		// collectorSwitch = new DigitalInput(DIO_SAFETY_SWITCH_PORT);
@@ -23,7 +26,11 @@ public class Collector extends Subsystem {
 	public double getCollectorSpeed(){
     	return ballCollectorController.get();
     }
-	
+
+	/**
+	 * Set the collector speed to collect a ball
+	 * @param speed
+     */
 	public void setCollectorSpeed(double speed){
     	ballCollectorController.set(speed);
     	System.out.println("Current Collector Speed: " + ballCollectorController.get());

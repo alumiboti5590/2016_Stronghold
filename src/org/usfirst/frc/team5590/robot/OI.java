@@ -29,7 +29,10 @@ public class OI {
 	public LogitechX3 logitechController = new LogitechX3(1);
 	
 	public boolean shooterMode = false;
-	
+
+	/**
+	 * All of the below calls set up event listeners on each of the buttons of the referenced controller.
+	 */
 	public OI() { 
 		
 		// Xbox Controller

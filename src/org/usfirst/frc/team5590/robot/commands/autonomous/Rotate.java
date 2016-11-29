@@ -5,7 +5,8 @@ import org.usfirst.frc.team5590.robot.subsystems.*;
 import org.usfirst.frc.team5590.robot.Robot;
 
 /**
- *
+ * Rotates the robot a certain number of degrees
+ * (The amount passed through the constructor)
  */
 public class Rotate extends Command {
 	

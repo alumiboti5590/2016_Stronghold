@@ -4,6 +4,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+/**
+ * Logitech controller with all of the buttons mapped out.
+ * This can be reused if the controller is used.
+ */
 public class LogitechX3 extends Joystick{
 	
 	public Button button1,

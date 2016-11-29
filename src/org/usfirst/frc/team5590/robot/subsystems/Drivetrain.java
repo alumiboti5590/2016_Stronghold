@@ -14,6 +14,7 @@ public class Drivetrain extends Subsystem {
 	private static final int leftTrackPWM = 1;
 	private static final int rightTrackPWM = 0;
 
+	// FRC's library to drive a robot
 	private static RobotDrive robotDrive;
 	
 	private double leftMotorSpeed = 0;
@@ -54,7 +55,8 @@ public class Drivetrain extends Subsystem {
 	}
 
 	/**
-	 * 
+	 * Updates the speed of the drive train motors based off the xbox
+	 * controller's sticks.
 	 */
 	public void updateSpeed() {
 		double leftStickY = roundToTenth(Robot.oi.xboxController.getLeftStickY());
@@ -78,11 +80,19 @@ public class Drivetrain extends Subsystem {
 		robotDrive.tankDrive(speed, speed);
 	}
 
+	/**
+	 * Rotates the robot left
+	 * @param speed
+     */
 	public void rotateLeft(double speed) {
 		robotDrive.tankDrive(-speed, speed);
 		System.out.println("Speed: " + speed);
 	}
 
+	/**
+	 * Rotates the robot right
+	 * @param speed
+	 */
 	public void rotateRight(double speed) {
 		robotDrive.tankDrive(speed, -speed);
 		System.out.println("Speed: " + speed);
@@ -97,7 +107,12 @@ public class Drivetrain extends Subsystem {
 		robotDrive.tankDrive(0.0, 0.0);
 		System.out.println("Drivetrain: Stopped");
 	}
-	
+
+	/**
+	 * Scales down the effect of joystick input
+	 * @param joystickIn
+	 * @return
+     */
 	public static double logisticScale(double joystickIn){
 		double driveIn = Math.abs(joystickIn);
 		double denominator = 1+(Math.exp(-10*(driveIn-.6)));
