@@ -12,18 +12,23 @@ import org.usfirst.frc.team5590.robot.Robot;
 public class DriveForward extends Command {
 	
 	public Drivetrain drivetrain = Robot.drivetrain;
+	private double speed;
+	private double time;
 
-    public DriveForward() {
+    public DriveForward(double speed, double time) {
     	requires(drivetrain);
+    	this.speed=speed;
+    	this.time=time;
         //TODO Set a time out
-        setTimeout(1.0);
+        setTimeout(this.time);
     }
 
     // Called just before this Command runs the first time
+    // cackerman
     protected void initialize() {
     	drivetrain.stop();
     	System.out.println("Driving Forward");
-    	drivetrain.setSpeed(.7);
+    	drivetrain.setSpeed(this.speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
